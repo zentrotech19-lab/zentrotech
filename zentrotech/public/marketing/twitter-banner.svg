@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="500" viewBox="0 0 1500 500" role="img" aria-label="ZentroTECH — Engineering the AI of 2050, today.">
+  <defs>
+    <radialGradient id="t-aurora-a" cx="15%" cy="30%" r="85%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="t-aurora-b" cx="85%" cy="70%" r="75%">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#06b6d4" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="t-aurora-c" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="t-wordmark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+    <filter id="t-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="t-grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#6366f1" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1500" height="500" fill="#0a0a0f"/>
+  <rect width="1500" height="500" fill="url(#t-grid)"/>
+  <rect width="1500" height="500" fill="url(#t-aurora-a)"/>
+  <rect width="1500" height="500" fill="url(#t-aurora-b)"/>
+  <rect width="1500" height="500" fill="url(#t-aurora-c)"/>
+
+  <!-- Particle field -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="140" cy="90" r="1.4"/>
+    <circle cx="280" cy="380" r="1"/>
+    <circle cx="440" cy="180" r="1.6"/>
+    <circle cx="640" cy="80" r="1.2"/>
+    <circle cx="820" cy="420" r="1.4"/>
+    <circle cx="980" cy="160" r="1"/>
+    <circle cx="1180" cy="340" r="1.6"/>
+    <circle cx="1340" cy="220" r="1.2"/>
+    <circle cx="1420" cy="110" r="1.4"/>
+    <circle cx="1430" cy="380" r="1"/>
+  </g>
+
+  <!-- Right-side neural orb hint -->
+  <g transform="translate(1230 250)" filter="url(#t-glow)" opacity="0.95">
+    <circle r="120" fill="none" stroke="#06b6d4" stroke-opacity="0.4" stroke-width="1.2"/>
+    <circle r="86" fill="none" stroke="#8b5cf6" stroke-opacity="0.55" stroke-width="1.2"/>
+    <circle r="52" fill="none" stroke="#ec4899" stroke-opacity="0.7" stroke-width="1.4"/>
+    <circle r="8" fill="#ffffff"/>
+  </g>
+
+  <!-- Wordmark + mark -->
+  <g transform="translate(110 200)">
+    <g transform="translate(0 -8)">
+      <rect x="0" y="0" width="80" height="80" rx="20" fill="#0a0a0f" stroke="#6366f1" stroke-width="1.5"/>
+      <path d="M20 22 L60 22 L24 58 L60 58" fill="none" stroke="url(#t-wordmark)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    </g>
+    <text x="104" y="56" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2" fill="url(#t-wordmark)">ZentroTECH</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="110" y="312" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="500" fill="#e5e7eb" letter-spacing="0.2">
+    Engineering the AI of 2050, today.
+  </text>
+
+  <!-- Locations -->
+  <text x="110" y="354" font-family="'JetBrains Mono', Menlo, Consolas, monospace" font-size="15" fill="#9ca3af" letter-spacing="2.5">
+    BANGALORE  ·  DUBAI  ·  GLOBAL
+  </text>
+
+  <!-- URL pill -->
+  <g transform="translate(110 386)">
+    <rect width="240" height="48" rx="24" fill="#1a0f2e" stroke="#6366f1" stroke-opacity="0.6" stroke-width="1.2"/>
+    <circle cx="24" cy="24" r="4.5" fill="#ec4899"/>
+    <text x="44" y="32" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="500" fill="#ffffff">zentrotech.ai</text>
+  </g>
+</svg>
