@@ -8,6 +8,7 @@ export function OrganizationSchema() {
     name: SITE.name,
     url: SITE.url,
     logo: `${SITE.url}/logo.png`,
+    image: `${SITE.url}/logo.svg`,
     description: SITE.description,
     foundingDate: "2026",
     email: SITE.email,
