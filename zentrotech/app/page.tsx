@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { ServicesBento } from "@/components/sections/services-bento";
-import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { TrustSignals } from "@/components/sections/trust-signals";
+// Client wrapper that dynamic()s ProcessTimeline with `ssr: false` —
+// keeps GSAP + ScrollTrigger out of the initial server bundle.
+import { ProcessTimeline } from "@/components/sections/process-timeline-lazy";
 import { GlobeSection } from "@/components/sections/globe-section";
 import { InsightsPreview } from "@/components/sections/insights-preview";
 import { CTASection } from "@/components/sections/cta-section";
