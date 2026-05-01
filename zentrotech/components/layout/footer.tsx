@@ -6,13 +6,13 @@ import { FaLinkedinIn, FaXTwitter, FaGithub, FaInstagram } from "react-icons/fa6
 export function Footer() {
   return (
     <footer className="relative mt-32 border-t border-white/5 bg-void/50 backdrop-blur-md">
-      <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-indigo/40 to-transparent" />
+      <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-indigo/40 to-transparent" />
 
       <Container className="py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative size-8 rounded-lg bg-gradient-to-br from-indigo to-pink-pulse">
+              <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-pink-pulse">
                 <div className="absolute inset-0.5 rounded-lg bg-void flex items-center justify-center">
                   <span className="text-aurora font-black text-sm">Z</span>
                 </div>

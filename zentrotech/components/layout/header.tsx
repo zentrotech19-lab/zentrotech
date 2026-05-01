@@ -29,7 +29,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href="/" className="group flex items-center gap-2">
-          <div className="relative size-8 rounded-lg bg-gradient-to-br from-indigo to-pink-pulse shadow-[0_0_20px_rgba(99,102,241,0.5)]">
+          <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-pink-pulse shadow-[0_0_20px_rgba(99,102,241,0.5)]">
             <div className="absolute inset-0.5 rounded-lg bg-void flex items-center justify-center">
               <span className="text-aurora font-black text-sm">Z</span>
             </div>
