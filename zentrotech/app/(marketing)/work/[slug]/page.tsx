@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/sections/cta-section";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
+import { mdxComponents } from "@/lib/mdx-components";
 
 export async function generateStaticParams() {
   const all = await getAllCaseStudies();
@@ -48,12 +50,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <section className="py-24">
         <Container>
-          <article className="prose prose-invert max-w-3xl mx-auto text-text-secondary [&>h2]:text-white [&>h2]:text-3xl [&>h2]:font-black [&>h2]:mt-12 [&>h2]:mb-4 [&>h3]:text-white [&>blockquote]:text-text-muted [&>blockquote]:border-indigo [&>p]:leading-relaxed">
-            {c.body.split("\n\n").map((para, i) => {
-              if (para.startsWith("## ")) return <h2 key={i}>{para.replace(/^##\s/, "")}</h2>;
-              if (para.startsWith("> ")) return <blockquote key={i}>{para.replace(/^>\s/, "")}</blockquote>;
-              return <p key={i}>{para}</p>;
-            })}
+          <article className="prose prose-invert max-w-3xl mx-auto">
+            <MDXRemote source={c.body} components={mdxComponents} />
           </article>
         </Container>
       </section>

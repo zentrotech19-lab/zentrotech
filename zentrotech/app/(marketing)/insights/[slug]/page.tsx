@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/sections/cta-section";
 import { getAllInsights, getInsight } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
+import { mdxComponents } from "@/lib/mdx-components";
 
 export async function generateStaticParams() {
   const all = await getAllInsights();
@@ -35,19 +37,8 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
       <section className="py-12">
         <Container className="max-w-3xl">
-          <article className="prose prose-invert max-w-none text-text-secondary text-lg leading-relaxed [&>h2]:text-white [&>h2]:text-3xl [&>h2]:font-black [&>h2]:mt-12 [&>h2]:mb-4 [&>p]:mb-6 [&>ul>li]:my-2">
-            {p.body.split("\n\n").map((para, i) => {
-              if (para.startsWith("## ")) return <h2 key={i}>{para.replace(/^##\s/, "")}</h2>;
-              if (para.match(/^\d+\.\s/)) {
-                const items = para.split("\n").map((line) => line.replace(/^\d+\.\s/, ""));
-                return <ol key={i} className="list-decimal pl-6">{items.map((it, j) => <li key={j}>{it}</li>)}</ol>;
-              }
-              if (para.startsWith("- ")) {
-                const items = para.split("\n").map((line) => line.replace(/^-\s/, ""));
-                return <ul key={i} className="list-disc pl-6">{items.map((it, j) => <li key={j}>{it}</li>)}</ul>;
-              }
-              return <p key={i}>{para}</p>;
-            })}
+          <article className="prose prose-invert max-w-none">
+            <MDXRemote source={p.body} components={mdxComponents} />
           </article>
         </Container>
       </section>
