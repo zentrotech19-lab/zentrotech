@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="ZentroTECH — Engineering the AI of 2050, today.">
+  <title>ZentroTECH</title>
+  <desc>Engineering the AI of 2050, today.</desc>
+  <defs>
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="55%" stop-color="#1a0f2e"/>
+      <stop offset="100%" stop-color="#0a0a0f"/>
+    </linearGradient>
+    <radialGradient id="og-aurora-a" cx="0.18" cy="0.25" r="0.6">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="og-aurora-b" cx="0.85" cy="0.8" r="0.55">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="og-aurora-c" cx="0.55" cy="0.55" r="0.5">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="og-mark-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="45%" stop-color="#6366f1"/>
+      <stop offset="80%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="og-tech" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="og-frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.1"/>
+    </linearGradient>
+    <pattern id="og-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0 L0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- background stack -->
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+  <rect width="1200" height="630" fill="url(#og-grid)"/>
+  <rect width="1200" height="630" fill="url(#og-aurora-a)"/>
+  <rect width="1200" height="630" fill="url(#og-aurora-b)"/>
+  <rect width="1200" height="630" fill="url(#og-aurora-c)"/>
+
+  <!-- mark on the left -->
+  <g transform="translate(110,195) scale(1.2)">
+    <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z"
+          fill="none" stroke="url(#og-frame)" stroke-width="3" stroke-linejoin="round"/>
+    <g fill="none" stroke="url(#og-mark-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M58 70 L142 70"/>
+      <path d="M138 74 L108 104 L92 104 L62 134"/>
+      <path d="M58 138 L142 138"/>
+    </g>
+    <g fill="#ffffff">
+      <circle cx="58" cy="70" r="5"/>
+      <circle cx="142" cy="70" r="5"/>
+      <circle cx="58" cy="138" r="5"/>
+      <circle cx="142" cy="138" r="5"/>
+    </g>
+    <circle cx="100" cy="104" r="4" fill="#ec4899"/>
+  </g>
+
+  <!-- text -->
+  <g transform="translate(420,250)">
+    <text x="0" y="0"
+          font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="92"
+          font-weight="800"
+          letter-spacing="6"
+          fill="#ffffff">ZENTRO<tspan fill="url(#og-tech)">TECH</tspan></text>
+    <line x1="2" y1="34" x2="660" y2="34" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+    <text x="0" y="100"
+          font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="36"
+          font-weight="500"
+          letter-spacing="0.5"
+          fill="#e5e7eb">Engineering the AI of 2050, today.</text>
+    <text x="0" y="156"
+          font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+          font-size="20"
+          font-weight="500"
+          letter-spacing="6"
+          fill="#9ca3af">AI AGENTS · AUTOMATION · STRATEGY · BANGALORE · DUBAI</text>
+  </g>
+
+  <!-- thin gradient bottom rule -->
+  <rect x="0" y="624" width="1200" height="6" fill="url(#og-mark-grad)"/>
+</svg>

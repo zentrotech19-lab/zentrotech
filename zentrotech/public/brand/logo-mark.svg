@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="ZentroTECH mark">
+  <title>ZentroTECH</title>
+  <defs>
+    <linearGradient id="zt-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="45%" stop-color="#6366f1"/>
+      <stop offset="80%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="zt-frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="zt-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- soft inner glow (works on dark and light) -->
+  <circle cx="100" cy="100" r="78" fill="url(#zt-glow)"/>
+
+  <!-- hex portal frame -->
+  <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z"
+        fill="none" stroke="url(#zt-frame)" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- circuit-Z: top track, diagonal path, bottom track -->
+  <g fill="none" stroke="url(#zt-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <!-- top horizontal -->
+    <path d="M58 70 L142 70"/>
+    <!-- diagonal circuit path with a subtle elbow -->
+    <path d="M138 74 L108 104 L92 104 L62 134"/>
+    <!-- bottom horizontal -->
+    <path d="M58 138 L142 138"/>
+  </g>
+
+  <!-- circuit nodes -->
+  <g fill="#ffffff">
+    <circle cx="58" cy="70" r="5"/>
+    <circle cx="142" cy="70" r="5"/>
+    <circle cx="58" cy="138" r="5"/>
+    <circle cx="142" cy="138" r="5"/>
+  </g>
+  <g fill="#ec4899">
+    <circle cx="100" cy="104" r="4"/>
+  </g>
+</svg>

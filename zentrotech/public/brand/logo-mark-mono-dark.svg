@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="ZentroTECH mark, black">
+  <title>ZentroTECH</title>
+  <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z"
+        fill="none" stroke="#0a0a0f" stroke-opacity="0.7" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="none" stroke="#0a0a0f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 70 L142 70"/>
+    <path d="M138 74 L108 104 L92 104 L62 134"/>
+    <path d="M58 138 L142 138"/>
+  </g>
+  <g fill="#0a0a0f">
+    <circle cx="58" cy="70" r="5"/>
+    <circle cx="142" cy="70" r="5"/>
+    <circle cx="58" cy="138" r="5"/>
+    <circle cx="142" cy="138" r="5"/>
+    <circle cx="100" cy="104" r="4"/>
+  </g>
+</svg>
