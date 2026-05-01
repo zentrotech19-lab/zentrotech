@@ -1,0 +1,1481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZentroTECH — Engineering the AI of 2050, today.</title>
+<meta name="description" content="ZentroTECH company brochure. Bangalore-headquartered AI consultancy building agentic systems, intelligent automation, and AI-native digital products." />
+<meta name="theme-color" content="#0a0a0f" />
+<style>
+  /* =======================================================================
+     ZentroTECH — print-ready brochure
+     Self-contained: system fonts, inline SVG, CSS custom properties.
+     A4 portrait: 210mm x 297mm.
+     ======================================================================= */
+
+  :root {
+    --void:    #0a0a0f;
+    --deep:    #1a0f2e;
+    --indigo:  #6366f1;
+    --violet:  #8b5cf6;
+    --pink:    #ec4899;
+    --cyan:    #06b6d4;
+    --ink:     #ffffff;
+    --ink-2:   #e5e7eb;
+    --muted:   #9ca3af;
+    --muted-2: #6b7280;
+    --line:    rgba(255, 255, 255, 0.08);
+    --line-2:  rgba(255, 255, 255, 0.14);
+    --glass:   rgba(255, 255, 255, 0.04);
+    --glass-2: rgba(255, 255, 255, 0.07);
+
+    --grad-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    --grad-cool:  linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+    --grad-hot:   linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+                 "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: #050507;
+    color: var(--ink-2);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+  }
+
+  /* ---------- Page frame ---------- */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 12mm auto;
+    background: radial-gradient(120% 80% at 0% 0%, #1a0f2e 0%, #0a0a0f 55%, #050509 100%);
+    color: var(--ink-2);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(99, 102, 241, 0.18),
+                0 1px 0 rgba(255,255,255,0.03) inset;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    padding: 18mm 16mm 22mm 16mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 40% at 90% 0%, rgba(139, 92, 246, 0.18), transparent 60%),
+      radial-gradient(50% 35% at 0% 100%, rgba(6, 182, 212, 0.10), transparent 60%),
+      radial-gradient(40% 30% at 100% 100%, rgba(236, 72, 153, 0.10), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* faint grid grain */
+  .page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page > * { position: relative; z-index: 1; }
+
+  /* ---------- Header / footer ---------- */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9.5pt;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 10mm;
+  }
+  .page-header .brandline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .page-header .brandline .mark { width: 18px; height: 18px; }
+  .page-header .section-tag {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  .page-footer {
+    margin-top: auto;
+    padding-top: 10mm;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5pt;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .page-footer .url {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.08;
+  }
+  h1 { font-size: 44pt; }
+  h2 { font-size: 28pt; letter-spacing: -0.025em; }
+  h3 { font-size: 14pt; letter-spacing: -0.01em; }
+  h4 { font-size: 11pt; }
+
+  p { margin: 0 0 10pt 0; font-size: 10.5pt; color: var(--ink-2); }
+  .lede { font-size: 12pt; color: var(--ink-2); line-height: 1.55; }
+  .small { font-size: 9pt; color: var(--muted); }
+  .mono { font-family: var(--font-mono); font-size: 9pt; letter-spacing: 0.02em; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 6px 10px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: var(--glass);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+
+  .gradient-text {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- Cover page ---------- */
+  .cover { padding: 16mm; justify-content: space-between; }
+  .cover .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .cover .logo-stack {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cover .logo-stack .mark { width: 56px; height: 56px; }
+  .cover .logo-stack .wordmark {
+    font-size: 18pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .cover .logo-stack .wordmark span { color: var(--violet); }
+
+  .cover .meta {
+    text-align: right;
+    font-size: 9pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .cover .meta strong { color: var(--ink-2); font-weight: 600; }
+
+  .cover .center {
+    margin-top: 30mm;
+  }
+  .cover .center .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9.5pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 14px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: var(--glass);
+    margin-bottom: 14mm;
+  }
+  .cover .center .badge::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink);
+  }
+  .cover h1 {
+    font-size: 64pt;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    max-width: 170mm;
+  }
+  .cover h1 .accent {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .cover .tagline {
+    margin-top: 10mm;
+    font-size: 13pt;
+    color: var(--ink-2);
+    max-width: 145mm;
+    line-height: 1.5;
+  }
+
+  .cover .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12mm;
+  }
+  .cover .contact-card {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 18px 22px;
+    backdrop-filter: blur(8px);
+    flex: 1;
+    max-width: 110mm;
+  }
+  .cover .contact-card .label {
+    font-size: 8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cover .contact-card .email {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .cover .contact-card .url {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .cover .geo {
+    text-align: right;
+    color: var(--muted);
+    font-size: 9pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .cover .geo strong { color: var(--ink-2); font-weight: 600; }
+
+  .cover-orb {
+    position: absolute;
+    right: -60mm;
+    top: 30mm;
+    width: 220mm;
+    height: 220mm;
+    pointer-events: none;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  /* ---------- Section pages ---------- */
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 14mm;
+  }
+  .section-title .eyebrow { align-self: flex-start; }
+  .section-title h2 { max-width: 160mm; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12mm;
+  }
+
+  .vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8mm;
+    margin-top: 10mm;
+  }
+  .vm-card {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vm-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--grad-brand);
+    opacity: 0.85;
+  }
+  .vm-card .label {
+    font-size: 8.5pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .vm-card h3 { margin-bottom: 6px; font-size: 13pt; }
+  .vm-card p { font-size: 10pt; color: var(--ink-2); margin: 0; }
+
+  /* ---------- Services grid ---------- */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6mm;
+  }
+  .svc {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+    min-height: 50mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .svc::after {
+    content: "";
+    position: absolute;
+    inset: auto -30% -50% auto;
+    width: 60mm; height: 60mm;
+    background: radial-gradient(closest-side, rgba(99,102,241,0.16), transparent);
+    pointer-events: none;
+  }
+  .svc.violet::after { background: radial-gradient(closest-side, rgba(139,92,246,0.18), transparent); }
+  .svc.pink::after   { background: radial-gradient(closest-side, rgba(236,72,153,0.18), transparent); }
+  .svc.cyan::after   { background: radial-gradient(closest-side, rgba(6,182,212,0.18), transparent); }
+
+  .svc .icon-wrap {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--glass-2);
+    border: 1px solid var(--line-2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .svc .icon-wrap svg { width: 20px; height: 20px; }
+  .svc h3 {
+    font-size: 12pt;
+    margin-bottom: 6px;
+  }
+  .svc .short {
+    font-size: 9.5pt;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+  .svc .desc {
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .svc .num {
+    position: absolute;
+    top: 14px; right: 16px;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted-2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- Process timeline ---------- */
+  .process {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6mm;
+    margin-top: 4mm;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 32mm 1fr;
+    gap: 8mm;
+    padding: 16px 20px;
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .step::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--grad-brand);
+  }
+  .step .num-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .step .num-block .n {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+  }
+  .step .num-block .name {
+    font-size: 18pt;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
+  .step .body h4 { font-size: 11pt; margin-bottom: 6px; }
+  .step .body p {
+    font-size: 9.5pt;
+    color: var(--ink-2);
+    margin-bottom: 6px;
+  }
+  .step .body .meta {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Case studies ---------- */
+  .cases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6mm;
+  }
+  .case {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+    min-height: 70mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .case .industry {
+    font-size: 8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .case h3 {
+    font-size: 12pt;
+    margin-bottom: 6px;
+  }
+  .case .summary {
+    font-size: 9pt;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+    flex: 1;
+  }
+  .case .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .case .metric .v {
+    font-size: 16pt;
+    font-weight: 700;
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
+  .case .metric .l {
+    font-size: 8pt;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Differentiators ---------- */
+  .diffs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6mm;
+  }
+  .diff {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    min-height: 65mm;
+  }
+  .diff .num {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+  }
+  .diff h3 {
+    font-size: 14pt;
+    margin-bottom: 10px;
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .diff p {
+    font-size: 9.5pt;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* ---------- Locations & contact ---------- */
+  .offices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6mm;
+    margin-bottom: 8mm;
+  }
+  .office {
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .office .pill {
+    display: inline-block;
+    font-size: 8pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    border: 1px solid rgba(6,182,212,0.4);
+    background: rgba(6,182,212,0.06);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .office .pill.hq {
+    color: var(--pink);
+    border-color: rgba(236,72,153,0.4);
+    background: rgba(236,72,153,0.06);
+  }
+  .office h3 { font-size: 18pt; margin-bottom: 4px; }
+  .office .region { font-size: 9pt; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.04em; }
+  .office .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 9.5pt;
+    color: var(--ink-2);
+  }
+  .office .row svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; opacity: 0.8; }
+  .office .row a { color: inherit; text-decoration: none; }
+
+  .contact-band {
+    background: linear-gradient(135deg, rgba(99,102,241,0.10), rgba(236,72,153,0.10));
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8mm;
+    align-items: center;
+  }
+  .contact-band .label {
+    font-size: 8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .contact-band .v {
+    font-size: 12pt;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .contact-band .v.email {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .socials {
+    margin-top: 6mm;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .social-chip {
+    font-size: 9pt;
+    color: var(--ink-2);
+    border: 1px solid var(--line-2);
+    background: var(--glass);
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+  }
+
+  .signoff {
+    margin-top: auto;
+    padding: 10mm 0 4mm;
+    text-align: center;
+    color: var(--muted);
+  }
+  .signoff .big {
+    font-size: 22pt;
+    font-weight: 700;
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .signoff .small { font-size: 9pt; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* ---------- Print button (screen only) ---------- */
+  .print-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 100;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--grad-brand);
+    color: white;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 30px -8px rgba(139, 92, 246, 0.55),
+                0 0 0 1px rgba(255,255,255,0.08) inset;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform .15s ease;
+  }
+  .print-btn:hover { transform: translateY(-1px); }
+  .print-btn svg { width: 14px; height: 14px; }
+
+  /* ===== PRINT ===== */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    body { background: white; }
+    .print-btn { display: none !important; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      height: 297mm;
+      margin: 0;
+      box-shadow: none;
+      border: 0;
+      border-radius: 0;
+      page-break-after: always;
+      break-after: page;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      color-adjust: exact;
+    }
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+    /* Slightly tighter padding for print to keep content in bleed */
+    .page { padding: 16mm 14mm 18mm 14mm; }
+    .cover { padding: 14mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable SVG defs (referenced by id="…" inline below where needed) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="coolGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="hotGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     PAGE 1 — COVER
+============================================================= -->
+<section class="page cover">
+  <!-- Decorative orb -->
+  <svg class="cover-orb" viewBox="0 0 600 600" aria-hidden="true">
+    <defs>
+      <radialGradient id="orbCore" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ec4899" stop-opacity="0.55"/>
+        <stop offset="40%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+        <stop offset="75%" stop-color="#6366f1" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#6366f1"/>
+        <stop offset="100%" stop-color="#ec4899"/>
+      </linearGradient>
+    </defs>
+    <circle cx="300" cy="300" r="240" fill="url(#orbCore)"/>
+    <g fill="none" stroke="url(#ringGrad)" stroke-opacity="0.55">
+      <ellipse cx="300" cy="300" rx="230" ry="60" stroke-width="1"/>
+      <ellipse cx="300" cy="300" rx="200" ry="200" stroke-width="0.75" stroke-opacity="0.25"/>
+      <ellipse cx="300" cy="300" rx="160" ry="40" stroke-width="0.75" stroke-opacity="0.4" transform="rotate(35 300 300)"/>
+      <ellipse cx="300" cy="300" rx="180" ry="50" stroke-width="0.75" stroke-opacity="0.4" transform="rotate(-25 300 300)"/>
+    </g>
+    <g fill="#06b6d4">
+      <circle cx="120" cy="220" r="2"/>
+      <circle cx="500" cy="320" r="2"/>
+      <circle cx="380" cy="120" r="1.5"/>
+      <circle cx="240" cy="480" r="1.5"/>
+      <circle cx="450" cy="460" r="1.5"/>
+    </g>
+  </svg>
+
+  <div class="top">
+    <div class="logo-stack">
+      <!-- Inline logo mark -->
+      <svg class="mark" viewBox="0 0 64 64" aria-label="ZentroTECH mark">
+        <defs>
+          <linearGradient id="zMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#ec4899"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#zMark)" stroke-width="2"/>
+        <path d="M16 18 L48 18 L20 46 L48 46"
+              fill="none" stroke="url(#zMark)" stroke-width="5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="48" cy="18" r="3" fill="#ec4899"/>
+        <circle cx="16" cy="46" r="3" fill="#06b6d4"/>
+      </svg>
+      <div class="wordmark">ZENTRO<span>TECH</span></div>
+    </div>
+    <div class="meta">
+      <div><strong>Company Brochure</strong></div>
+      <div>2026 / Edition 01</div>
+      <div>Confidential</div>
+    </div>
+  </div>
+
+  <div class="center">
+    <div class="badge">Bangalore · Dubai · Global</div>
+    <h1>
+      Engineering the<br/>
+      <span class="accent">AI of 2050,</span><br/>
+      today.
+    </h1>
+    <p class="tagline">
+      ZentroTECH is a Bangalore-headquartered AI consultancy building agentic systems,
+      intelligent automation, and AI-native digital products for ambitious businesses
+      across India, the UAE, and the world.
+    </p>
+  </div>
+
+  <div class="bottom">
+    <div class="contact-card">
+      <div class="label">Start a conversation</div>
+      <div class="email">hello@zentrotech.ai</div>
+      <div class="url">zentrotech.ai · +91 80 0000 0000</div>
+    </div>
+    <div class="geo">
+      <div><strong>Bangalore HQ</strong></div>
+      <div>WeWork Galaxy, Residency Road</div>
+      <div style="margin-top:6px"><strong>Dubai</strong></div>
+      <div>DIFC Innovation Hub</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PAGE 2 — WHO WE ARE
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">01 / Who we are</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">Introduction</span>
+    <h2>An <span class="gradient-text">agentic-first</span> AI consultancy, purpose-built for the 2050 economy.</h2>
+  </div>
+
+  <div class="two-col" style="margin-bottom: 12mm;">
+    <div>
+      <p class="lede">
+        We are engineers, designers, and operators who ship production AI for a living.
+        Founded in 2026 in Bangalore with a presence in Dubai, ZentroTECH was built around
+        one conviction: <strong style="color:var(--ink)">agentic AI is the new application layer</strong> &mdash;
+        and the businesses that adopt it well will compound for a decade.
+      </p>
+      <p>
+        We sit in a deliberate gap. The tier-one strategy houses are slow and
+        slide-deck-heavy. The boutique automation shops are narrow. The AI labs are not
+        consultancies. We combine senior agentic engineering with full-service AI breadth,
+        priced so that ambitious mid-market and SMB teams can actually engage us &mdash;
+        without giving up the premium delivery global enterprises expect.
+      </p>
+    </div>
+    <div>
+      <p>
+        Every engagement is run by a small, senior team that ships in vertical slices.
+        Weekly demos, written evaluations on every change, human-in-the-loop guardrails,
+        and a fixed-price proposal after a paid 1&ndash;2 week discovery sprint. You see a
+        working v1 in the first month, or you stop. No long sales cycles, no slide-deck
+        dance.
+      </p>
+      <p>
+        We work with funded startups in Bangalore, mid-market enterprises across India and
+        the UAE, and tech-forward teams in the US, UK, and Singapore. About half our
+        pipeline is international &mdash; we run async-first with overlapping working hours
+        and travel for kickoffs and quarterly reviews when it earns its keep.
+      </p>
+    </div>
+  </div>
+
+  <div class="vm-grid">
+    <div class="vm-card">
+      <div class="label">Vision</div>
+      <h3>Build the AI world of 2050, today.</h3>
+      <p>
+        A world where every ambitious business operates with a fleet of trusted AI
+        agents &mdash; thinking, deciding, and acting alongside humans. We exist to
+        compress the distance from now to then.
+      </p>
+    </div>
+    <div class="vm-card">
+      <div class="label">Mission</div>
+      <h3>Make agentic AI honest, useful, and shipped.</h3>
+      <p>
+        Replace hype with evaluations, slide decks with vertical slices, and bespoke
+        sprawl with reusable architecture &mdash; so every client gets production AI that
+        compounds in value, not maintenance debt.
+      </p>
+    </div>
+  </div>
+
+  <div class="vm-grid" style="margin-top: 6mm;">
+    <div class="vm-card">
+      <div class="label">Origin</div>
+      <h3>Bangalore HQ &middot; Dubai presence &middot; global delivery</h3>
+      <p>
+        Founded 2026. Bangalore engineering hub, Dubai client office, async delivery
+        teams across UTC+4 to UTC+5:30 with overlap windows to North America and Europe.
+      </p>
+    </div>
+    <div class="vm-card">
+      <div class="label">How we measure ourselves</div>
+      <h3>Time-to-production, ROI delivered, retention.</h3>
+      <p>
+        Not billable hours. Not deck pages. We track how fast clients reach a working
+        system, the dollar impact it produces, and whether they renew us for the next
+        slice. That's the entire scorecard.
+      </p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>02</span>
+  </footer>
+</section>
+
+<!-- ============================================================
+     PAGE 3 — WHAT WE DO (services)
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">02 / What we do</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">Six services, one team</span>
+    <h2>Full-service AI consultancy &mdash; <span class="gradient-text">strategy, agents, automation, code.</span></h2>
+  </div>
+
+  <div class="svc-grid">
+    <!-- 1 AI Agents -->
+    <div class="svc">
+      <span class="num">S/01</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#brandGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="7" width="16" height="12" rx="3"/>
+          <circle cx="9" cy="13" r="1.2" fill="url(#brandGrad)" stroke="none"/>
+          <circle cx="15" cy="13" r="1.2" fill="url(#brandGrad)" stroke="none"/>
+          <path d="M12 4v3"/>
+          <circle cx="12" cy="3.2" r="1" fill="url(#brandGrad)" stroke="none"/>
+          <path d="M8 19v2M16 19v2"/>
+        </svg>
+      </div>
+      <h3>AI Agent Development</h3>
+      <p class="short">Custom autonomous agents that think, decide, and act.</p>
+      <p class="desc">
+        Production-grade agents for sales, support, research, and operations. Built on the
+        latest LLMs with tool use, memory, and human-in-the-loop guardrails.
+      </p>
+    </div>
+
+    <!-- 2 AI Automation -->
+    <div class="svc violet">
+      <span class="num">S/02</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#hotGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="url(#hotGrad)" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <h3>AI Automation</h3>
+      <p class="short">End-to-end workflow automation powered by AI.</p>
+      <p class="desc">
+        Replace repetitive workflows with intelligent automation. Document AI, n8n / Make
+        orchestration, custom Python services &mdash; scaling teams without scaling headcount.
+      </p>
+    </div>
+
+    <!-- 3 AI Websites -->
+    <div class="svc pink">
+      <span class="num">S/03</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#hotGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18"/>
+          <path d="M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>
+        </svg>
+      </div>
+      <h3>AI-Powered Websites</h3>
+      <p class="short">Websites that think, learn, and convert.</p>
+      <p class="desc">
+        Beyond static sites &mdash; embedded AI agents, personalization engines, real-time
+        content, and conversion optimization built into every interaction.
+      </p>
+    </div>
+
+    <!-- 4 Agentic Coding -->
+    <div class="svc cyan">
+      <span class="num">S/04</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#coolGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 7l-5 5 5 5"/>
+          <path d="M15 7l5 5-5 5"/>
+          <path d="M13 4l-2 16"/>
+        </svg>
+      </div>
+      <h3>Agentic Coding</h3>
+      <p class="short">Ship 10x faster with AI engineering teams.</p>
+      <p class="desc">
+        Embed Claude Code, Cursor, code review agents, and automated testing into your
+        engineering org &mdash; multiply output without adding bodies.
+      </p>
+    </div>
+
+    <!-- 5 LLM Integration -->
+    <div class="svc">
+      <span class="num">S/05</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#brandGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 4a3 3 0 00-3 3v1a3 3 0 00-2 5 3 3 0 002 5v1a3 3 0 003 3h1V4H9z"/>
+          <path d="M15 4a3 3 0 013 3v1a3 3 0 012 5 3 3 0 01-2 5v1a3 3 0 01-3 3h-1V4h1z"/>
+          <path d="M12 8v8M9 11h6M9 14h6"/>
+        </svg>
+      </div>
+      <h3>LLM Integration</h3>
+      <p class="short">Plug enterprise-grade LLMs into your stack.</p>
+      <p class="desc">
+        From OpenAI to Anthropic to open-source &mdash; we architect, secure, and integrate
+        LLMs with cost optimization, RAG, and observability built in.
+      </p>
+    </div>
+
+    <!-- 6 AI Strategy -->
+    <div class="svc violet">
+      <span class="num">S/06</span>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#hotGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="12" cy="12" r="1.5" fill="url(#hotGrad)" stroke="none"/>
+        </svg>
+      </div>
+      <h3>AI Strategy Consulting</h3>
+      <p class="short">Roadmaps that turn AI hype into ROI.</p>
+      <p class="desc">
+        C-suite strategy by operators, not slide decks: where to invest, what to build vs.
+        buy, how to organize, and how to measure. 12&ndash;24 month roadmaps with KPIs.
+      </p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>03</span>
+  </footer>
+</section>
+
+<!-- ============================================================
+     PAGE 4 — HOW WE WORK
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">03 / How we work</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">A four-step engagement</span>
+    <h2>From <span class="gradient-text">discovery to defence</span> &mdash; production AI in weeks, not quarters.</h2>
+  </div>
+
+  <p style="max-width: 160mm; color: var(--ink-2); margin-bottom: 8mm;">
+    Every ZentroTECH engagement runs the same disciplined loop. Paid discovery up front so
+    pricing is honest. Vertical slices so you see value early and can stop after any one.
+    Written evaluations so we both know whether the system works. Ongoing care so it keeps
+    working as the world changes.
+  </p>
+
+  <div class="process">
+    <div class="step">
+      <div class="num-block">
+        <div class="n">STEP 01</div>
+        <div class="name">Discover</div>
+      </div>
+      <div class="body">
+        <h4>Map the problem, prove the feasibility, fix the price.</h4>
+        <p>
+          A paid 1&ndash;2 week sprint where we interview stakeholders, audit data, prototype
+          the riskiest part, and write a fixed-price proposal. By the end you have a yes/no
+          on feasibility and a quote you can sign &mdash; not a slide deck.
+        </p>
+        <div class="meta">DELIVERABLES: opportunity map &middot; technical spike &middot; SOW &middot; eval plan</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num-block">
+        <div class="n">STEP 02</div>
+        <div class="name">Design</div>
+      </div>
+      <div class="body">
+        <h4>Architect the system, write the eval, plan the slices.</h4>
+        <p>
+          We design the agent topology, tool integrations, memory and retrieval layers,
+          guardrails, and observability. We also write the evaluation harness that scores
+          every change to come &mdash; before we write production code.
+        </p>
+        <div class="meta">DELIVERABLES: system architecture &middot; eval harness v1 &middot; UX flows &middot; slice roadmap</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num-block">
+        <div class="n">STEP 03</div>
+        <div class="name">Deploy</div>
+      </div>
+      <div class="body">
+        <h4>Ship vertical slices weekly until v1 is in production.</h4>
+        <p>
+          Each slice is a working, testable, demoable increment of the final system.
+          Weekly demos, weekly evals, weekly cost and quality reports. v1 in production in
+          4&ndash;12 weeks for most engagements; you can stop after any slice.
+        </p>
+        <div class="meta">DELIVERABLES: production system &middot; IaC &middot; runbooks &middot; handover docs</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num-block">
+        <div class="n">STEP 04</div>
+        <div class="name">Defend &amp; Grow</div>
+      </div>
+      <div class="body">
+        <h4>Monitor, regression-test, and compound the wins.</h4>
+        <p>
+          Optional monthly retainer covering monitoring, eval regression on every model
+          change, prompt and cost tuning, and incremental capability additions. Most
+          clients keep us on for 6&ndash;12 months post-launch.
+        </p>
+        <div class="meta">DELIVERABLES: monthly review &middot; eval reports &middot; model upgrades &middot; new capabilities</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>04</span>
+  </footer>
+</section>
+
+<!-- ============================================================
+     PAGE 5 — SELECTED WORK
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">04 / Selected work</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">Sample engagements</span>
+    <h2>Production AI <span class="gradient-text">measured in revenue, hours, and accuracy.</span></h2>
+  </div>
+
+  <p class="small" style="margin-bottom: 8mm; max-width: 165mm;">
+    Selected work, anonymized at client request. Numbers reflect outcomes measured against
+    the KPI defined in week one of each engagement. Full case studies available on request
+    under NDA.
+  </p>
+
+  <div class="cases">
+    <div class="case">
+      <div class="industry">Fintech &middot; Bangalore</div>
+      <h3>Multi-agent KYC &amp; onboarding system</h3>
+      <p class="summary">
+        Replaced a 7-step manual KYC workflow with a multi-agent pipeline: document
+        extraction, sanctions screening, risk scoring, and human-in-the-loop review. Live
+        in 9 weeks across two product lines.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="v">82%</div><div class="l">faster onboarding</div></div>
+        <div class="metric"><div class="v">99.4%</div><div class="l">eval accuracy</div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="industry">E-commerce &middot; UAE</div>
+      <h3>Arabic + English support agent</h3>
+      <p class="summary">
+        Bilingual support agent connected to order systems, returns, and CRM. Handles
+        80%+ of tier-1 tickets autonomously with human handoff on intent change. Modern
+        Standard Arabic plus Gulf and Levantine dialect tuning.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="v">3.2x</div><div class="l">deflection rate</div></div>
+        <div class="metric"><div class="v">4.6/5</div><div class="l">CSAT</div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="industry">SaaS &middot; United States</div>
+      <h3>Agentic coding rollout for a 60-engineer team</h3>
+      <p class="summary">
+        6-week adoption program: Claude Code &amp; Cursor install, custom slash commands,
+        PR-review and test-generation agents in CI, and weekly office hours. Measured
+        throughput against pre-rollout baseline.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="v">2.7x</div><div class="l">PR throughput</div></div>
+        <div class="metric"><div class="v">-41%</div><div class="l">cycle time</div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="industry">Professional services &middot; UK</div>
+      <h3>Document AI for contract review</h3>
+      <p class="summary">
+        RAG-grounded analysis agent for commercial contracts: clause extraction, deviation
+        flagging, and summary generation, with citations into source documents. Deployed
+        in client's Azure tenancy for data residency.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="v">11hrs</div><div class="l">saved per contract</div></div>
+        <div class="metric"><div class="v">94%</div><div class="l">clause precision</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>05</span>
+  </footer>
+</section>
+
+<!-- ============================================================
+     PAGE 6 — WHY ZENTROTECH
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">05 / Why ZentroTECH</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">The market gap we own</span>
+    <h2>The only AI partner that combines <span class="gradient-text">all four.</span></h2>
+  </div>
+
+  <p style="max-width: 165mm; color: var(--ink-2); margin-bottom: 8mm;">
+    The AI consulting market is full of partial answers. Tier-one strategy houses are slow
+    and expensive. Boutique automation shops are narrow. Pure agentic specialists lack
+    breadth. Hyperscale infrastructure firms can't move at SMB speed. ZentroTECH is built
+    in the gap between all of them.
+  </p>
+
+  <div class="diffs">
+    <div class="diff">
+      <div class="num">01</div>
+      <h3>Agentic-first, not bolted on.</h3>
+      <p>
+        Our default is agents that act &mdash; tool use, memory, orchestration, evals &mdash;
+        not chatbots or static prompts. Every engineer on our team ships agentic systems
+        weekly, on the latest models, with eval harnesses as standard. AI is the main act,
+        not a side hustle to a dev shop.
+      </p>
+    </div>
+
+    <div class="diff">
+      <div class="num">02</div>
+      <h3>Full-service breadth.</h3>
+      <p>
+        Strategy, agents, automation, websites, agentic coding, and LLM integration under
+        one roof. You don't have to stitch a roadmap consultancy together with three
+        delivery shops. The team writing the strategy is the team that ships the system.
+      </p>
+    </div>
+
+    <div class="diff">
+      <div class="num">03</div>
+      <h3>SMB &amp; mid-market accessible.</h3>
+      <p>
+        Engagement sizes from $15K to $250K, fixed-price after a paid 1-week discovery,
+        vertical slices you can stop after. The same senior engineering you'd get from a
+        $5M enterprise programme &mdash; just sized for ambitious mid-market and SMB teams
+        that need to move fast.
+      </p>
+    </div>
+
+    <div class="diff">
+      <div class="num">04</div>
+      <h3>Premium, global delivery.</h3>
+      <p>
+        Award-worthy design, async-first delivery across UTC+4 to UTC+5:30 with overlap to
+        the US, UK, and Singapore, on-site presence in Bangalore and Dubai, multilingual
+        agents (English, Hindi, Kannada, Arabic), and compliance-aware architectures
+        (SOC&nbsp;2, GDPR, DPDP, UAE PDPL).
+      </p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>06</span>
+  </footer>
+</section>
+
+<!-- ============================================================
+     PAGE 7 — LOCATIONS & CONTACT
+============================================================= -->
+<section class="page">
+  <header class="page-header">
+    <div class="brandline">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#brandGrad)" stroke-width="3"/>
+        <path d="M16 18 L48 18 L20 46 L48 46" fill="none" stroke="url(#brandGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ZentroTECH</span>
+    </div>
+    <div class="section-tag">06 / Locations &amp; contact</div>
+  </header>
+
+  <div class="section-title">
+    <span class="eyebrow">Where to find us</span>
+    <h2>Two offices. <span class="gradient-text">Global delivery.</span> One short conversation away.</h2>
+  </div>
+
+  <div class="offices">
+    <!-- Bangalore HQ -->
+    <div class="office">
+      <span class="pill hq">Headquarters</span>
+      <h3>Bangalore</h3>
+      <div class="region">Karnataka, India &middot; IST (UTC+5:30)</div>
+
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s7-7.58 7-13a7 7 0 10-14 0c0 5.42 7 13 7 13z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span>WeWork Galaxy, Residency Road, Bangalore 560025</span>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/>
+        </svg>
+        <span>+91 80 0000 0000</span>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3 7l9 6 9-6"/>
+        </svg>
+        <a href="mailto:bangalore@zentrotech.ai">bangalore@zentrotech.ai</a>
+      </div>
+    </div>
+
+    <!-- Dubai -->
+    <div class="office">
+      <span class="pill">Regional office</span>
+      <h3>Dubai</h3>
+      <div class="region">Dubai, UAE &middot; GST (UTC+4)</div>
+
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s7-7.58 7-13a7 7 0 10-14 0c0 5.42 7 13 7 13z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span>DIFC Innovation Hub, Gate Avenue, Dubai</span>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92V20a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3.09a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.38a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/>
+        </svg>
+        <span>+971 4 000 0000</span>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3 7l9 6 9-6"/>
+        </svg>
+        <a href="mailto:dubai@zentrotech.ai">dubai@zentrotech.ai</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-band">
+    <div>
+      <div class="label">General enquiries</div>
+      <div class="v email">hello@zentrotech.ai</div>
+    </div>
+    <div>
+      <div class="label">Web</div>
+      <div class="v" style="font-family: var(--font-mono); font-size: 11pt;">zentrotech.ai</div>
+    </div>
+  </div>
+
+  <div class="socials">
+    <span class="social-chip">linkedin.com/company/zentrotech</span>
+    <span class="social-chip">twitter.com/zentrotech</span>
+    <span class="social-chip">github.com/zentrotech</span>
+    <span class="social-chip">instagram.com/zentrotech</span>
+  </div>
+
+  <div class="signoff">
+    <div class="big">Engineering the AI of 2050, today.</div>
+    <div class="small">Bangalore &middot; Dubai &middot; Global</div>
+  </div>
+
+  <footer class="page-footer">
+    <span>ZENTROTECH &middot; <span class="url">zentrotech.ai</span></span>
+    <span>07</span>
+  </footer>
+</section>
+
+<!-- Print button (screen only, hidden in print) -->
+<button class="print-btn" type="button" onclick="window.print()" aria-label="Print or save as PDF">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9V2h12v7"/>
+    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+    <rect x="6" y="14" width="12" height="8"/>
+  </svg>
+  Print or save as PDF
+</button>
+
+</body>
+</html>
