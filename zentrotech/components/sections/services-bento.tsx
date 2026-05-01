@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Bot, Zap, Globe, Code2, BrainCircuit, Target, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
@@ -28,7 +28,7 @@ export function ServicesBento() {
           {SERVICES.map((service, i) => {
             const Icon = ICONS[service.icon];
             return (
-              <motion.div
+              <m.div
                 key={service.slug}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export function ServicesBento() {
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

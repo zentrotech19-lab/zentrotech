@@ -1,12 +1,12 @@
 "use client";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { OFFICES } from "@/lib/constants";
 import { MapPin } from "lucide-react";
 
-const GlobeScene = dynamic(() => import("@/components/3d/globe-scene").then((m) => m.GlobeScene), {
+const GlobeScene = dynamic(() => import("@/components/3d/globe-scene").then((mod) => mod.GlobeScene), {
   ssr: false,
   loading: () => <div className="aspect-square w-full rounded-full bg-linear-to-br from-indigo/20 to-violet/10 animate-pulse" />,
 });
@@ -16,7 +16,7 @@ export function GlobeSection() {
     <section className="relative py-32">
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -42,7 +42,7 @@ export function GlobeSection() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           <div className="aspect-square relative">
             <GlobeScene className="size-full" />

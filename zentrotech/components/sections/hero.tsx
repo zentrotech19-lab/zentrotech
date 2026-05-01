@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { AuroraBackground } from "@/components/animations/aurora-background";
 import { TextScramble } from "@/components/animations/text-scramble";
 
-const NeuralOrb = dynamic(() => import("@/components/3d/neural-orb").then((m) => m.NeuralOrb), {
+const NeuralOrb = dynamic(() => import("@/components/3d/neural-orb").then((mod) => mod.NeuralOrb), {
   ssr: false,
   loading: () => <div className="size-[500px] rounded-full bg-linear-to-br from-indigo/30 to-pink-pulse/20 blur-3xl animate-pulse" />,
 });
@@ -23,7 +23,7 @@ export function Hero() {
       </div>
 
       <Container className="relative z-10">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -56,7 +56,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
@@ -68,8 +68,8 @@ export function Hero() {
               <div className="size-8 rounded-full bg-linear-to-br from-pink-pulse to-violet border-2 border-void" />
             </div>
             <span>Trusted by ambitious teams in 12+ countries</span>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </Container>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-text-muted text-xs flex flex-col items-center gap-2">
