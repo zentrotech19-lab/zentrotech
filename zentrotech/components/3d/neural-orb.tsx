@@ -42,7 +42,7 @@ function CoreLight() {
 
 export function NeuralOrb({ className }: { className?: string }) {
   return (
-    <div className={className}>
+    <div className={className} aria-hidden="true" tabIndex={-1}>
       <Canvas
         camera={{ position: [0, 0, 4], fov: 45 }}
         dpr={[1, 1.5]}

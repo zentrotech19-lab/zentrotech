@@ -1,16 +1,28 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/hooks/use-reduced-motion";
 
 const CHARS = "!<>-_\\/[]{}—=+*^?#________";
 
-export function TextScramble({ text, className, duration = 1800 }: { text: string; className?: string; duration?: number }) {
+export function TextScramble({
+  text,
+  className,
+  duration = 1800,
+}: {
+  text: string;
+  className?: string;
+  duration?: number;
+}) {
   const [output, setOutput] = useState(text);
-  const frameRef = useRef(0);
-  const queueRef = useRef<{ from: string; to: string; start: number; end: number; char?: string }[]>([]);
+  const reduce = usePrefersReducedMotion();
 
   useEffect(() => {
-    const length = Math.max(output.length, text.length);
-    const queue = [];
+    if (reduce) {
+      setOutput(text);
+      return;
+    }
+    const length = Math.max(text.length, output.length);
+    const queue: { from: string; to: string; start: number; end: number; char?: string }[] = [];
     for (let i = 0; i < length; i++) {
       const from = output[i] ?? "";
       const to = text[i] ?? "";
@@ -18,13 +30,12 @@ export function TextScramble({ text, className, duration = 1800 }: { text: strin
       const end = start + Math.floor(Math.random() * (duration / 50));
       queue.push({ from, to, start, end });
     }
-    queueRef.current = queue;
     let frame = 0;
     let raf: number;
     const tick = () => {
       let out = "";
       let complete = 0;
-      for (const item of queueRef.current) {
+      for (const item of queue) {
         if (frame >= item.end) {
           complete++;
           out += item.to;
@@ -38,7 +49,7 @@ export function TextScramble({ text, className, duration = 1800 }: { text: strin
         }
       }
       setOutput(out);
-      if (complete < queueRef.current.length) {
+      if (complete < queue.length) {
         frame++;
         raf = requestAnimationFrame(tick);
       }
@@ -46,7 +57,7 @@ export function TextScramble({ text, className, duration = 1800 }: { text: strin
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
+  }, [text, reduce]);
 
   return <span className={className} dangerouslySetInnerHTML={{ __html: output }} />;
 }
