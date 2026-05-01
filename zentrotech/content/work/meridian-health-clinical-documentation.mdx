@@ -1,0 +1,33 @@
+---
+client: "Meridian Health (sample)"
+title: "Meridian: HIPAA-compliant LLM cuts clinical documentation time by 73%"
+excerpt: "A US telehealth startup rebuilt clinician notes, coding, and prior-auth on a private LLM stack — without a single PHI byte leaving their VPC."
+industry: "Healthcare"
+service: "LLM Integration"
+results:
+  - { label: "Notes time saved", value: "73%" }
+  - { label: "Clinician hours/week", value: "+9.4" }
+  - { label: "Coding accuracy", value: "96.1%" }
+  - { label: "PHI breaches", value: "0" }
+---
+
+> **Note:** Sample case study for demo purposes. Replace with real client work.
+
+## The challenge
+
+Meridian, a Boston-based telehealth startup serving 340,000 chronic-care patients, had a clinician burnout problem rooted in documentation. Providers spent 2.1 hours per shift on SOAP notes, ICD-10/CPT coding, and prior-authorization letters. Off-the-shelf scribe tools weren't an option — Meridian's BAA-bound stack ruled out routing PHI through public APIs, and their compliance team needed deterministic audit trails for every model interaction.
+
+## What we built
+
+A private LLM integration layered into the existing Epic-on-FHIR EHR:
+
+- Anthropic Claude deployed via AWS Bedrock inside Meridian's HIPAA-eligible VPC, with PHI never leaving the BAA boundary. PrivateLink endpoints, KMS-managed keys, and CloudTrail logging on every inference request.
+- A real-time ambient scribe that listens to the telehealth session (with explicit patient consent banner), generates the structured SOAP note, and surfaces it for clinician edit-then-sign in under 12 seconds after visit end.
+- An ICD-10 and CPT coding agent that reads the finalized note and proposes codes with citations back to specific note passages, reviewed by certified coders for the first 90 days then promoted to assist-only mode.
+- A prior-auth letter generator that pulls the patient's plan-specific clinical criteria from a vector index of 1,400 payer policies and drafts the appeal in the right format on the first try.
+
+Every prompt, response, and human override is logged immutably for HIPAA audit and used to refine the system weekly.
+
+## Results
+
+Documentation time per encounter fell 73%, returning 9.4 hours per clinician per week. Coding accuracy reached 96.1% versus a 91% baseline, lifting clean-claim rate by 4.2 points. Prior-auth approval-on-first-submission rose from 58% to 81%. Zero PHI incidents across 11 months and 1.6M inference calls; passed external HIPAA audit with no findings.

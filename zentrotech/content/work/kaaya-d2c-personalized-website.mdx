@@ -1,0 +1,33 @@
+---
+client: "Kaaya Wellness (sample)"
+title: "Kaaya: AI-personalized D2C site lifts revenue per visitor 3.2x"
+excerpt: "A Mumbai-based ayurvedic skincare brand replaced its static Shopify storefront with an AI-native experience that adapts to every visitor in real time."
+industry: "D2C / E-commerce"
+service: "AI-Powered Websites"
+results:
+  - { label: "Revenue per visitor", value: "3.2x" }
+  - { label: "Add-to-cart rate", value: "+118%" }
+  - { label: "Repeat purchase", value: "+47%" }
+  - { label: "Time to launch", value: "9 weeks" }
+---
+
+> **Note:** Sample case study for demo purposes. Replace with real client work.
+
+## The challenge
+
+Kaaya is a fast-growing D2C ayurvedic skincare brand selling across India and the GCC. Their Shopify storefront did the basics well but treated every visitor identically — the same hero, the same product grid, the same generic quiz. With paid CAC climbing past INR 940 and a 1.4% site-wide conversion rate, the founders knew the next leg of growth had to come from the experience itself, not more ad spend.
+
+## What we built
+
+A headless rebuild on Next.js with Shopify Storefront API, fronted by an AI personalization layer:
+
+- A skin-and-routine concierge agent powered by OpenAI GPT and Anthropic Claude (model-routed by query type) that conducts a 6-question diagnostic in conversational Hindi, English, or Hinglish and returns a tailored regimen with reasoning the customer can actually read.
+- A vector-DB recommender (Weaviate) trained on 18 months of order history, product reviews, and ingredient-affinity data, so a visitor who selects "combination skin + monsoon humidity + fragrance-sensitive" sees a different bestseller list than the next visitor.
+- Server-side personalized hero, social proof, and bundle blocks that render before first paint based on geolocation, referral source, and returning-visitor cohort — no client-side flicker.
+- An n8n automation flow that nurtures abandoned diagnostics via WhatsApp Business API with a hand-off to the same agent context, so the conversation continues instead of restarting.
+
+The whole stack is instrumented with PostHog so the team sees which agent decisions move revenue and which don't.
+
+## Results
+
+Revenue per visitor climbed 3.2x within 90 days of launch. Add-to-cart rate more than doubled (+118%) and the 90-day repeat purchase rate rose 47% as customers built routines around the regimens the agent recommended. Average order value grew 38% on the strength of bundle suggestions. Paid CAC payback shortened from 4.1 months to 1.6.
