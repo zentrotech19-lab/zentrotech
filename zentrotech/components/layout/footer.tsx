@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SITE, OFFICES, NAV_LINKS, SOCIAL } from "@/lib/constants";
-import { Briefcase, Share, MessageCircle, AtSign } from "lucide-react";
+import { FaLinkedinIn, FaXTwitter, FaGithub, FaInstagram } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -22,16 +22,16 @@ export function Footer() {
             <p className="text-text-muted text-sm max-w-md leading-relaxed">{SITE.description}</p>
             <div className="flex gap-3 mt-6">
               <a href={SOCIAL.linkedin} aria-label="LinkedIn" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <Briefcase className="size-4 text-text-muted" />
+                <FaLinkedinIn className="size-4 text-text-muted" />
               </a>
               <a href={SOCIAL.twitter} aria-label="Twitter" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <MessageCircle className="size-4 text-text-muted" />
+                <FaXTwitter className="size-4 text-text-muted" />
               </a>
               <a href={SOCIAL.github} aria-label="GitHub" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <Share className="size-4 text-text-muted" />
+                <FaGithub className="size-4 text-text-muted" />
               </a>
               <a href={SOCIAL.instagram} aria-label="Instagram" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <AtSign className="size-4 text-text-muted" />
+                <FaInstagram className="size-4 text-text-muted" />
               </a>
             </div>
           </div>
