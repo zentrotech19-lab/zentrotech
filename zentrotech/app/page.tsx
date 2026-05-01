@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { ServicesBento } from "@/components/sections/services-bento";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
@@ -9,6 +10,15 @@ import { AgentChatDemo } from "@/components/demos/agent-chat-demo";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "ZentroTECH — AI Consultancy in Bangalore & Dubai | Agents, Automation, AI Websites",
+  description:
+    "ZentroTECH builds production-grade AI agents, intelligent automation, and AI-native websites for ambitious teams across India, the UAE, and globally. Engineering the AI of 2050, today.",
+  path: "/",
+  ogImage: "/og/home.png",
+});
 
 export default function HomePage() {
   return (

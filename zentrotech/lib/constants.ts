@@ -32,7 +32,29 @@ export const OFFICES = [
     primary: false,
     coords: { lat: 25.2048, lng: 55.2708 },
   },
+  {
+    // Country-level entity for the UAE landing page so we don't collapse
+    // UAE -> Dubai in Google's local pack. Address points at our Dubai
+    // operational office; geo coordinates are the country centroid.
+    city: "UAE",
+    region: "United Arab Emirates",
+    country: "United Arab Emirates",
+    address: "Serving the UAE from DIFC Innovation Hub, Gate Avenue, Dubai",
+    phone: "+971 4 000 0000",
+    email: "uae@zentrotech.ai",
+    timezone: "GST (UTC+4)",
+    primary: false,
+    coords: { lat: 23.4241, lng: 53.8478 },
+  },
 ];
+
+// City landing pages — used by the footer "Local Pages" column and any
+// future Locations dropdown so these routes are no longer orphaned.
+export const CITY_PAGES = [
+  { label: "AI Consultancy in Bangalore", href: "/ai-consultancy-bangalore" },
+  { label: "AI Agency in Dubai", href: "/ai-agency-dubai" },
+  { label: "AI Development in the UAE", href: "/ai-development-uae" },
+] as const;
 
 export const SERVICES = [
   {

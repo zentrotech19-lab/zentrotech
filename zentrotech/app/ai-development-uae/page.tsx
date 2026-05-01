@@ -17,7 +17,7 @@ export const metadata = buildMetadata({
 export default function UAELanding() {
   return (
     <>
-      <LocalBusinessSchema city="Dubai" />
+      <LocalBusinessSchema city="UAE" />
       <section className="py-24">
         <Container>
           <Badge><MapPin className="size-3" /> United Arab Emirates</Badge>
