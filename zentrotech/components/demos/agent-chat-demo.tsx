@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Bot, Send, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -35,12 +35,12 @@ export function AgentChatDemo() {
     const text = input.trim();
     if (!text) return;
     const id = messages.length;
-    setMessages((m) => [...m, { id, from: "user", text }]);
+    setMessages((prev) => [...prev, { id, from: "user", text }]);
     setInput("");
     setTyping(true);
     setTimeout(() => {
       setTyping(false);
-      setMessages((m) => [...m, { id: id + 1, from: "agent", text: reply(text) }]);
+      setMessages((prev) => [...prev, { id: id + 1, from: "agent", text: reply(text) }]);
     }, 1100);
   };
 
@@ -49,7 +49,7 @@ export function AgentChatDemo() {
       <div className="rounded-3xl bg-void/60 overflow-hidden">
         <div className="px-6 py-4 border-b border-white/5 flex items-center gap-3">
           <div className="relative size-10 rounded-full bg-linear-to-br from-indigo to-pink-pulse flex items-center justify-center">
-            <Bot className="size-5 text-white" />
+            <Bot aria-hidden="true" className="size-5 text-white" />
             <div className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full bg-cyan-glow border-2 border-void" />
           </div>
           <div>
@@ -60,37 +60,37 @@ export function AgentChatDemo() {
 
         <div className="px-6 py-6 h-80 overflow-y-auto space-y-4">
           <AnimatePresence initial={false}>
-            {messages.map((m) => (
-              <motion.div
-                key={m.id}
+            {messages.map((msg) => (
+              <m.div
+                key={msg.id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={cn("flex gap-3", m.from === "user" ? "justify-end" : "justify-start")}
+                className={cn("flex gap-3", msg.from === "user" ? "justify-end" : "justify-start")}
               >
-                {m.from === "agent" && (
+                {msg.from === "agent" && (
                   <div className="size-8 rounded-full bg-indigo/20 flex items-center justify-center shrink-0">
-                    <Bot className="size-4 text-indigo-glow" />
+                    <Bot aria-hidden="true" className="size-4 text-indigo-glow" />
                   </div>
                 )}
-                <div className={cn("max-w-[75%] px-4 py-3 rounded-2xl text-sm", m.from === "user" ? "bg-indigo text-white" : "glass text-text-secondary")}>
-                  {m.text}
+                <div className={cn("max-w-[75%] px-4 py-3 rounded-2xl text-sm", msg.from === "user" ? "bg-indigo text-white" : "glass text-text-secondary")}>
+                  {msg.text}
                 </div>
-                {m.from === "user" && (
+                {msg.from === "user" && (
                   <div className="size-8 rounded-full bg-pink-pulse/20 flex items-center justify-center shrink-0">
-                    <User className="size-4 text-pink-pulse" />
+                    <User aria-hidden="true" className="size-4 text-pink-pulse" />
                   </div>
                 )}
-              </motion.div>
+              </m.div>
             ))}
             {typing && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-2 items-center text-text-muted text-sm">
-                <div className="size-8 rounded-full bg-indigo/20 flex items-center justify-center"><Bot className="size-4 text-indigo-glow" /></div>
+              <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-2 items-center text-text-muted text-sm">
+                <div className="size-8 rounded-full bg-indigo/20 flex items-center justify-center"><Bot aria-hidden="true" className="size-4 text-indigo-glow" /></div>
                 <span className="flex gap-1">
                   <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce" />
                   <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce [animation-delay:0.15s]" />
                   <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce [animation-delay:0.3s]" />
                 </span>
-              </motion.div>
+              </m.div>
             )}
             <div ref={endRef} />
           </AnimatePresence>
@@ -102,10 +102,15 @@ export function AgentChatDemo() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
             placeholder="Ask the agent anything..."
-            className="flex-1 bg-white/5 rounded-full px-4 py-2 text-sm text-white placeholder:text-text-muted focus:outline-none focus:bg-white/10"
+            aria-label="Ask the agent"
+            className="flex-1 bg-white/5 rounded-full px-4 py-2 text-sm text-white placeholder:text-text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void"
           />
-          <button onClick={send} className="size-10 rounded-full bg-linear-to-br from-indigo to-pink-pulse flex items-center justify-center hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all">
-            <Send className="size-4 text-white" />
+          <button
+            onClick={send}
+            aria-label="Send message"
+            className="size-11 min-w-11 min-h-11 rounded-full bg-linear-to-br from-indigo to-pink-pulse flex items-center justify-center hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void"
+          >
+            <Send aria-hidden="true" className="size-4 text-white" />
           </button>
         </div>
       </div>

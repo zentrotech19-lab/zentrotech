@@ -26,17 +26,17 @@ export function Footer() {
             </div>
             <p className="text-text-muted text-sm max-w-md leading-relaxed">{SITE.description}</p>
             <div className="flex gap-3 mt-6">
-              <a href={SOCIAL.linkedin} aria-label="LinkedIn" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <FaLinkedinIn className="size-4 text-text-muted" />
+              <a href={SOCIAL.linkedin} aria-label="LinkedIn" className="size-11 min-w-11 min-h-11 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
+                <FaLinkedinIn aria-hidden="true" className="size-4 text-text-muted" />
               </a>
-              <a href={SOCIAL.twitter} aria-label="Twitter" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <FaXTwitter className="size-4 text-text-muted" />
+              <a href={SOCIAL.twitter} aria-label="Twitter" className="size-11 min-w-11 min-h-11 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
+                <FaXTwitter aria-hidden="true" className="size-4 text-text-muted" />
               </a>
-              <a href={SOCIAL.github} aria-label="GitHub" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <FaGithub className="size-4 text-text-muted" />
+              <a href={SOCIAL.github} aria-label="GitHub" className="size-11 min-w-11 min-h-11 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
+                <FaGithub aria-hidden="true" className="size-4 text-text-muted" />
               </a>
-              <a href={SOCIAL.instagram} aria-label="Instagram" className="size-9 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
-                <FaInstagram className="size-4 text-text-muted" />
+              <a href={SOCIAL.instagram} aria-label="Instagram" className="size-11 min-w-11 min-h-11 rounded-full glass flex items-center justify-center hover:border-indigo/40 transition-colors">
+                <FaInstagram aria-hidden="true" className="size-4 text-text-muted" />
               </a>
             </div>
           </div>

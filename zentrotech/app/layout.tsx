@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { SmoothScrollProvider } from "@/components/animations/smooth-scroll";
 import { MagneticCursor } from "@/components/animations/magnetic-cursor";
 import { Header } from "@/components/layout/header";
@@ -55,12 +56,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SmoothScrollProvider>
-          <MagneticCursor />
-          <Header />
-          <main className="pt-20">{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:px-4 focus:py-2 focus:rounded-full focus:bg-indigo focus:text-white"
+        >
+          Skip to main content
+        </a>
+        <LazyMotion features={domAnimation} strict>
+          <SmoothScrollProvider>
+            <MagneticCursor />
+            <Header />
+            <main id="main" className="pt-20">{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
+        </LazyMotion>
       </body>
     </html>
   );
