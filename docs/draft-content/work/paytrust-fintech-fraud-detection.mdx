@@ -1,0 +1,32 @@
+---
+client: "PayTrust Financial (sample)"
+title: "PayTrust: Fraud detection agent cuts false positives 40% on 2.4M daily transactions"
+excerpt: "A multi-model fraud agent that protects a Bangalore-based UPI and card processor without burying the risk team in noise."
+industry: "Fintech"
+service: "AI Agent Development"
+results:
+  - { label: "False positives", value: "-40%" }
+  - { label: "True fraud caught", value: "+18%" }
+  - { label: "Analyst hours saved", value: "11,200/yr" }
+  - { label: "Time to deploy", value: "14 weeks" }
+---
+
+> **Note:** Sample case study for demo purposes. Replace with real client work.
+
+## The challenge
+
+PayTrust processes 2.4M UPI and card transactions per day across India. Their legacy rules engine flagged 3.1% of transactions as suspicious — a 26-person review team drowned in noise, and genuine fraud still slipped through during festive-season spikes. Every false decline cost an estimated INR 480 in lost lifetime value, and RBI compliance windows left no room for slow review queues.
+
+## What we built
+
+A three-layer agentic fraud system:
+
+1. A streaming feature pipeline on Kafka + Redis that hydrates 240+ behavioral signals (device fingerprint, geo-velocity, merchant category drift, peer-cohort spend patterns) within 80ms.
+2. An ensemble scoring layer combining a gradient-boosted base model with an Anthropic Claude reasoning agent that interprets edge cases — high-value first-time merchants, unusual time-of-day, KYC-fresh accounts.
+3. A Pinecone vector store of 18 months of confirmed-fraud narratives so the agent can retrieve "this looks like" precedent and explain its decision in natural language to the analyst.
+
+Human-in-the-loop escalation triggers only when the agent's confidence is below 0.82, and every override feeds the next day's fine-tune cycle.
+
+## Results
+
+False positive rate dropped from 3.1% to 1.86% (a 40% relative reduction) while genuine fraud detection rose 18%. The risk team redeployed 11,200 analyst hours per year toward proactive merchant-risk profiling. Mean time-to-decision fell from 4.2 minutes to 9 seconds, and the explainability layer cleared an RBI thematic audit on first review.

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="AI Agency in Dubai — ZentroTECH">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="100%" stop-color="#1a0f2e"/>
+    </linearGradient>
+    <radialGradient id="auroraIndigo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auroraViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auroraPink" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auroraCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wordmarkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="40%" stop-color="#6366f1"/>
+      <stop offset="70%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="pinGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="burjGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#1a0f2e" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="noise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="13"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Aurora upper-right -->
+  <g opacity="0.9">
+    <ellipse cx="1000" cy="120" rx="420" ry="320" fill="url(#auroraViolet)"/>
+    <ellipse cx="1100" cy="220" rx="340" ry="260" fill="url(#auroraIndigo)"/>
+    <ellipse cx="860" cy="60" rx="300" ry="220" fill="url(#auroraPink)"/>
+    <ellipse cx="800" cy="320" rx="240" ry="180" fill="url(#auroraCyan)"/>
+  </g>
+
+  <!-- Burj Khalifa silhouette (subtle, right side) -->
+  <g transform="translate(1020,630)" opacity="0.45">
+    <!-- Stepped tower -->
+    <polygon points="0,0 -10,-380 -22,-460 -32,-520 -38,-560 -42,-590 -42,-630
+                     0,-590 0,0" fill="url(#burjGrad)"/>
+    <polygon points="0,0 10,-380 22,-460 32,-520 38,-560 42,-590 42,-630
+                     0,-590 0,0" fill="url(#burjGrad)"/>
+    <line x1="-42" y1="-630" x2="-42" y2="0" stroke="#8b5cf6" stroke-width="1" opacity="0.45"/>
+    <line x1="42" y1="-630" x2="42" y2="0" stroke="#8b5cf6" stroke-width="1" opacity="0.45"/>
+    <!-- Antenna -->
+    <line x1="0" y1="-590" x2="0" y2="-700" stroke="#06b6d4" stroke-width="1.2" opacity="0.6"/>
+    <circle cx="0" cy="-700" r="3" fill="#06b6d4" opacity="0.8"/>
+  </g>
+  <!-- City skyline base -->
+  <g transform="translate(0,580)" opacity="0.25" fill="#6366f1">
+    <rect x="700" y="-30" width="40" height="50"/>
+    <rect x="745" y="-50" width="36" height="70"/>
+    <rect x="786" y="-20" width="28" height="40"/>
+    <rect x="820" y="-40" width="34" height="60"/>
+    <rect x="860" y="-60" width="40" height="80"/>
+    <rect x="905" y="-30" width="32" height="50"/>
+    <rect x="940" y="-25" width="28" height="45"/>
+    <rect x="1080" y="-35" width="40" height="55"/>
+    <rect x="1125" y="-50" width="36" height="70"/>
+    <rect x="1166" y="-25" width="28" height="45"/>
+  </g>
+
+  <!-- Brand mark Z -->
+  <g transform="translate(72,72)">
+    <rect x="0" y="0" width="56" height="56" rx="14" fill="none" stroke="url(#wordmarkGrad)" stroke-width="2"/>
+    <text x="28" y="40" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="34" text-anchor="middle" fill="url(#wordmarkGrad)">Z</text>
+  </g>
+  <text x="148" y="108" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="18" letter-spacing="4" fill="rgba(255,255,255,0.55)">ZENTROTECH</text>
+
+  <!-- Map pin (right) -->
+  <g transform="translate(870,250)" filter="url(#glow)">
+    <path d="M0 -90 C 50 -90 80 -54 80 -14 C 80 46 0 130 0 130 C 0 130 -80 46 -80 -14 C -80 -54 -50 -90 0 -90 Z"
+          fill="url(#pinGrad)" opacity="0.95"/>
+    <circle cx="0" cy="-14" r="28" fill="#0a0a0f"/>
+    <circle cx="0" cy="-14" r="13" fill="#ec4899"/>
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="72" y="234" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="20" letter-spacing="6" fill="#06b6d4">LOCATION</text>
+
+  <!-- Headline -->
+  <text x="72" y="324" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="80" letter-spacing="-2" fill="#ffffff" filter="url(#glow)">AI Agency</text>
+  <text x="72" y="408" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="80" letter-spacing="-2" fill="url(#wordmarkGrad)" filter="url(#glow)">in Dubai</text>
+
+  <!-- Subhead -->
+  <text x="72" y="464" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="28" fill="rgba(255,255,255,0.75)">Premium agentic AI for the UAE&apos;s most ambitious teams.</text>
+
+  <!-- Bottom meta -->
+  <g transform="translate(72,548)">
+    <circle cx="6" cy="-8" r="6" fill="#06b6d4"/>
+    <text x="22" y="-3" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="18" fill="rgba(255,255,255,0.6)">Dubai  ·  25.20° N, 55.27° E  ·  UAE</text>
+  </g>
+  <text x="1128" y="545" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="18" fill="rgba(255,255,255,0.45)">zentrotech.ai / dubai</text>
+
+  <rect width="1200" height="630" filter="url(#noise)" opacity="0.7"/>
+</svg>

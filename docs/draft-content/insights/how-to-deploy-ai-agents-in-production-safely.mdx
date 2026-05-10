@@ -1,0 +1,114 @@
+---
+title: "How to Deploy AI Agents in Production Safely: A 2026 Field Guide"
+excerpt: "A senior engineer's checklist for shipping agents that won't burn your budget, leak data, or take destructive actions in the middle of the night."
+category: "AI Trends"
+date: "2026-04-28"
+author: "ZentroTECH Research"
+readingTime: "9 min read"
+---
+
+## The "demo to prod" gap is where careers go to die
+
+Most agent demos work. Most agent deployments don't. The difference isn't model quality — Sonnet 4.6, GPT-5, and Gemini 3 Pro are all reliable enough for production tool-calling. The difference is everything *around* the model: guardrails, observability, cost control, fallback paths, and the operational discipline to treat an agent like the autonomous system it actually is.
+
+We've shipped 30+ production agents across finance, retail, and SaaS over the last 18 months. Here is the checklist we run before any agent touches a real customer or a real database.
+
+## 1. Define the blast radius before writing the prompt
+
+Every agent has a blast radius — the maximum damage a single bad run can cause. Quantify it before you build.
+
+- **Read-only agent fetching support tickets:** blast radius near zero.
+- **Agent issuing refunds up to $500:** blast radius = $500 per run, capped daily.
+- **Agent with shell access to production:** blast radius = the entire company. Don't build this. We mean it.
+
+Every tool you grant the agent expands the radius. Audit each one against the question: *what is the worst single action this enables, and can the business survive 1,000 of them per hour?*
+
+## 2. Use a tiered tool registry, not a flat one
+
+In production, tools fall into three tiers:
+
+- **Tier 0 — read-only:** queries, lookups, retrievals. No approval needed.
+- **Tier 1 — bounded writes:** sending an email, creating a draft, posting a Slack message. Rate-limited, logged, reversible.
+- **Tier 2 — irreversible / high-stakes:** payments, customer-facing actions, data deletion, code merges. Always require human-in-the-loop approval, no exceptions.
+
+A flat tool list where the model picks anything is the single biggest cause of production agent incidents. Tier your tools and route Tier 2 calls through a dedicated approval queue.
+
+## 3. Cost-budget every single run
+
+Agents that loop are agents that bankrupt you. Every run must have:
+
+- A **hard token budget** (we use 200K tokens as a default ceiling per run; raise deliberately)
+- A **hard tool-call ceiling** (15-25 calls is plenty for 90% of workflows)
+- A **wall-clock timeout** (90 seconds for sync, 30 minutes for async)
+- A **dollar budget** computed live from token + tool costs, with auto-abort at threshold
+
+Wire these into your runtime, not your prompt. Models will happily ignore a "please don't loop" instruction at 3am.
+
+## 4. Make the agent legible: structured traces from day one
+
+If you cannot answer "what did the agent do at 02:47 last Tuesday and why?" in under two minutes, you do not have a production system. You have a liability.
+
+Minimum trace requirements:
+
+- Full input + system prompt (with PII redaction)
+- Every tool call with arguments + result
+- Every model response, including reasoning blocks
+- Latency, token count, dollar cost per step
+- Outcome label (success / partial / failed / aborted)
+
+LangSmith, Braintrust, Langfuse, or Anthropic's eval harness all do this. Pick one and instrument before you launch — retrofitting is brutal.
+
+## 5. Build the eval harness *before* the agent goes live
+
+You need at least three eval suites running on every prompt or model change:
+
+- **Golden set (50-200 cases):** known-good inputs with known-good outputs. Catches regressions.
+- **Adversarial set (30-100 cases):** prompt injections, jailbreaks, malformed inputs, ambiguous requests. Catches safety failures.
+- **Production replay (continuous):** sample 1-5% of real production runs and re-evaluate them with each change. Catches drift.
+
+If your eval suite takes more than 10 minutes to run, engineers will stop running it. Optimize ruthlessly.
+
+## 6. Plan the failure modes, not just the happy path
+
+For every agent, document:
+
+- **What does the agent do when a tool returns an error?** (retry? escalate? abort?)
+- **What does it do when it cannot make progress?** (loop detection, max-step abort)
+- **What does it do when confidence is low?** (defer to human, ask for clarification, or surface uncertainty)
+- **What does it do when the model output is malformed?** (strict schema validation, structured outputs, repair prompt)
+
+The default behavior of "keep trying" is how you discover, three weeks in, that an agent has been retrying a failed Stripe charge 4,000 times a day.
+
+## 7. Deploy behind a feature flag, ramp gradually
+
+Never enable a new agent for 100% of traffic on day one. Standard ramp:
+
+- Day 1-3: shadow mode (agent runs, output logged, no real action taken)
+- Day 4-7: 5% of eligible traffic with explicit human approval on every action
+- Day 8-14: 25% with sampled human review
+- Day 15+: ramp to 100% with continuous monitoring
+
+Shadow mode catches 70% of issues you wouldn't catch in eval. Use it.
+
+## 8. Set up the kill switch before you need it
+
+Two switches, both reachable in under 30 seconds:
+
+- **Per-agent disable** (env var, feature flag, kill API)
+- **Per-tool disable** (revoke specific tool access without taking the whole agent down)
+
+Test the kill switch monthly. A switch you've never pulled is a switch that doesn't work.
+
+## 9. Treat prompts and tools like code, not config
+
+Version-control everything. Code-review prompt changes. Run evals on PR. Tag releases. Roll back on regression. The teams that treat prompts as casual config are the same teams writing Slack post-mortems on Friday evenings.
+
+## 10. Know when not to use an agent
+
+The hardest discipline. If a workflow is deterministic, low-variance, and high-volume, a state machine with a few LLM-calls embedded will outperform a full agent on cost, latency, and reliability. Agents earn their keep when the path is genuinely open-ended. Don't reach for the autonomous hammer when a script will do.
+
+## The summary
+
+Production agents are not a model problem. They are a systems engineering problem with an LLM in the middle. Tier your tools, budget your runs, instrument everything, eval continuously, ramp gradually, and design for failure. Do this and your agents will behave. Skip any of it and you will eventually write the post-mortem.
+
+If you'd like a second pair of eyes on an agent you're about to ship, [book a 30-minute review](/contact).

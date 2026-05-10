@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Work that ships — ZentroTECH case studies">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="100%" stop-color="#1a0f2e"/>
+    </linearGradient>
+    <radialGradient id="auroraIndigo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auroraViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auroraPink" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wordmarkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="40%" stop-color="#6366f1"/>
+      <stop offset="70%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="tile1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a0f2e" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="tile2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a0f2e" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="tile3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a0f2e" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="tile4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a0f2e" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="noise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="19"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Aurora upper-right -->
+  <g opacity="0.9">
+    <ellipse cx="1000" cy="120" rx="420" ry="320" fill="url(#auroraViolet)"/>
+    <ellipse cx="1100" cy="220" rx="340" ry="260" fill="url(#auroraIndigo)"/>
+    <ellipse cx="860" cy="60" rx="300" ry="220" fill="url(#auroraPink)"/>
+  </g>
+
+  <!-- Bento grid portfolio (right side) -->
+  <g transform="translate(680,140)" stroke="rgba(255,255,255,0.12)" stroke-width="1">
+    <!-- Big tile -->
+    <rect x="0" y="0" width="220" height="220" rx="16" fill="url(#tile1)"/>
+    <!-- inner mock content -->
+    <rect x="20" y="20" width="80" height="10" rx="4" fill="rgba(255,255,255,0.55)" stroke="none"/>
+    <rect x="20" y="38" width="140" height="6" rx="3" fill="rgba(255,255,255,0.25)" stroke="none"/>
+    <circle cx="180" cy="180" r="22" fill="rgba(236,72,153,0.5)" stroke="none"/>
+    <polyline points="20,180 50,160 80,170 110,140 140,150 170,120" fill="none" stroke="#06b6d4" stroke-width="2"/>
+
+    <!-- Top right -->
+    <rect x="240" y="0" width="220" height="100" rx="14" fill="url(#tile2)"/>
+    <rect x="260" y="20" width="100" height="8" rx="3" fill="rgba(255,255,255,0.55)" stroke="none"/>
+    <rect x="260" y="36" width="160" height="6" rx="3" fill="rgba(255,255,255,0.25)" stroke="none"/>
+    <rect x="260" y="64" width="40" height="20" rx="6" fill="rgba(6,182,212,0.55)" stroke="none"/>
+    <rect x="305" y="64" width="40" height="20" rx="6" fill="rgba(139,92,246,0.55)" stroke="none"/>
+
+    <!-- Mid right -->
+    <rect x="240" y="120" width="100" height="100" rx="14" fill="url(#tile3)"/>
+    <circle cx="290" cy="170" r="22" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="290" cy="170" r="8" fill="#ec4899" stroke="none"/>
+
+    <!-- Mid right 2 -->
+    <rect x="360" y="120" width="100" height="100" rx="14" fill="url(#tile4)"/>
+    <polyline points="380,200 395,180 410,190 425,165 440,175" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="440" cy="175" r="3" fill="#ffffff" stroke="none"/>
+
+    <!-- Bottom row -->
+    <rect x="0" y="240" width="140" height="100" rx="14" fill="url(#tile3)"/>
+    <rect x="20" y="260" width="60" height="8" rx="3" fill="rgba(255,255,255,0.55)" stroke="none"/>
+    <rect x="20" y="276" width="100" height="6" rx="3" fill="rgba(255,255,255,0.25)" stroke="none"/>
+    <rect x="20" y="305" width="80" height="18" rx="6" fill="rgba(99,102,241,0.45)" stroke="none"/>
+
+    <rect x="160" y="240" width="140" height="100" rx="14" fill="url(#tile4)"/>
+    <rect x="180" y="260" width="60" height="8" rx="3" fill="rgba(255,255,255,0.55)" stroke="none"/>
+    <circle cx="270" cy="295" r="20" fill="rgba(236,72,153,0.5)" stroke="none"/>
+    <circle cx="270" cy="295" r="10" fill="#0a0a0f" stroke="none"/>
+
+    <rect x="320" y="240" width="140" height="100" rx="14" fill="url(#tile1)"/>
+    <rect x="340" y="260" width="60" height="8" rx="3" fill="rgba(255,255,255,0.55)" stroke="none"/>
+    <polyline points="340,310 360,290 380,300 400,275 420,290 440,270" fill="none" stroke="#06b6d4" stroke-width="2"/>
+  </g>
+
+  <!-- Brand mark Z -->
+  <g transform="translate(72,72)">
+    <rect x="0" y="0" width="56" height="56" rx="14" fill="none" stroke="url(#wordmarkGrad)" stroke-width="2"/>
+    <text x="28" y="40" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="34" text-anchor="middle" fill="url(#wordmarkGrad)">Z</text>
+  </g>
+  <text x="148" y="108" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="18" letter-spacing="4" fill="rgba(255,255,255,0.55)">ZENTROTECH</text>
+
+  <!-- Eyebrow -->
+  <text x="72" y="234" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="20" letter-spacing="6" fill="#ec4899">CASE STUDIES</text>
+
+  <!-- Headline -->
+  <text x="72" y="338" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="96" letter-spacing="-3" fill="#ffffff" filter="url(#glow)">Work that</text>
+  <text x="72" y="430" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="96" letter-spacing="-3" fill="url(#wordmarkGrad)" filter="url(#glow)">ships.</text>
+
+  <!-- Subhead -->
+  <text x="72" y="488" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="28" fill="rgba(255,255,255,0.75)">Real systems. Measurable outcomes.</text>
+
+  <!-- Bottom meta -->
+  <g transform="translate(72,558)">
+    <circle cx="6" cy="-8" r="6" fill="#06b6d4"/>
+    <text x="22" y="-3" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="18" fill="rgba(255,255,255,0.6)">Agents  ·  Automation  ·  AI products</text>
+  </g>
+  <text x="1128" y="555" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="18" fill="rgba(255,255,255,0.45)">zentrotech.ai / work</text>
+
+  <rect width="1200" height="630" filter="url(#noise)" opacity="0.7"/>
+</svg>

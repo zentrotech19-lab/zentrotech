@@ -1,14 +1,17 @@
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { AuroraBackground } from "@/components/animations/aurora-background";
 
 export function CTASection() {
   return (
     <section className="relative py-32">
       <Container>
         <div className="relative rounded-3xl glass-glow p-12 md:p-20 text-center overflow-hidden">
-          <AuroraBackground intensity="high" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-1/3 left-1/2 -translate-x-1/2 size-[800px] rounded-full blur-3xl opacity-50"
+            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.35) 0%, transparent 65%)" }}
+          />
           <div className="relative z-10">
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight">
               Ready to ship the <span className="text-aurora">future</span>?

@@ -4,6 +4,7 @@ import "./globals.css";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { SmoothScrollProvider } from "@/components/animations/smooth-scroll";
 import { MagneticCursor } from "@/components/animations/magnetic-cursor";
+import { Starfield } from "@/components/animations/starfield";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
+        <Starfield />
         <LazyMotion features={domAnimation} strict>
           <SmoothScrollProvider>
             <MagneticCursor />

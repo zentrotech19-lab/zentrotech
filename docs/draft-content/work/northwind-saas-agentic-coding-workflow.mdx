@@ -1,0 +1,31 @@
+---
+client: "Northwind Cloud (sample)"
+title: "Northwind: Agentic coding workflow saves 15,000 engineering hours a year"
+excerpt: "How a UK SaaS company's 180-engineer org rewired their SDLC around Claude-powered coding agents and shipped 2.3x faster."
+industry: "SaaS"
+service: "Agentic Coding"
+results:
+  - { label: "Hours saved", value: "15,000/yr" }
+  - { label: "PR cycle time", value: "-61%" }
+  - { label: "Ship velocity", value: "2.3x" }
+  - { label: "Engineers onboarded", value: "180" }
+---
+
+> **Note:** Sample case study for demo purposes. Replace with real client work.
+
+## The challenge
+
+Northwind, a London-headquartered B2B SaaS company in the workforce-analytics space, had 180 engineers across four product lines. Code review queues averaged 38 hours, refactor work was perpetually deprioritized, and senior engineers spent roughly a third of their week on glue work — writing tests, updating docs, migrating between framework versions. Leadership wanted measurable throughput gains without expanding headcount or compromising their SOC 2 Type II posture.
+
+## What we built
+
+A staged rollout of agentic coding capability across the org:
+
+- A Claude Code-based agent harness wired into Northwind's monorepo with scoped read/write permissions per team, gated by their existing GitHub Enterprise SSO and CODEOWNERS rules.
+- Custom skills for the patterns that mattered most: writing failing tests first, generating ADRs from PR diffs, performing dependency-bump migrations across 240+ services, and authoring runbooks from incident postmortems.
+- A reviewing-agent layer that runs on every PR — checks against the internal style guide, flags untested code paths, and posts inline suggestions before a human reviewer is ever paged.
+- An MCP server exposing Northwind's internal API catalog, design tokens, and customer-tier feature flags so generated code conforms to house conventions on the first try.
+
+## Results
+
+Across 11 months: 15,000 engineering hours recovered, PR cycle time down 61%, and shipping velocity (story points completed per sprint) up 2.3x. The platform team retired two long-stalled migration projects in a single quarter. Crucially, defect-escape rate fell 22% — agentic review caught issues that previously made it to staging.

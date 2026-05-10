@@ -1,0 +1,31 @@
+---
+client: "Al Marwa Retail Group (sample)"
+title: "Al Marwa: Arabic + English voice agent serving 80 stores across the UAE"
+excerpt: "A bilingual customer service agent that handles 92% of calls end-to-end without a human, in dialect-aware Khaleeji Arabic."
+industry: "Retail"
+service: "AI Agent Development"
+results:
+  - { label: "Calls auto-resolved", value: "92%" }
+  - { label: "Avg handle time", value: "-58%" }
+  - { label: "CSAT (Arabic)", value: "4.7 / 5" }
+  - { label: "Stores live", value: "80" }
+---
+
+> **Note:** Sample case study for demo purposes. Replace with real client work.
+
+## The challenge
+
+Al Marwa runs 80 retail locations across Dubai, Abu Dhabi, Sharjah, and the Northern Emirates. Their contact center fielded 14,000 calls a week — store hours, stock availability, return policy, loyalty points, click-and-collect status — split roughly 60/40 Arabic to English. Hiring fully bilingual agents at scale was getting expensive, and Khaleeji dialect callers were routinely transferred two or three times before reaching someone who understood them.
+
+## What we built
+
+A single voice agent fronting both languages, deployed on Twilio Voice with a custom orchestration layer:
+
+- Speech-to-text via a fine-tuned Whisper model adapted for Khaleeji and Levantine Arabic dialects, with code-switching detection (callers often mix English brand names mid-Arabic sentence).
+- Reasoning and intent handling powered by Anthropic Claude with a tool registry wired into Al Marwa's SAP retail backend, Salesforce loyalty platform, and store-level inventory feeds.
+- Text-to-speech using ElevenLabs voices cloned with explicit licensing — one male and one female persona per language — to match the brand's existing IVR identity.
+- A compliance layer that masks PII before any text ever leaves UAE-resident infrastructure (Azure UAE North), satisfying TDRA data residency requirements.
+
+## Results
+
+92% of calls now resolve without human handover. Average handle time fell from 4 minutes 10 seconds to 1 minute 45 seconds. Arabic-language CSAT climbed from 3.9 to 4.7 out of 5 — finally matching the English experience. The contact center reduced agent headcount by 34 roles through natural attrition while extending service hours from 12 to 24 per day.

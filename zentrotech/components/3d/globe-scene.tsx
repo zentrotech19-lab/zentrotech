@@ -29,15 +29,15 @@ function Globe() {
   });
   return (
     <group ref={ref}>
-      <Sphere args={[1, 64, 64]}>
-        <meshStandardMaterial color="#1a0f2e" emissive="#6366f1" emissiveIntensity={0.05} wireframe />
+      <Sphere args={[1, 48, 48]}>
+        <meshBasicMaterial color="#6366f1" wireframe transparent opacity={0.22} />
       </Sphere>
       {PINS.map((pin) => {
         const pos = latLngToVec3(pin.lat, pin.lng);
         return (
           <mesh key={pin.name} position={pos}>
-            <sphereGeometry args={[pin.primary ? 0.04 : 0.025, 16, 16]} />
-            <meshBasicMaterial color={pin.primary ? "#ec4899" : "#06b6d4"} />
+            <sphereGeometry args={[pin.primary ? 0.045 : 0.025, 16, 16]} />
+            <meshBasicMaterial color={pin.primary ? "#ffffff" : "#a5b4fc"} />
           </mesh>
         );
       })}
@@ -50,8 +50,6 @@ export function GlobeScene({ className }: { className?: string }) {
     <div className={className} aria-hidden="true" tabIndex={-1}>
       <Canvas camera={{ position: [0, 0, 2.6], fov: 45 }} dpr={[1, 1.5]} gl={{ alpha: true }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[3, 3, 3]} intensity={2} color="#6366f1" />
           <Globe />
           <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.4} />
         </Suspense>

@@ -32,11 +32,11 @@ export function GlobeSection() {
             <div className="mt-8 space-y-4">
               {OFFICES.map((o) => (
                 <div key={o.city} className="flex items-start gap-4 glass rounded-xl p-5">
-                  <div className={`size-10 rounded-lg flex items-center justify-center shrink-0 ${o.primary ? "bg-pink-pulse/20 text-pink-pulse" : "bg-cyan-glow/20 text-cyan-glow"}`}>
+                  <div className={`size-10 rounded-lg flex items-center justify-center shrink-0 ${o.primary ? "bg-indigo/25 text-indigo-glow" : "bg-white/5 text-text-secondary"}`}>
                     <MapPin className="size-5" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold">{o.city} {o.primary && <span className="text-xs text-pink-pulse ml-2">HQ</span>}</p>
+                    <p className="text-white font-semibold">{o.city} {o.primary && <span className="text-xs text-indigo-glow ml-2">HQ</span>}</p>
                     <p className="text-text-muted text-sm">{o.address}</p>
                   </div>
                 </div>
