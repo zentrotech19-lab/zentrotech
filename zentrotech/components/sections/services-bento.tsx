@@ -1,39 +1,53 @@
 "use client";
 import { m } from "framer-motion";
-import { Bot, Zap, Globe, Code2, BrainCircuit, Target, ArrowUpRight } from "lucide-react";
+import {
+  Target, Cpu, MessageSquare, Wallet, Phone, Bot, Smartphone, Search, Users,
+  ArrowUpRight,
+} from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { SERVICES } from "@/lib/constants";
+import { en } from "@/lib/i18n/dictionaries/en";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Bot, Zap, Globe, Code2, BrainCircuit, Target,
+  Target, Cpu, MessageSquare, Wallet, Phone, Bot, Smartphone, Search, Users,
 };
 
-export function ServicesBento() {
+interface ServicesBentoProps {
+  dict?: Dictionary["servicesBento"];
+}
+
+// Falls back to English so /services index page still renders without
+// passing dict; localized homepage explicitly passes its dict.
+export function ServicesBento({ dict = en.servicesBento }: ServicesBentoProps) {
   return (
     <section className="relative py-32" id="services">
       <Container>
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <Badge>What we do</Badge>
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Badge>{dict.badge}</Badge>
           <h2 className="mt-4 text-4xl md:text-6xl font-black tracking-tight text-white">
-            Six services, <span className="text-aurora">one north star</span>.
+            {dict.title1} <span className="text-aurora">{dict.title2}</span>
           </h2>
-          <p className="mt-6 text-text-muted text-lg">
-            From discovery to deployment — we own the full AI lifecycle so your team can ship.
-          </p>
+          <p className="mt-6 text-text-muted text-lg">{dict.sub}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, i) => {
             const Icon = ICONS[service.icon];
+            // Localized title/short live in the dictionary, keyed by slug.
+            // Falls back to constants if a key is missing in a non-EN dict.
+            const localized = dict.services[service.slug];
+            const title = localized?.title ?? service.title;
+            const short = localized?.short ?? service.short;
             return (
               <m.div
                 key={service.slug}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
               >
                 <Link href={`/services/${service.slug}`} className="group block h-full" data-magnetic>
                   <div className="relative h-full rounded-2xl glass p-8 overflow-hidden transition-all duration-500 hover:border-indigo/40 hover:-translate-y-1">
@@ -44,11 +58,11 @@ export function ServicesBento() {
                         {Icon && <Icon className="size-6 text-indigo-glow" />}
                       </div>
 
-                      <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
-                      <p className="text-text-muted text-sm leading-relaxed">{service.short}</p>
+                      <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+                      <p className="text-text-muted text-sm leading-relaxed">{short}</p>
 
                       <div className="mt-6 flex items-center gap-2 text-indigo-glow text-sm font-medium">
-                        <span>Learn more</span>
+                        <span>{dict.learnMore}</span>
                         <ArrowUpRight className="size-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </div>
                     </div>

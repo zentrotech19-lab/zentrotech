@@ -3,18 +3,26 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { m } from "framer-motion";
-import { NAV_LINKS, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { cn } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n/locales";
+import type { Dictionary } from "@/lib/i18n/types";
 
 function isActive(pathname: string | null, href: string) {
   if (!pathname) return false;
-  if (href === "/") return pathname === "/";
+  if (href === "/" || href.match(/^\/(en|ta|kn)$/)) return pathname === href;
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-export function Header() {
+interface HeaderProps {
+  locale: Locale;
+  dict: Dictionary;
+}
+
+export function Header({ locale, dict }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -24,6 +32,14 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const homeHref = `/${locale}`;
+  const navItems = [
+    { label: dict.nav.services, href: "/services" },
+    { label: dict.nav.locations, href: "/locations/bangalore" },
+    { label: dict.nav.about, href: "/about" },
+    { label: dict.nav.insights, href: "/insights" },
+  ];
 
   return (
     <m.header
@@ -36,8 +52,8 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="group flex items-center gap-2">
-          <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-pink-pulse shadow-[0_0_20px_rgba(99,102,241,0.5)]">
+        <Link href={homeHref} className="group flex items-center gap-2">
+          <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-violet shadow-[0_0_20px_rgba(99,102,241,0.5)]">
             <div className="absolute inset-0.5 rounded-lg bg-void flex items-center justify-center">
               <span className="text-aurora font-black text-sm">Z</span>
             </div>
@@ -48,7 +64,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
-          {NAV_LINKS.map((link) => {
+          {navItems.map((link) => {
             const active = isActive(pathname, link.href);
             return (
               <Link
@@ -68,9 +84,10 @@ export function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher currentLocale={locale} label={dict.nav.languageLabel} />
           <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-            Book a Call
+            {dict.nav.getQuote}
           </Button>
           <MobileNav />
         </div>

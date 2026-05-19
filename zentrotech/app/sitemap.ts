@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE, SERVICES } from "@/lib/constants";
+import { VERTICALS_CONTENT } from "@/lib/verticals-content";
+import { LOCALES } from "@/lib/i18n/locales";
 import { getAllInsights, getAllCaseStudies } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -7,8 +9,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const insights = await getAllInsights();
   const work = await getAllCaseStudies();
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    "",
+  // Localized homepages — one entry per supported language with hreflang
+  // alternates so Google can serve the right one per region.
+  const homepageAlternates = Object.fromEntries(
+    LOCALES.map((l) => [l, `${SITE.url}/${l}`])
+  );
+
+  const localizedHomepages: MetadataRoute.Sitemap = LOCALES.map((lang) => ({
+    url: `${SITE.url}/${lang}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 1,
+    alternates: { languages: homepageAlternates },
+  }));
+
+  const englishOnlyRoutes: MetadataRoute.Sitemap = [
     "/services",
     "/showcase",
     "/work",
@@ -22,11 +37,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${SITE.url}${path}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.8,
+    priority: 0.8,
   }));
 
   const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
     url: `${SITE.url}/services/${s.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  const verticalPages: MetadataRoute.Sitemap = Object.keys(VERTICALS_CONTENT).map((slug) => ({
+    url: `${SITE.url}/verticals/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
@@ -46,5 +68,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...servicePages, ...insightPages, ...workPages];
+  return [...localizedHomepages, ...englishOnlyRoutes, ...servicePages, ...verticalPages, ...insightPages, ...workPages];
 }

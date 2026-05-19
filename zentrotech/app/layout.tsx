@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { SmoothScrollProvider } from "@/components/animations/smooth-scroll";
@@ -7,6 +8,8 @@ import { MagneticCursor } from "@/components/animations/magnetic-cursor";
 import { Starfield } from "@/components/animations/starfield";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { LOCALES, LOCALE_META, DEFAULT_LOCALE, isLocale, type Locale } from "@/lib/i18n/locales";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,43 +22,65 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://zentrotech.ai"),
+  metadataBase: new URL("https://zentrotech.in"),
   title: {
-    default: "ZentroTECH — AI Consultancy | Agents, Automation & AI-Powered Websites",
+    default: "ZentroTECH — Bangalore's #1 Lead Engine Website Agency",
     template: "%s · ZentroTECH",
   },
   description:
-    "ZentroTECH is a Bangalore-headquartered AI consultancy building agentic systems, intelligent automation, and AI-native digital products for ambitious businesses across India, the UAE, and the world.",
+    "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 25+ cities across South India.",
   keywords: [
-    "AI consultancy Bangalore",
-    "AI agents",
-    "AI automation",
-    "agentic AI",
-    "AI agency Dubai",
-    "LLM integration",
-    "AI website development",
-    "agentic coding",
+    "AI agency Bangalore",
+    "lead generation website",
+    "AI automation Bangalore",
+    "AI voice agent India",
+    "AI chatbot Bangalore",
+    "Android app development Bangalore",
+    "lead follow up automation",
+    "payment recovery automation",
+    "website design Bangalore",
   ],
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://zentrotech.ai",
+    locale: "en_IN",
+    url: "https://zentrotech.in",
     siteName: "ZentroTECH",
-    title: "ZentroTECH — Engineering the AI of 2050, today.",
+    title: "ZentroTECH — Build. Automate. Get Paid.",
     description:
-      "Agentic systems, intelligent automation, and AI-native digital products for Bangalore, Dubai, and the world.",
+      "Lead-engine websites + AI automation for Indian SMBs. Bangalore HQ, serving 25+ cities across South India.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZentroTECH — AI Consultancy",
-    description: "Agentic systems, intelligent automation, AI-native digital products.",
+    title: "ZentroTECH — Build. Automate. Get Paid.",
+    description: "Lead-engine websites + AI automation. Bangalore HQ.",
   },
   robots: { index: true, follow: true },
+  alternates: {
+    languages: {
+      "en-IN": "/en",
+      "ta-IN": "/ta",
+      "kn-IN": "/kn",
+      "x-default": "/en",
+    },
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+function detectLocale(pathname: string): Locale {
+  // /en, /ta, /kn — first segment is the locale
+  const seg = pathname.split("/")[1];
+  if (seg && isLocale(seg)) return seg;
+  return DEFAULT_LOCALE;
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const h = await headers();
+  const pathname = h.get("x-pathname") ?? "/";
+  const locale = detectLocale(pathname);
+  const htmlLang = LOCALE_META[locale].htmlLang;
+  const dict = await getDictionary(locale);
+
   return (
-    <html lang="en" className="dark">
+    <html lang={htmlLang} className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <a
           href="#main"
@@ -67,9 +92,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LazyMotion features={domAnimation} strict>
           <SmoothScrollProvider>
             <MagneticCursor />
-            <Header />
+            <Header locale={locale} dict={dict} />
             <main id="main" className="pt-20">{children}</main>
-            <Footer />
+            <Footer locale={locale} dict={dict} />
           </SmoothScrollProvider>
         </LazyMotion>
       </body>

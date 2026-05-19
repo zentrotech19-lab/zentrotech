@@ -1,12 +1,28 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-const ContactPayload = z.object({
+// Mirrors the client-side Zod schema in /contact. Keep in sync if either changes.
+const RequirementsPayload = z.object({
   name: z.string().min(2).max(120),
+  businessName: z.string().min(2).max(160),
+  whatsapp: z.string().min(10).max(20),
+  phone: z.string().max(20).optional().or(z.literal("")),
   email: z.string().email(),
-  company: z.string().max(120).optional().or(z.literal("")),
-  service: z.string().max(120).optional().or(z.literal("")),
-  message: z.string().min(10).max(5000),
+  city: z.string().min(2).max(60),
+  industry: z.string().min(2).max(80),
+  businessSize: z.string().min(2).max(20),
+  yearsInBusiness: z.string().min(1).max(20),
+  currentWebsite: z.string().max(200).optional().or(z.literal("")),
+  needs: z.array(z.string()).min(1),
+  needsOther: z.string().max(200).optional().or(z.literal("")),
+  primaryGoal: z.string().min(2).max(120),
+  monthlyLeads: z.string().min(1).max(40),
+  investmentRange: z.string().min(2).max(40),
+  timeline: z.string().min(2).max(40),
+  description: z.string().min(30).max(5000),
+  source: z.string().max(60).optional().or(z.literal("")),
+  additionalNotes: z.string().max(2000).optional().or(z.literal("")),
+  consent: z.boolean().refine((v) => v === true),
 });
 
 export async function POST(req: Request) {
@@ -17,7 +33,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  const parsed = ContactPayload.safeParse(json);
+  const parsed = RequirementsPayload.safeParse(json);
   if (!parsed.success) {
     return NextResponse.json(
       { ok: false, error: "Validation failed", issues: parsed.error.flatten() },
@@ -25,10 +41,10 @@ export async function POST(req: Request) {
     );
   }
 
-  // TODO: wire to Resend per CONTENT.md (transactional + lead notification).
-  // For now we log on the server so the submission can be eyeballed in dev,
-  // and return 200 so the UI's success path is exercisable end-to-end.
-  console.log("[contact] new submission", parsed.data);
+  // TODO: wire to Resend / WhatsApp Business API / CRM webhook for real
+  // notification routing. Right now we log on the server so submissions
+  // can be eyeballed in dev.
+  console.log("[requirements] new lead", parsed.data);
 
   return NextResponse.json({ ok: true });
 }

@@ -5,27 +5,21 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
+import type { Dictionary } from "@/lib/i18n/types";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const STEPS = [
-  { num: "01", title: "Discover", desc: "Deep-dive workshops to map your AI opportunity portfolio. We listen, we learn, we benchmark." },
-  { num: "02", title: "Design", desc: "Architecture, prompts, agent topology, evaluation harness. Every line of code traceable to a business outcome." },
-  { num: "03", title: "Deploy", desc: "Production-grade systems shipped iteratively. Observability, cost guards, rollback paths — built in from day one." },
-  { num: "04", title: "Defend & Grow", desc: "Continuous monitoring, retraining, expansion. Your AI gets smarter every quarter, not stale." },
-];
+interface ProcessTimelineProps {
+  dict: Dictionary["process"];
+}
 
-export function ProcessTimeline() {
+export function ProcessTimeline({ dict }: ProcessTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const STEPS = dict.steps;
 
-  // Determine whether we should use the GSAP scroll-pin variant or the plain
-  // stacked list. Stacked is keyboard-friendly and is what we render whenever:
-  // - the user prefers reduced motion (vestibular safety + a11y)
-  // - the viewport is small (existing mobile fallback)
-  // - we haven't yet hydrated (SSR has no `window`)
   const [useStacked, setUseStacked] = useState(true);
 
   useEffect(() => {
@@ -70,9 +64,9 @@ export function ProcessTimeline() {
       <section ref={containerRef} className="relative py-32">
         <Container>
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge>How we work</Badge>
+            <Badge>{dict.badge}</Badge>
             <h2 className="mt-4 text-4xl md:text-5xl font-black text-white">
-              Our 4-step <span className="text-aurora">process</span>
+              {dict.title1} <span className="text-aurora">{dict.title2}</span>
             </h2>
           </div>
           <ol className="space-y-6">
@@ -93,9 +87,9 @@ export function ProcessTimeline() {
     <section ref={containerRef} className="relative h-screen overflow-hidden">
       <div className="flex h-screen items-center">
         <div className="pl-[10vw] absolute top-32">
-          <Badge>How we work</Badge>
+          <Badge>{dict.badge}</Badge>
           <h2 className="mt-4 text-5xl xl:text-7xl font-black text-white">
-            Our 4-step <span className="text-aurora">process</span>
+            {dict.title1} <span className="text-aurora">{dict.title2}</span>
           </h2>
         </div>
 

@@ -48,6 +48,9 @@ yarn-error.log*
 # Superpowers brainstorm sessions (mockups)
 .superpowers/
 
+# Playwright MCP transient (browser snapshots / console logs from local dev)
+.playwright-mcp/
+
 # OS
 .DS_Store
 ehthumbs.db

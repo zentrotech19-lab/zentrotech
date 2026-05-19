@@ -6,25 +6,104 @@ import { z } from "zod";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { OFFICES, SITE } from "@/lib/constants";
-import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
+import { SITE, SOCIAL, SOUTH_INDIA_CITIES } from "@/lib/constants";
+import { FaWhatsapp } from "react-icons/fa6";
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { LocalBusinessSchema } from "@/components/seo/local-business-schema";
 
-const ContactSchema = z.object({
+const NEEDS_OPTIONS = [
+  { value: "new-website", label: "New website" },
+  { value: "redesign-website", label: "Redesign existing website" },
+  { value: "animated-3d-website", label: "Animated / 3D website" },
+  { value: "android-app", label: "Android app" },
+  { value: "ai-chatbot", label: "AI chatbot for website / WhatsApp" },
+  { value: "ai-voice-agent", label: "AI voice agent (inbound / outbound)" },
+  { value: "lead-followup", label: "Lead follow-up automation" },
+  { value: "payment-recovery", label: "Payment recovery automation" },
+  { value: "seo-services", label: "SEO services" },
+  { value: "crm-setup", label: "CRM + lead management setup" },
+  { value: "workflow-automation", label: "Business workflow automation" },
+  { value: "other", label: "Something else" },
+] as const;
+
+const INDUSTRIES = [
+  "Healthcare / Clinic",
+  "Real Estate",
+  "D2C / E-commerce",
+  "Restaurant / F&B",
+  "Salon / Spa",
+  "Coaching / Education",
+  "Professional Services (CA / Legal / Architect)",
+  "Manufacturing / B2B",
+  "IT / SaaS",
+  "Hospitality / Travel",
+  "Other",
+] as const;
+
+const BUSINESS_SIZES = ["Solo", "1-5", "6-25", "26-100", "100+"] as const;
+const YEARS = ["Less than 1", "1-3", "3-5", "5-10", "10+"] as const;
+const PRIMARY_GOALS = [
+  "More leads from my website",
+  "Save founder / team time on operations",
+  "Recover unpaid invoices",
+  "Launch a new business online",
+  "Replace expensive SaaS subscriptions",
+  "Beat my competition on Google",
+  "Other",
+] as const;
+const MONTHLY_LEADS = ["0-10", "10-50", "50-200", "200-1000", "1000+", "Don't know"] as const;
+const INVESTMENT = [
+  "Under ₹1 lakh",
+  "₹1-3 lakh",
+  "₹3-10 lakh",
+  "₹10 lakh+",
+  "Want to discuss",
+] as const;
+const TIMELINES = [
+  "Immediately",
+  "Within 1 month",
+  "1-3 months",
+  "3-6 months",
+  "Just exploring",
+] as const;
+const SOURCES = ["Google Search", "WhatsApp", "Referral", "LinkedIn", "Instagram", "Other"] as const;
+
+const RequirementsSchema = z.object({
   name: z.string().min(2, "Please enter your name").max(120),
-  email: z.string().email("Please enter a valid email address"),
-  company: z.string().max(120).optional().or(z.literal("")),
-  service: z.string().max(120).optional().or(z.literal("")),
-  message: z
+  businessName: z.string().min(2, "Please enter your business name").max(160),
+  whatsapp: z.string().min(10, "WhatsApp number must be at least 10 digits").max(20),
+  phone: z.string().max(20).optional().or(z.literal("")),
+  email: z.string().email("Please enter a valid email"),
+  city: z.string().min(2, "Please pick a city").max(60),
+  industry: z.string().min(2, "Please pick your industry").max(80),
+  businessSize: z.enum(BUSINESS_SIZES, { message: "Please pick business size" }),
+  yearsInBusiness: z.enum(YEARS, { message: "Please pick how long you've been in business" }),
+  currentWebsite: z.string().max(200).optional().or(z.literal("")),
+  needs: z.array(z.string()).min(1, "Pick at least one service you need"),
+  needsOther: z.string().max(200).optional().or(z.literal("")),
+  primaryGoal: z.enum(PRIMARY_GOALS, { message: "Please pick a primary goal" }),
+  monthlyLeads: z.enum(MONTHLY_LEADS, { message: "Please pick your current lead volume" }),
+  investmentRange: z.enum(INVESTMENT, { message: "Please pick an investment range" }),
+  timeline: z.enum(TIMELINES, { message: "Please pick a timeline" }),
+  description: z
     .string()
-    .min(10, "Tell us a little more (at least 10 characters)")
+    .min(30, "Tell us a bit more (at least 30 characters)")
     .max(5000),
+  source: z.string().max(60).optional().or(z.literal("")),
+  additionalNotes: z.string().max(2000).optional().or(z.literal("")),
+  consent: z
+    .boolean()
+    .refine((v) => v === true, { message: "Please agree to be contacted" }),
 });
 
-type ContactValues = z.infer<typeof ContactSchema>;
+type RequirementsValues = z.infer<typeof RequirementsSchema>;
 
 const inputClass =
   "mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void";
+
+const labelClass = "block text-sm text-text-secondary";
+
+const errorClass = "mt-2 text-sm text-pink-pulse";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -35,9 +114,24 @@ export default function ContactPage() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ContactValues>({
-    resolver: zodResolver(ContactSchema),
-    defaultValues: { name: "", email: "", company: "", service: "", message: "" },
+  } = useForm<RequirementsValues>({
+    resolver: zodResolver(RequirementsSchema),
+    defaultValues: {
+      name: "",
+      businessName: "",
+      whatsapp: "",
+      phone: "",
+      email: "",
+      city: "",
+      industry: "",
+      currentWebsite: "",
+      needs: [],
+      needsOther: "",
+      description: "",
+      source: "",
+      additionalNotes: "",
+      consent: false,
+    },
   });
 
   const onSubmit = handleSubmit(async (values) => {
@@ -63,169 +157,306 @@ export default function ContactPage() {
 
   const sending = status === "sending" || isSubmitting;
 
+  if (status === "sent") {
+    return (
+      <section className="py-24">
+        <Container>
+          <div className="max-w-xl mx-auto text-center glass-glow rounded-3xl p-12">
+            <CheckCircle2 className="size-16 text-indigo-glow mx-auto" aria-hidden="true" />
+            <h1 className="mt-6 text-4xl font-black text-white tracking-tight">
+              Got it. We're on it.
+            </h1>
+            <p className="mt-4 text-text-secondary">
+              Your requirements are with our team. We'll WhatsApp you within 1 business day with a custom quote and next steps.
+            </p>
+            <p className="mt-2 text-text-muted text-sm">
+              In a hurry? Ping us directly on WhatsApp.
+            </p>
+            <div className="mt-8">
+              <Button href={SOCIAL.whatsapp} size="lg" external>
+                <FaWhatsapp className="size-5" />
+                Open WhatsApp
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <>
       <LocalBusinessSchema city="Bangalore" />
-      <LocalBusinessSchema city="Dubai" />
 
-      <section className="py-24">
+      <section className="py-20">
         <Container>
-          <Badge>Contact</Badge>
-          <h1 className="mt-4 text-5xl md:text-7xl font-black text-white tracking-tight">
-            Let&apos;s build <span className="text-aurora">something</span>.
-          </h1>
-          <p className="mt-6 text-text-secondary text-lg max-w-2xl">
-            Tell us a little about your AI ambition. We&apos;ll respond within one business day with concrete next steps.
-          </p>
+          <div className="max-w-3xl">
+            <Badge>Get a Custom Quote</Badge>
+            <h1 className="mt-4 text-4xl md:text-6xl font-black text-white tracking-tight">
+              Tell us what you need. <span className="text-aurora">We'll quote in 1 business day.</span>
+            </h1>
+            <p className="mt-6 text-text-secondary text-lg">
+              Pricing varies by scope, integrations, and ongoing automation. Fill this out — it takes 4 minutes — and we send a custom proposal with timeline and exact ₹ figures. No obligation.
+            </p>
+          </div>
         </Container>
       </section>
 
-      <section className="py-12">
+      <section className="pb-24">
         <Container>
           <div className="grid lg:grid-cols-5 gap-8">
             <form
               onSubmit={onSubmit}
               noValidate
-              className="lg:col-span-3 glass-glow rounded-3xl p-10 space-y-6"
+              className="lg:col-span-3 glass-glow rounded-3xl p-8 md:p-10 space-y-10"
             >
-              <div className="grid md:grid-cols-2 gap-4">
-                <label className="block">
-                  <span className="text-sm text-text-muted">Your name</span>
-                  <input
-                    {...register("name")}
-                    aria-invalid={errors.name ? "true" : "false"}
-                    aria-describedby={errors.name ? "contact-name-error" : undefined}
-                    className={inputClass}
-                    placeholder="Jane Doe"
-                  />
-                  {errors.name && (
-                    <p id="contact-name-error" role="alert" className="mt-2 text-sm text-pink-pulse">
-                      {errors.name.message}
-                    </p>
-                  )}
+              {/* Section A — Contact */}
+              <fieldset className="space-y-6">
+                <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">A · Contact</legend>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    Your full name *
+                    <input {...register("name")} className={inputClass} placeholder="Ramesh Kumar" />
+                    {errors.name && <p className={errorClass} role="alert">{errors.name.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    Business name *
+                    <input {...register("businessName")} className={inputClass} placeholder="Kumar & Sons" />
+                    {errors.businessName && <p className={errorClass} role="alert">{errors.businessName.message}</p>}
+                  </label>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    WhatsApp number *
+                    <input {...register("whatsapp")} className={inputClass} placeholder="+91 98765 43210" />
+                    {errors.whatsapp && <p className={errorClass} role="alert">{errors.whatsapp.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    Alternate phone (optional)
+                    <input {...register("phone")} className={inputClass} placeholder="+91 80 1234 5678" />
+                  </label>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    Email *
+                    <input {...register("email")} type="email" className={inputClass} placeholder="ramesh@business.com" />
+                    {errors.email && <p className={errorClass} role="alert">{errors.email.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    City *
+                    <select {...register("city")} className={inputClass}>
+                      <option value="">Select your city…</option>
+                      {SOUTH_INDIA_CITIES.map((c) => (
+                        <option key={c.slug} value={c.label}>{c.label}</option>
+                      ))}
+                      <option value="Other Indian city">Other Indian city</option>
+                      <option value="International">International</option>
+                    </select>
+                    {errors.city && <p className={errorClass} role="alert">{errors.city.message}</p>}
+                  </label>
+                </div>
+              </fieldset>
+
+              {/* Section B — Business */}
+              <fieldset className="space-y-6">
+                <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">B · Your business</legend>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    Industry *
+                    <select {...register("industry")} className={inputClass}>
+                      <option value="">Select an industry…</option>
+                      {INDUSTRIES.map((i) => (<option key={i} value={i}>{i}</option>))}
+                    </select>
+                    {errors.industry && <p className={errorClass} role="alert">{errors.industry.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    Business size *
+                    <select {...register("businessSize")} className={inputClass}>
+                      <option value="">Select team size…</option>
+                      {BUSINESS_SIZES.map((b) => (<option key={b} value={b}>{b} people</option>))}
+                    </select>
+                    {errors.businessSize && <p className={errorClass} role="alert">{errors.businessSize.message}</p>}
+                  </label>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    Years in business *
+                    <select {...register("yearsInBusiness")} className={inputClass}>
+                      <option value="">Select…</option>
+                      {YEARS.map((y) => (<option key={y} value={y}>{y} years</option>))}
+                    </select>
+                    {errors.yearsInBusiness && <p className={errorClass} role="alert">{errors.yearsInBusiness.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    Current website (optional)
+                    <input {...register("currentWebsite")} className={inputClass} placeholder="https://yoursite.com" />
+                  </label>
+                </div>
+              </fieldset>
+
+              {/* Section C — What you need */}
+              <fieldset className="space-y-4">
+                <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">C · What you need *</legend>
+                <p className="text-text-muted text-sm">Tick everything that applies — we don't charge per item, we bundle.</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {NEEDS_OPTIONS.map((n) => (
+                    <label key={n.value} className="flex items-start gap-3 cursor-pointer rounded-xl border border-white/10 bg-white/5 p-3 hover:border-indigo/40 transition-colors">
+                      <input
+                        type="checkbox"
+                        value={n.value}
+                        {...register("needs")}
+                        className="mt-1 size-4 rounded accent-indigo"
+                      />
+                      <span className="text-sm text-white">{n.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.needs && <p className={errorClass} role="alert">{errors.needs.message as string}</p>}
+
+                <label className={labelClass}>
+                  If "Something else", describe briefly
+                  <input {...register("needsOther")} className={inputClass} placeholder="e.g. iOS app, custom dashboard…" />
                 </label>
-                <label className="block">
-                  <span className="text-sm text-text-muted">Work email</span>
-                  <input
-                    {...register("email")}
-                    type="email"
-                    aria-invalid={errors.email ? "true" : "false"}
-                    aria-describedby={errors.email ? "contact-email-error" : undefined}
-                    className={inputClass}
-                    placeholder="jane@company.com"
-                  />
-                  {errors.email && (
-                    <p id="contact-email-error" role="alert" className="mt-2 text-sm text-pink-pulse">
-                      {errors.email.message}
-                    </p>
-                  )}
+              </fieldset>
+
+              {/* Section D — Goals */}
+              <fieldset className="space-y-6">
+                <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">D · Goals & timeline</legend>
+
+                <label className={labelClass}>
+                  Primary goal *
+                  <select {...register("primaryGoal")} className={inputClass}>
+                    <option value="">What matters most?</option>
+                    {PRIMARY_GOALS.map((g) => (<option key={g} value={g}>{g}</option>))}
+                  </select>
+                  {errors.primaryGoal && <p className={errorClass} role="alert">{errors.primaryGoal.message}</p>}
                 </label>
-              </div>
 
-              <label className="block">
-                <span className="text-sm text-text-muted">Company</span>
-                <input
-                  {...register("company")}
-                  aria-invalid={errors.company ? "true" : "false"}
-                  aria-describedby={errors.company ? "contact-company-error" : undefined}
-                  className={inputClass}
-                  placeholder="Company name"
-                />
-                {errors.company && (
-                  <p id="contact-company-error" role="alert" className="mt-2 text-sm text-pink-pulse">
-                    {errors.company.message}
-                  </p>
-                )}
-              </label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    Current monthly leads *
+                    <select {...register("monthlyLeads")} className={inputClass}>
+                      <option value="">Approx range</option>
+                      {MONTHLY_LEADS.map((m) => (<option key={m} value={m}>{m} per month</option>))}
+                    </select>
+                    {errors.monthlyLeads && <p className={errorClass} role="alert">{errors.monthlyLeads.message}</p>}
+                  </label>
+                  <label className={labelClass}>
+                    Investment range comfortable for you *
+                    <select {...register("investmentRange")} className={inputClass}>
+                      <option value="">Pick a range</option>
+                      {INVESTMENT.map((i) => (<option key={i} value={i}>{i}</option>))}
+                    </select>
+                    {errors.investmentRange && <p className={errorClass} role="alert">{errors.investmentRange.message}</p>}
+                  </label>
+                </div>
 
-              <label className="block">
-                <span className="text-sm text-text-muted">What service interests you?</span>
-                <select
-                  {...register("service")}
-                  aria-invalid={errors.service ? "true" : "false"}
-                  aria-describedby={errors.service ? "contact-service-error" : undefined}
-                  className={inputClass}
-                >
-                  <option value="">Select one...</option>
-                  <option>AI Agent Development</option>
-                  <option>AI Automation</option>
-                  <option>AI-Powered Websites</option>
-                  <option>Agentic Coding</option>
-                  <option>LLM Integration</option>
-                  <option>AI Strategy Consulting</option>
-                  <option>Not sure yet</option>
-                </select>
-                {errors.service && (
-                  <p id="contact-service-error" role="alert" className="mt-2 text-sm text-pink-pulse">
-                    {errors.service.message}
-                  </p>
-                )}
-              </label>
+                <label className={labelClass}>
+                  When do you want to start? *
+                  <select {...register("timeline")} className={inputClass}>
+                    <option value="">Pick a timeline</option>
+                    {TIMELINES.map((t) => (<option key={t} value={t}>{t}</option>))}
+                  </select>
+                  {errors.timeline && <p className={errorClass} role="alert">{errors.timeline.message}</p>}
+                </label>
+              </fieldset>
 
-              <label className="block">
-                <span className="text-sm text-text-muted">Tell us about your project</span>
-                <textarea
-                  {...register("message")}
-                  rows={5}
-                  aria-invalid={errors.message ? "true" : "false"}
-                  aria-describedby={errors.message ? "contact-message-error" : undefined}
-                  className={inputClass}
-                  placeholder="What are you trying to build, automate, or solve?"
-                />
-                {errors.message && (
-                  <p id="contact-message-error" role="alert" className="mt-2 text-sm text-pink-pulse">
-                    {errors.message.message}
-                  </p>
-                )}
-              </label>
+              {/* Section E — Description */}
+              <fieldset className="space-y-6">
+                <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">E · Tell us more</legend>
 
-              <Button type="submit" size="lg" className="w-full md:w-auto" disabled={sending}>
-                {sending ? "Sending…" : status === "sent" ? "Message sent ✓" : "Send message"}
+                <label className={labelClass}>
+                  Briefly describe what you want to achieve *
+                  <textarea
+                    {...register("description")}
+                    rows={5}
+                    className={inputClass}
+                    placeholder="What's the business problem you want solved? What does success look like in 6 months?"
+                  />
+                  {errors.description && <p className={errorClass} role="alert">{errors.description.message}</p>}
+                </label>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <label className={labelClass}>
+                    How did you find us?
+                    <select {...register("source")} className={inputClass}>
+                      <option value="">Optional</option>
+                      {SOURCES.map((s) => (<option key={s} value={s}>{s}</option>))}
+                    </select>
+                  </label>
+                  <label className={labelClass}>
+                    Anything else? (optional)
+                    <input {...register("additionalNotes")} className={inputClass} placeholder="Any context we should know" />
+                  </label>
+                </div>
+              </fieldset>
+
+              {/* Consent */}
+              <fieldset>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" {...register("consent")} className="mt-1 size-4 rounded accent-indigo" />
+                  <span className="text-sm text-text-secondary">
+                    I agree to be contacted by ZentroTECH via WhatsApp, phone, or email regarding my enquiry. *
+                  </span>
+                </label>
+                {errors.consent && <p className={errorClass} role="alert">{errors.consent.message}</p>}
+              </fieldset>
+
+              <Button type="submit" size="lg" className="w-full" disabled={sending}>
+                {sending ? "Sending…" : "Send my requirements"}
                 <Send aria-hidden="true" className="size-4" />
               </Button>
 
-              {/* Live regions: present in DOM at all times so AT picks up the change. */}
-              <p
-                role="status"
-                aria-live="polite"
-                className={`text-cyan-glow text-sm ${status === "sent" ? "" : "sr-only"}`}
-              >
-                {status === "sent"
-                  ? "Message sent. Thanks — we'll respond within 1 business day."
-                  : ""}
-              </p>
               <p
                 role="alert"
                 aria-live="assertive"
                 className={`text-pink-pulse text-sm ${status === "error" ? "" : "sr-only"}`}
               >
                 {status === "error"
-                  ? errorMessage ?? "Something went wrong sending your message. Please try again."
+                  ? errorMessage ?? "Something went wrong. Please try again or WhatsApp us directly."
                   : ""}
               </p>
             </form>
 
-            <div className="lg:col-span-2 space-y-6">
+            <aside className="lg:col-span-2 space-y-5">
               <div className="glass rounded-2xl p-6">
-                <p className="text-text-muted text-sm">General</p>
-                <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 mt-2 text-white hover:text-aurora">
-                  <Mail aria-hidden="true" className="size-4" /> {SITE.email}
-                </a>
+                <p className="text-text-muted text-xs uppercase tracking-widest font-mono">Faster than form</p>
+                <p className="text-white font-semibold mt-3">WhatsApp us — fastest response</p>
+                <p className="text-text-muted text-sm mt-2">Average reply within 15 minutes during working hours.</p>
+                <Button href={SOCIAL.whatsapp} size="md" external className="mt-4 w-full">
+                  <FaWhatsapp className="size-4" />
+                  Open WhatsApp
+                </Button>
               </div>
 
-              {OFFICES.map((o) => (
-                <div key={o.city} className="glass rounded-2xl p-6">
-                  <p className="text-aurora text-xs uppercase tracking-widest font-mono">{o.primary ? "Headquarters" : "Office"}</p>
-                  <h3 className="text-2xl font-bold text-white mt-2">{o.city}</h3>
-                  <div className="mt-4 space-y-2 text-sm">
-                    <p className="flex items-start gap-2 text-text-secondary"><MapPin aria-hidden="true" className="size-4 text-text-muted mt-0.5 shrink-0" /> {o.address}</p>
-                    <p className="flex items-center gap-2 text-text-secondary"><Phone aria-hidden="true" className="size-4 text-text-muted" /> {o.phone}</p>
-                    <p className="flex items-center gap-2 text-text-secondary"><Mail aria-hidden="true" className="size-4 text-text-muted" /> {o.email}</p>
-                    <p className="flex items-center gap-2 text-text-secondary"><Clock aria-hidden="true" className="size-4 text-text-muted" /> {o.timezone}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              <div className="glass rounded-2xl p-6 space-y-3 text-sm">
+                <a href={`tel:${SITE.phone}`} className="flex items-center gap-3 text-white hover:text-aurora">
+                  <Phone className="size-4 text-text-muted" aria-hidden="true" /> {SITE.phone}
+                </a>
+                <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 text-white hover:text-aurora">
+                  <Mail className="size-4 text-text-muted" aria-hidden="true" /> {SITE.email}
+                </a>
+                <p className="flex items-start gap-3 text-text-secondary">
+                  <MapPin className="size-4 text-text-muted mt-0.5 shrink-0" aria-hidden="true" />
+                  <span>Bangalore, Karnataka, India · Serving 25+ cities across South India</span>
+                </p>
+              </div>
+
+              <div className="glass rounded-2xl p-6">
+                <p className="text-indigo-glow text-xs uppercase tracking-widest font-mono">What happens next</p>
+                <ol className="mt-3 space-y-2 text-sm text-text-secondary list-decimal list-inside">
+                  <li>We review your requirements (within 4 business hours)</li>
+                  <li>We WhatsApp / call you to clarify any gaps</li>
+                  <li>We send a written proposal with scope, timeline, ₹ figures</li>
+                  <li>If aligned, we start with a 30-min kickoff call</li>
+                </ol>
+              </div>
+            </aside>
           </div>
         </Container>
       </section>
