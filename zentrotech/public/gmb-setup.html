@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>ZentroTECH — GMB Setup Tracker</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141c;
+    --surface-2: #1c1c28;
+    --border: rgba(255,255,255,0.08);
+    --text: #f5f5f7;
+    --text-muted: #a8a8b3;
+    --text-dim: #6c6c7a;
+    --accent: #818cf8;
+    --accent-strong: #6366f1;
+    --accent-soft: rgba(129,140,248,0.12);
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 80px;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .progress-wrap {
+    margin-top: 16px;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-strong), #c084fc);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  .intro p {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .intro p + p { margin-top: 10px; }
+  .intro strong { color: var(--text); }
+  details.section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  details.section[open] {
+    border-color: rgba(129,140,248,0.3);
+  }
+  details.section.done {
+    border-color: rgba(74,222,128,0.3);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 600;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::marker { display: none; }
+  .chevron {
+    color: var(--text-muted);
+    transition: transform 0.2s;
+    font-size: 14px;
+  }
+  details[open] .chevron { transform: rotate(90deg); }
+  .section-meta {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-progress {
+    background: var(--surface-2);
+    padding: 3px 9px;
+    border-radius: 99px;
+    min-width: 50px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  details.section.done .section-progress {
+    background: rgba(74,222,128,0.15);
+    color: var(--success);
+  }
+  .section-body {
+    padding: 0 24px 24px;
+  }
+  .section-intro {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.checklist {
+    list-style: none;
+  }
+  ul.checklist li {
+    margin: 8px 0;
+  }
+  ul.checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  ul.checklist label:hover {
+    background: var(--surface-2);
+  }
+  ul.checklist input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--text-dim);
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+    transition: all 0.15s;
+  }
+  ul.checklist input[type="checkbox"]:hover {
+    border-color: var(--accent);
+  }
+  ul.checklist input[type="checkbox"]:checked {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+  ul.checklist input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  ul.checklist input[type="checkbox"]:checked + .item-content {
+    color: var(--text-dim);
+    text-decoration: line-through;
+  }
+  .item-content {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+    transition: color 0.15s;
+  }
+  .item-content code, code {
+    font-family: "SF Mono", Monaco, Menlo, monospace;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--accent);
+    border: 1px solid var(--border);
+  }
+  .item-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .callout {
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .callout strong { color: var(--text); }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: rgba(251,191,36,0.06);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  td code {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  .quick-ref {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    font-family: "SF Mono", Monaco, Menlo, monospace;
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .quick-ref .label { color: var(--text-muted); display: inline-block; min-width: 130px; }
+  .footer {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+  a { color: var(--accent); }
+  @media print {
+    header { position: static; }
+    details.section { page-break-inside: avoid; }
+    details.section { open: true; }
+    summary .chevron { display: none; }
+  }
+  @media (max-width: 600px) {
+    main { padding: 20px 16px; }
+    h1 { font-size: 18px; }
+    summary { padding: 14px 16px; }
+    .section-body { padding: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="brand">ZentroTECH</div>
+        <h1>Google Business Profile — Setup Tracker</h1>
+      </div>
+      <button class="reset-btn" id="reset-btn">Reset progress</button>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span><strong id="done-count" style="color:#fff">0</strong> of <span id="total-count">0</span> done</span>
+        <span id="percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="intro">
+  <p><strong>What this tracks:</strong> Every actionable step to create, verify, optimize, and grow your Google Business Profile. ~90 minutes of active work + 1-14 days verification wait.</p>
+  <p><strong>How to use:</strong> Open each section, tick items as you finish. Progress saves in your browser automatically — close + reopen anytime. Print to PDF via your browser's Ctrl+P / Cmd+P if needed.</p>
+  <p><strong>Why it matters:</strong> GMB is the #1 ranking signal for local search. Verified, optimized profiles appear in the top-3 "local pack" above regular search results.</p>
+</div>
+
+<!-- SECTION 1 — Pre-flight -->
+<details class="section" data-section="1" open>
+  <summary>
+    <span class="chevron">▶</span>
+    <span>1 · Pre-flight checklist</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="1">0 / 10</span><span>15 min</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Collect these before touching GMB. Missing assets = Google penalizes mid-setup edits.</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s1-1"><span class="item-content"><strong>Dedicated business Gmail</strong> (e.g. <code>zentrotech.business@gmail.com</code>) — NOT a personal account, NOT a Google Workspace account</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-2"><span class="item-content"><strong>GST-matching address:</strong> <code>228/1, 5th Cross Road, Koramangala, Bengaluru, Karnataka 560034</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s1-3"><span class="item-content"><strong>Working phone number:</strong> <code>+91 73489 61600</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s1-4"><span class="item-content"><strong>Logo</strong> — square, 250×250 min, PNG/JPG</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-5"><span class="item-content"><strong>Cover photo</strong> — 16:9, 1024×576 min</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-6"><span class="item-content"><strong>5-10 office photos</strong> — exterior, entry, work area, signage</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-7"><span class="item-content"><strong>Website URL ready:</strong> <code>https://zentrotech.in</code> (can be live or coming soon — Google accepts both)</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-8"><span class="item-content"><strong>Office is accessible</strong> at the address you'll give (Google may video/postcard verify)</span></label></li>
+      <li><label><input type="checkbox" data-id="s1-9"><span class="item-content"><strong>WhatsApp Business</strong> active on <code>+91 73489 61600</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s1-10"><span class="item-content"><strong>NAP consistency check</strong> — Name + Address + Phone identical on GMB, website footer, GST cert, all other directories</span></label></li>
+    </ul>
+    <div class="callout warn"><strong>NAP rule:</strong> One character difference between your address on GST vs GMB vs website = ranking penalty. Lock down the EXACT format before starting.</div>
+  </div>
+</details>
+
+<!-- SECTION 2 — Create profile -->
+<details class="section" data-section="2">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>2 · Create the profile</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="2">0 / 9</span><span>10 min</span></span>
+  </summary>
+  <div class="section-body">
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s2-1"><span class="item-content">Open Chrome <strong>incognito window</strong> (avoid wrong-account auto sign-in)</span></label></li>
+      <li><label><input type="checkbox" data-id="s2-2"><span class="item-content">Sign in to your <strong>dedicated business Gmail</strong> (from Section 1)</span></label></li>
+      <li><label><input type="checkbox" data-id="s2-3"><span class="item-content">Navigate to <a href="https://business.google.com/create" target="_blank">business.google.com/create</a></span></label></li>
+      <li><label><input type="checkbox" data-id="s2-4"><span class="item-content">Click <strong>"Add your business to Google"</strong></span></label></li>
+      <li><label><input type="checkbox" data-id="s2-5"><span class="item-content"><strong>Business name:</strong> Enter exactly <code>ZentroTECH</code> (capital Z, capital TECH, no space, no period)</span></label></li>
+      <li><label><input type="checkbox" data-id="s2-6"><span class="item-content">Click <strong>Next</strong></span></label></li>
+      <li><label><input type="checkbox" data-id="s2-7"><span class="item-content"><strong>Primary category:</strong> Type <code>Website designer</code> and pick the exact autocomplete (NOT "Web designer" or "Web developer")</span></label></li>
+      <li><label><input type="checkbox" data-id="s2-8"><span class="item-content">Click <strong>Next</strong></span></label></li>
+      <li><label><input type="checkbox" data-id="s2-9"><span class="item-content"><strong>"Do you want to add a location?"</strong> → Click <strong>"Yes"</strong></span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 3 — Address & service area -->
+<details class="section" data-section="3">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>3 · Address &amp; service area</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="3">0 / 10</span><span>10 min</span></span>
+  </summary>
+  <div class="section-body">
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s3-1"><span class="item-content"><strong>Country:</strong> <code>India</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-2"><span class="item-content"><strong>Street:</strong> <code>228/1, 5th Cross Road</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-3"><span class="item-content"><strong>City:</strong> <code>Bengaluru</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-4"><span class="item-content"><strong>State:</strong> <code>Karnataka</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-5"><span class="item-content"><strong>PIN:</strong> <code>560034</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-6"><span class="item-content"><strong>Locality (if asked):</strong> <code>Koramangala</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-7"><span class="item-content"><strong>Drag the map pin</strong> to the exact rooftop of your office (very important for ranking)</span></label></li>
+      <li><label><input type="checkbox" data-id="s3-8"><span class="item-content"><strong>"Serve customers outside this location?"</strong> → Click <strong>"Yes"</strong></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-9"><span class="item-content">Add Bangalore neighborhoods: <code>Koramangala, HSR Layout, Indiranagar, Whitefield, Electronic City, Jayanagar, MG Road, Bellandur, Marathahalli, Sarjapur Road</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s3-10"><span class="item-content">Add South India cities: <code>Bangalore, Chennai, Hyderabad, Coimbatore, Mysore, Kochi, Madurai, Trichy, Salem, Mangalore</code></span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 4 — Contact info -->
+<details class="section" data-section="4">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>4 · Contact info</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="4">0 / 3</span><span>5 min</span></span>
+  </summary>
+  <div class="section-body">
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s4-1"><span class="item-content"><strong>Phone:</strong> <code>+91 73489 61600</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s4-2"><span class="item-content"><strong>Website:</strong> <code>https://zentrotech.in</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s4-3"><span class="item-content">Click <strong>"Finish"</strong></span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 5 — Verification -->
+<details class="section" data-section="5">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>5 · Verification</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="5">0 / 8</span><span>1-14 days</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Pick the fastest method Google offers. Video first, postcard fallback.</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s5-1"><span class="item-content">Note which verification method Google offered: <em>video / postcard / phone / email</em></span></label></li>
+      <li><label><input type="checkbox" data-id="s5-2"><span class="item-content"><strong>If video:</strong> record a 60-120 sec continuous portrait video showing — street outside → office entrance → signage → reception/desk → laptop showing your business Gmail open</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-3"><span class="item-content">Upload the video via GMB dashboard or mobile app</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-4"><span class="item-content"><strong>If postcard:</strong> wait 7-14 days for delivery to your office address</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-5"><span class="item-content">When postcard arrives: GMB dashboard → Verify → enter the 5-digit code</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-6"><span class="item-content"><strong>While waiting:</strong> Don't change business name, address, or sign in/out repeatedly</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-7"><span class="item-content">Verification confirmed ✓</span></label></li>
+      <li><label><input type="checkbox" data-id="s5-8"><span class="item-content">Enable 2FA on the Google account (security critical)</span></label></li>
+    </ul>
+    <div class="callout"><strong>If rejected:</strong> Usually address mismatch with Google's database OR video didn't clearly show location. Review what Google flagged, re-record/re-submit.</div>
+  </div>
+</details>
+
+<!-- SECTION 6 — Optimize profile -->
+<details class="section" data-section="6">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>6 · Optimize the full profile</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="6">0 / 14</span><span>60 min · within 24h</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro"><strong>Critical:</strong> Do this within 24 hours of verification. Google rewards "activity bursts" right after verification.</p>
+
+    <h4 style="margin:20px 0 10px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Description &amp; categories</h4>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s6-1"><span class="item-content">Paste business description (see below) into Edit Profile → About → Description</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-2"><span class="item-content">Add 9 secondary categories — see Quick Reference</span></label></li>
+    </ul>
+    <div class="callout">
+      <strong>Description (paste exactly — 746 chars):</strong><br>
+      ZentroTECH builds lead-engine websites and AI automation for ambitious Indian SMBs. Based in Koramangala, Bengaluru, we serve businesses across Karnataka, Tamil Nadu, Telangana, Andhra Pradesh, and Kerala. Our team builds websites that produce leads (not brochures), AI voice agents in Hindi/Kannada/Tamil/Telugu/English, WhatsApp chatbots, lead follow-up automation, and payment recovery systems. One contract replaces 5-6 SaaS subscriptions. Quote within 1 business day, no obligation. WhatsApp us to start.
+    </div>
+    <div class="callout">
+      <strong>10 categories to add (1 primary already set, add 9 secondary):</strong><br>
+      <code>Website designer</code> (primary) · <code>Internet marketing service</code> · <code>Marketing agency</code> · <code>SEO services</code> · <code>Software company</code> · <code>Software development</code> · <code>Business consultant</code> · <code>Mobile app developer</code> · <code>Computer consultant</code> · <code>IT services</code>
+    </div>
+
+    <h4 style="margin:20px 0 10px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Hours</h4>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s6-3"><span class="item-content">Set hours: Mon-Fri <code>9:30 AM – 7:30 PM</code>, Sat <code>10 AM – 4 PM</code>, Sun <code>Closed</code></span></label></li>
+    </ul>
+
+    <h4 style="margin:20px 0 10px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Services (each = a keyword you rank for)</h4>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s6-4"><span class="item-content">Add "Lead Engine Websites" service with description</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-5"><span class="item-content">Add "Business on Autopilot" service</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-6"><span class="item-content">Add "Lead Follow-up Automation" service</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-7"><span class="item-content">Add "Payment Recovery Automation" service</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-8"><span class="item-content">Add "AI Voice Agents" + "AI Chatbots" services</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-9"><span class="item-content">Add "Android App Development" + "SEO + Local Visibility" services</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-10"><span class="item-content">Add "Lead Management + CRM" + "Website Audit + Lead Boost" services</span></label></li>
+    </ul>
+
+    <h4 style="margin:20px 0 10px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Photos (10-15 minimum)</h4>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s6-11"><span class="item-content">Upload logo (square) + cover photo (16:9)</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-12"><span class="item-content">Upload 5+ office photos (exterior, entry, signage, reception, work area)</span></label></li>
+      <li><label><input type="checkbox" data-id="s6-13"><span class="item-content">Upload 3+ product photos (website screenshots, dashboard, app mockup)</span></label></li>
+    </ul>
+
+    <h4 style="margin:20px 0 10px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Attributes</h4>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s6-14"><span class="item-content">Tick: Online appointments · Online estimates · Identifies as small business · Free Wi-Fi · Wheelchair accessible (if applicable)</span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 7 — First 30 days of posts -->
+<details class="section" data-section="7">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>7 · First 30 days of posts</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="7">0 / 4</span><span>4 posts · 20 min each</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">1 post per week. Posts expire after 7 days but boost ranking while live.</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s7-1"><span class="item-content"><strong>Week 1 — Welcome post</strong> ("What's New" type). "🚀 ZentroTECH is now live in Bangalore!" — CTA: Learn more → <code>https://zentrotech.in/services</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s7-2"><span class="item-content"><strong>Week 2 — Offer post</strong> ("Offer" type). "Free Lead Engine Audit — Worth ₹15,000" — CTA: Get offer → <code>https://zentrotech.in/contact</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s7-3"><span class="item-content"><strong>Week 3 — "What's New" post.</strong> "Now serving 25+ South India cities" — CTA: <code>https://zentrotech.in/locations/bangalore</code></span></label></li>
+      <li><label><input type="checkbox" data-id="s7-4"><span class="item-content"><strong>Week 4 — Event post.</strong> "Free Webinar — How to 10x Your Lead Volume Without 10x Your Ad Spend" — pick a date 2 weeks out, Zoom link</span></label></li>
+    </ul>
+    <div class="callout">Going forward: 1-2 posts/month. Themes: case studies · vertical tips · service highlights · behind-the-scenes · educational explainers. We have 30 post drafts in <code>public/marketing/google-business-profile-content.md</code> — adapt for Bangalore positioning.</div>
+  </div>
+</details>
+
+<!-- SECTION 8 — First reviews -->
+<details class="section" data-section="8">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>8 · Get first reviews (critical)</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="8">0 / 6</span><span>target 10 in 90 days</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Reviews = #1 local-pack ranking signal. Aim for 10 reviews in first 90 days, 25 in 180 days.</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s8-1"><span class="item-content">Get direct review link from GMB dashboard ("Share review form") — looks like <code>g.page/r/CXxX...XxX/review</code> — save it</span></label></li>
+      <li><label><input type="checkbox" data-id="s8-2"><span class="item-content">Identify 5 people likely to leave honest 5-star reviews (friends, prior partners, first clients)</span></label></li>
+      <li><label><input type="checkbox" data-id="s8-3"><span class="item-content">Send WhatsApp script to each: "Hey [name], we just launched ZentroTECH on Google Maps. Would you mind a 60-sec honest review? <code>[direct link]</code> Thanks 🙏"</span></label></li>
+      <li><label><input type="checkbox" data-id="s8-4"><span class="item-content">Add review link to email signature: "P.S. If you've worked with us recently, a Google review takes 30 seconds — <code>[link]</code>"</span></label></li>
+      <li><label><input type="checkbox" data-id="s8-5"><span class="item-content">Wire post-delivery WhatsApp auto-message: "Project delivered ✓ — if happy, a Google review helps others find us: <code>[link]</code>"</span></label></li>
+      <li><label><input type="checkbox" data-id="s8-6"><span class="item-content">Respond to EVERY review within 24h (good or bad — see templates in main guide)</span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 9 — Wire to website -->
+<details class="section" data-section="9">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>9 · Wire GMB into the website</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="9">0 / 3</span><span>5 min · I do it once you send me values</span></span>
+  </summary>
+  <div class="section-body">
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s9-1"><span class="item-content">Copy GMB profile URL (the public Maps link) from your GMB dashboard</span></label></li>
+      <li><label><input type="checkbox" data-id="s9-2"><span class="item-content">Look up your Place ID via <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank">Google's Place ID Finder</a> — search "ZentroTECH Koramangala" → copy the ID (looks like <code>ChIJ...XYZ</code>)</span></label></li>
+      <li><label><input type="checkbox" data-id="s9-3"><span class="item-content">Send me both values — I'll wire them into the website footer + Organization schema + add a "Reviews on Google" badge</span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 10 — Maintenance -->
+<details class="section" data-section="10">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>10 · Ongoing maintenance</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="10">0 / 5</span><span>~30 min/week</span></span>
+  </summary>
+  <div class="section-body">
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s10-1"><span class="item-content"><strong>Weekly:</strong> Reply to GMB messages (Google chat) within 1 day · post 1 content item · respond to new reviews</span></label></li>
+      <li><label><input type="checkbox" data-id="s10-2"><span class="item-content"><strong>Monthly:</strong> Add 2-3 new photos · update services if anything changed · check GMB Insights (search queries, photo views, actions)</span></label></li>
+      <li><label><input type="checkbox" data-id="s10-3"><span class="item-content"><strong>Quarterly:</strong> Add 3-5 new client logos as photos · audit top-3 competitors' GMB profiles</span></label></li>
+      <li><label><input type="checkbox" data-id="s10-4"><span class="item-content"><strong>Set a recurring calendar reminder</strong> — every Monday 10am "Post 1 GMB update"</span></label></li>
+      <li><label><input type="checkbox" data-id="s10-5"><span class="item-content"><strong>Bookmark the GMB app on your phone</strong> (iOS + Android) for replying to chats on the go</span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 11 — Quick reference -->
+<details class="section" data-section="11">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>11 · Quick reference card</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="11">0 / 1</span></span>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">All values you'll need during setup. Print or screenshot this.</p>
+    <div class="quick-ref">
+      <div><span class="label">Business Name:</span><code>ZentroTECH</code></div>
+      <div><span class="label">Primary Category:</span><code>Website designer</code></div>
+      <div><span class="label">Address:</span><code>228/1, 5th Cross Road, Koramangala, Bengaluru, Karnataka 560034</code></div>
+      <div><span class="label">Phone:</span><code>+91 73489 61600</code></div>
+      <div><span class="label">Website:</span><code>https://zentrotech.in</code></div>
+      <div><span class="label">Email:</span><code>hello@zentrotech.in</code></div>
+      <div><span class="label">GST:</span><code>29FETPS9602L1ZC</code></div>
+      <div><span class="label">Legal form:</span><code>Proprietorship (Trade name: Zentro Tech)</code></div>
+      <div><span class="label">Hours:</span><code>Mon-Fri 9:30am-7:30pm · Sat 10am-4pm · Sun closed</code></div>
+      <div><span class="label">Service area:</span><code>25+ South India cities</code></div>
+    </div>
+    <ul class="checklist">
+      <li><label><input type="checkbox" data-id="s11-1"><span class="item-content">Reference card screenshotted / printed for offline use</span></label></li>
+    </ul>
+  </div>
+</details>
+
+<!-- SECTION 12 — Troubleshooting -->
+<details class="section" data-section="12">
+  <summary>
+    <span class="chevron">▶</span>
+    <span>12 · Troubleshooting</span>
+    <span class="section-meta"><span class="section-progress" data-section-progress="12">0 / 0</span></span>
+  </summary>
+  <div class="section-body">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Verification rejected</td><td>Re-check address spelling. Re-record video showing clearer signage + walking sequence</td></tr>
+          <tr><td>Profile suspended</td><td>GMB Help → Request Reinstatement → explain what happened. Usually reinstated in 5-7 days</td></tr>
+          <tr><td>Duplicate listing appears</td><td>"Suggest an edit" on the duplicate → "Place is closed or doesn't exist"</td></tr>
+          <tr><td>Wrong category shows in search</td><td>Re-check primary = "Website designer" (NOT "Web designer")</td></tr>
+          <tr><td>Reviews not appearing</td><td>Google delays new reviews 24-48h. Wait 1 week. If still missing, contact GMB support</td></tr>
+          <tr><td>Photos rejected</td><td>Re-upload originals from phone (no stock photos, no edited screenshots)</td></tr>
+          <tr><td>"Temporarily closed" shows</td><td>GMB → click "Mark as open"</td></tr>
+          <tr><td>Address auto-changed by Google</td><td>Activity Log → revert change. Lock down with 2FA</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</details>
+
+</main>
+
+<div class="footer">
+  Stored in your browser's localStorage — progress persists across sessions.<br>
+  Source: <a href="https://github.com/zentrotech19-lab/zentrotech/blob/main/docs/GMB-SETUP-GUIDE.md" target="_blank">Full Markdown guide on GitHub</a> · Last updated 2026-05-19
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'zentrotech-gmb-progress';
+  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  const fill = document.getElementById('progress-fill');
+  const doneEl = document.getElementById('done-count');
+  const totalEl = document.getElementById('total-count');
+  const percentEl = document.getElementById('percent');
+  const resetBtn = document.getElementById('reset-btn');
+
+  // Load saved state
+  function loadState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      checkboxes.forEach(cb => {
+        if (saved[cb.dataset.id]) cb.checked = true;
+      });
+    } catch (e) {}
+  }
+
+  // Save state
+  function saveState() {
+    const state = {};
+    checkboxes.forEach(cb => {
+      if (cb.checked) state[cb.dataset.id] = true;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // Update progress UI (overall + per-section)
+  function updateProgress() {
+    const done = checkboxes.filter(cb => cb.checked).length;
+    const total = checkboxes.length;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+    fill.style.width = pct + '%';
+    doneEl.textContent = done;
+    totalEl.textContent = total;
+    percentEl.textContent = pct + '%';
+
+    // Per-section counts
+    document.querySelectorAll('details.section').forEach(section => {
+      const sectionId = section.dataset.section;
+      const sectionBoxes = Array.from(section.querySelectorAll('input[type="checkbox"][data-id]'));
+      const sectionDone = sectionBoxes.filter(cb => cb.checked).length;
+      const sectionTotal = sectionBoxes.length;
+      const progressEl = section.querySelector('[data-section-progress="' + sectionId + '"]');
+      if (progressEl) {
+        progressEl.textContent = sectionDone + ' / ' + sectionTotal;
+      }
+      if (sectionTotal > 0 && sectionDone === sectionTotal) {
+        section.classList.add('done');
+      } else {
+        section.classList.remove('done');
+      }
+    });
+  }
+
+  // Wire up listeners
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      saveState();
+      updateProgress();
+    });
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (confirm('Reset all progress? This cannot be undone.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      checkboxes.forEach(cb => cb.checked = false);
+      updateProgress();
+    }
+  });
+
+  loadState();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
