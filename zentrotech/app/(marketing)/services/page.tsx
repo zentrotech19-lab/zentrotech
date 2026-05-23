@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ServicesBento } from "@/components/sections/services-bento";
 import { CTASection } from "@/components/sections/cta-section";
-import { LeadFunnel3D } from "@/components/3d/lead-funnel-3d-lazy";
 import { buildMetadata } from "@/lib/seo";
 import { ArrowRight, Sparkles, Target, FileSearch, Cpu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -59,37 +58,26 @@ export default function ServicesPage() {
           style={{ background: "radial-gradient(circle, rgba(99,102,241,0.45) 0%, transparent 65%)" }}
         />
         <Container className="relative">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <Badge>
-                <Sparkles className="size-3" />
-                <span>Ten services · One contract</span>
-              </Badge>
-              <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[0.98]">
-                Pick what you need. <br />
-                <span className="text-aurora">Stack what makes sense.</span>
-              </h1>
-              <p className="mt-8 text-text-secondary text-lg md:text-xl max-w-2xl leading-relaxed">
-                We sell ten services to Indian SMBs — but one client rarely needs all ten. Tell us what's broken and we'll bundle the smallest set that fixes it. We replace 5–6 SaaS subscriptions with one team and one monthly bill.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Button href={SOCIAL.whatsapp} size="lg" external>
-                  <FaWhatsapp className="size-5" />
-                  WhatsApp us
-                </Button>
-                <Button href="/contact" size="lg" variant="secondary">
-                  Get a Custom Quote <ArrowRight className="size-4" />
-                </Button>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="relative aspect-square rounded-3xl glass-glow overflow-hidden">
-                <LeadFunnel3D className="absolute inset-0" />
-                <div className="absolute bottom-6 left-6 right-6 text-center">
-                  <p className="text-xs uppercase tracking-[0.3em] text-text-muted">Lead Engine</p>
-                  <p className="text-text-secondary text-sm mt-1">Inbound → Qualified → Closed</p>
-                </div>
-              </div>
+          <div className="max-w-4xl">
+            <Badge>
+              <Sparkles className="size-3" />
+              <span>Ten services · One contract</span>
+            </Badge>
+            <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[0.98]">
+              Pick what you need. <br />
+              <span className="text-aurora">Stack what makes sense.</span>
+            </h1>
+            <p className="mt-8 text-text-secondary text-lg md:text-xl max-w-2xl leading-relaxed">
+              We sell ten services to Indian SMBs — but one client rarely needs all ten. Tell us what's broken and we'll bundle the smallest set that fixes it. We replace 5–6 SaaS subscriptions with one team and one monthly bill.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button href={SOCIAL.whatsapp} size="lg" external>
+                <FaWhatsapp className="size-5" />
+                WhatsApp us
+              </Button>
+              <Button href="/contact" size="lg" variant="secondary">
+                Get a Custom Quote <ArrowRight className="size-4" />
+              </Button>
             </div>
           </div>
         </Container>
