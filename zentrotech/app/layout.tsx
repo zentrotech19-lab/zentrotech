@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { LazyMotion, domAnimation } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SmoothScrollProvider } from "@/components/animations/smooth-scroll";
 import { MagneticCursor } from "@/components/animations/magnetic-cursor";
 import { Starfield } from "@/components/animations/starfield";
@@ -97,6 +99,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Footer locale={locale} dict={dict} />
           </SmoothScrollProvider>
         </LazyMotion>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
