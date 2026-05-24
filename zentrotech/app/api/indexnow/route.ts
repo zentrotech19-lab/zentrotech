@@ -24,6 +24,19 @@ const DEFAULT_URLS = [
   `https://${HOST}/services`,
   `https://${HOST}/locations/bangalore`,
   `https://${HOST}/contact`,
+  `https://${HOST}/pricing`,
+  `https://${HOST}/process`,
+  `https://${HOST}/partners`,
+  `https://${HOST}/case-studies`,
+  `https://${HOST}/case-studies/sample-bangalore-dental-clinic`,
+  `https://${HOST}/about/founders`,
+  `https://${HOST}/for/dental-clinics-bangalore`,
+  `https://${HOST}/for/coaching-institutes-bangalore`,
+  `https://${HOST}/for/wedding-photographers-bangalore`,
+  `https://${HOST}/for/sub-broker-real-estate-bangalore`,
+  `https://${HOST}/for/contractors-bangalore`,
+  `https://${HOST}/tools/whatsapp-pricing-calculator`,
+  `https://${HOST}/tools/dso-impact-calculator`,
 ];
 
 function authorized(req: Request): boolean {
