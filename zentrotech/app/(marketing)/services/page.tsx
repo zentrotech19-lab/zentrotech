@@ -4,15 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ServicesBento } from "@/components/sections/services-bento";
 import { CTASection } from "@/components/sections/cta-section";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { buildMetadata } from "@/lib/seo";
 import { ArrowRight, Sparkles, Target, FileSearch, Cpu } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { SOCIAL } from "@/lib/constants";
 
 export const metadata = buildMetadata({
-  title: "Services — Lead Engine Websites, AI Automation, Voice Agents, Apps & More",
+  title: "Services — Kannada AI Voice + WhatsApp + Lead Engines for Bangalore SMBs",
   description:
-    "Ten services from ZentroTECH for Indian SMBs: lead-engine websites, business automation, AI voice agents, chatbots, Android apps, SEO, CRM, lead follow-up, payment recovery, and website audits. One contract, one team.",
+    "Ten done-for-you services from ZentroTECH for Indian SMBs: AI voice agents in 11 Indian languages, WhatsApp Business automation, lead-engine websites, payment recovery, lead nurture, SEO, CRM, apps, audits. One contract, one team, 21-day delivery.",
   path: "/services",
 });
 
@@ -50,6 +51,7 @@ const STACK_HIGHLIGHTS = [
 export default function ServicesPage() {
   return (
     <>
+      <OrganizationSchema />
       {/* HERO */}
       <section className="relative overflow-hidden pt-12 pb-16">
         <div

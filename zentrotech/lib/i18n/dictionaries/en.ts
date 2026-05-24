@@ -8,7 +8,7 @@ export const en: Dictionary = {
     siteName: "ZentroTECH",
     tagline: "Build. Automate. Get Paid.",
     description:
-      "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 138 cities across South India.",
+      "Kannada-first AI voice agents + WhatsApp + lead-engine websites for Bangalore SMBs. We answer your missed calls in Kannada, follow up 5–7 times in <72hrs, and recover 30–50% of your unpaid invoices. Done for you. 21-day delivery. Money-back trial.",
   },
   nav: {
     services: "Services",
@@ -22,10 +22,10 @@ export const en: Dictionary = {
     label: "We work with you in",
   },
   hero: {
-    badge: "#1 Lead Engine Website Agency · Bangalore",
+    badge: "Kannada-first AI agency · Bangalore HQ",
     title1: "Build. Automate.",
     title2: "Get Paid.",
-    sub: "We build websites that generate leads — the way Google My Business does. Plus AI automations that follow up on every lead and chase your unpaid invoices for you. If your business can handle 10x inbound, talk to us.",
+    sub: "Done-for-you AI voice agents in 11 Indian languages + WhatsApp + lead-engine websites for Bangalore SMBs. We answer your missed calls in Kannada, follow up 5–7 times within 72 hours, and recover 30–50% of your unpaid invoices. 21-day delivery. First measurable result or full refund.",
     ctaWhatsapp: "WhatsApp us",
     ctaQuote: "Get a Custom Quote",
     ctaSubtext: "Free 30-min lead engine audit · No obligation · Quote within 1 business day",

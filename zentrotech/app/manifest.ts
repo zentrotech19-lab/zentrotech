@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "ZentroTECH — Bangalore's Lead Engine Website Agency",
     short_name: "ZentroTECH",
     description:
-      "Lead-engine websites + AI automation for Indian SMBs. Bangalore HQ, serving 138 cities across South India.",
+      "Kannada-first AI voice + WhatsApp + lead engines for Bangalore SMBs. 21-day delivery. Money-back trial. 138 cities across South India.",
     start_url: "/en",
     display: "standalone",
     background_color: "#0a0a0f",

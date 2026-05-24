@@ -2,13 +2,14 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/sections/cta-section";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { getAllInsights } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
 export const metadata = buildMetadata({
-  title: "Insights — AI, Automation & Industry Analysis",
-  description: "Original research, case stories, and operator-grade analysis from the ZentroTECH team on agentic AI, automation, and the future of work.",
+  title: "Insights — Indian SMB AI, WhatsApp Business, Voice AI Analysis",
+  description: "Operator-grade analysis from the ZentroTECH team on AI voice agents in Indian languages, WhatsApp Business pricing, lead generation for Indian SMBs, and Bangalore agency tactics.",
   path: "/insights",
 });
 
@@ -16,6 +17,7 @@ export default async function InsightsPage() {
   const posts = await getAllInsights();
   return (
     <>
+      <OrganizationSchema />
       <section className="py-24">
         <Container>
           <Badge>Insights</Badge>

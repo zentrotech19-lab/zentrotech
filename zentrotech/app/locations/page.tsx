@@ -2,14 +2,15 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/sections/cta-section";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { SOUTH_INDIA_CITIES } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 import { ArrowRight, MapPin } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "All 138 Locations — ZentroTECH Service Areas Across South India",
+  title: "138 Locations — ZentroTECH Service Areas Across South India",
   description:
-    "ZentroTECH builds websites + AI automation for 138 locations across Bangalore neighborhoods, IT parks, South India metros, and Tier-2 commercial centres.",
+    "ZentroTECH ships Kannada-first AI voice agents + WhatsApp + lead-engine websites to 138 locations: every Bangalore neighborhood + IT park, South India metros (Chennai, Hyderabad, Coimbatore, Kochi), and Tier-2 commercial centres.",
   path: "/locations",
 });
 
@@ -31,6 +32,7 @@ export default function LocationsIndexPage() {
 
   return (
     <>
+      <OrganizationSchema />
       <section className="relative overflow-hidden pt-12 pb-16">
         <div
           aria-hidden="true"

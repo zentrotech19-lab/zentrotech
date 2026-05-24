@@ -27,8 +27,9 @@ export default function RefundPolicyPage() {
           <div className="prose-zentro mt-10 text-text-secondary leading-relaxed space-y-7">
             <section>
               <p>
-                We back our work with a money-back trial because we&rsquo;d rather refund a client than carry a project
-                neither side is excited about. This policy explains exactly when refunds apply, how to request one,
+                <strong className="text-white">Our promise:</strong> a measurable result in 21 days — moved
+                lead-response time, increased qualified-call volume, or reduced invoice DSO. If we don&rsquo;t move
+                the number, you get a full refund. This page explains exactly when refunds apply, how to request one,
                 and what to expect.
               </p>
             </section>

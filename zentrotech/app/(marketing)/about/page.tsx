@@ -3,12 +3,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/sections/cta-section";
 import { TrustSignals } from "@/components/sections/trust-signals";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { buildMetadata } from "@/lib/seo";
 import { Eye, Rocket, Heart, Globe2 } from "lucide-react";
 
 export const metadata = buildMetadata({
-  title: "About — Our 2050 Promise",
-  description: "Why ZentroTECH exists, what we believe, and the vision driving our work in agentic AI and intelligent automation.",
+  title: "About ZentroTECH — Bangalore's Kannada-First AI Agency",
+  description:
+    "ZentroTECH is Bangalore's done-for-you AI agency for Indian SMBs. Kannada-first AI voice in 11 Indian languages + WhatsApp + lead-engine websites + payment recovery. 21-day delivery, first result or full refund.",
   path: "/about",
 });
 
@@ -22,14 +24,15 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <OrganizationSchema />
       <section className="py-24">
         <Container>
           <Badge>About</Badge>
           <h1 className="mt-4 text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight max-w-4xl">
-            We&apos;re building the AI of <span className="text-aurora">2050</span>, today.
+            <span className="text-aurora">Bangalore SMBs</span> deserve better than SaaS dashboards.
           </h1>
           <p className="mt-8 text-xl text-text-secondary max-w-2xl">
-            ZentroTECH was founded on a simple bet: that the next decade belongs to companies who can ship agentic AI faster than their competitors can write a strategy memo about it.
+            ZentroTECH was founded in 2026 on one bet: Indian SMBs doing ₹50L–₹5Cr in revenue don&apos;t need another SaaS to set up &mdash; they need a Bangalore team that ships the whole system. Lead-engine website. AI voice agent in Kannada. WhatsApp follow-up. Payment recovery. One contract. 21 days. Money back if we don&apos;t move your numbers.
           </p>
         </Container>
       </section>

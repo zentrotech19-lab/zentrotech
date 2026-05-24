@@ -20,8 +20,8 @@ const PROOFS = [
   },
   {
     icon: ShieldCheck,
-    title: "Money-back trial on milestone one",
-    body: "If you're not happy after the discovery deliverable and first build milestone, full refund — no negotiation. Detailed in our public Refund Policy.",
+    title: "First measurable result in 21 days, or full refund",
+    body: "We commit to a specific outcome — lead-response time, qualified-call volume, or invoice DSO — and ship it inside 21 days. If we don't move the number, full refund. No retainer trap. No fine print.",
   },
   {
     icon: Clock,

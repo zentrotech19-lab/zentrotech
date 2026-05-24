@@ -34,8 +34,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/showcase",
     "/work",
     "/about",
+    "/about/founders",
     "/insights",
     "/contact",
+    "/pricing",
+    "/partners",
+    "/process",
+    "/case-studies",
+    "/case-studies/sample-bangalore-dental-clinic",
     "/ai-consultancy-bangalore",
     "/ai-agency-dubai",
     "/ai-development-uae",
@@ -44,6 +50,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.8,
+  }));
+
+  // Vertical landing pages (Bangalore SMB segments) — high commercial intent.
+  const verticalLandingPages: MetadataRoute.Sitemap = [
+    "/for/dental-clinics-bangalore",
+    "/for/coaching-institutes-bangalore",
+    "/for/wedding-photographers-bangalore",
+    "/for/sub-broker-real-estate-bangalore",
+    "/for/contractors-bangalore",
+  ].map((path) => ({
+    url: `${SITE.url}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
+  // Free interactive tools — top-of-funnel acquisition + backlink magnets.
+  const toolPages: MetadataRoute.Sitemap = [
+    "/tools/whatsapp-pricing-calculator",
+    "/tools/dso-impact-calculator",
+  ].map((path) => ({
+    url: `${SITE.url}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
   }));
 
   // Legal pages — required for footer linking, DPDP compliance, and to back up
@@ -162,6 +193,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...localizedHomepages,
     ...englishOnlyRoutes,
+    ...verticalLandingPages,
+    ...toolPages,
     ...legalPages,
     ...servicePages,
     ...verticalPages,

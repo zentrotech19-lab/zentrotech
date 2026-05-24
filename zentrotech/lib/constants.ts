@@ -3,7 +3,7 @@ export const SITE = {
   url: "https://zentrotech.in",
   tagline: "Build. Automate. Get Paid.",
   description:
-    "ZentroTECH builds lead-engine websites, AI automations, and Android apps for ambitious Indian businesses — and chases the follow-ups and unpaid invoices for you. Headquartered in Bangalore, serving 138 cities across South India.",
+    "ZentroTECH is Bangalore's Kannada-first AI agency: AI voice agents in 11 Indian languages, WhatsApp Business automation, lead-engine websites, and payment recovery — done for you. 21-day delivery, money-back trial. Serving 138 cities across South India.",
   email: "hello@zentrotech.in",
   phone: "+91 73489 61600",
   whatsapp: "+91 73489 61600",

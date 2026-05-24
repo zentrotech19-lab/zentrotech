@@ -33,10 +33,28 @@ export function Footer({ locale, dict }: FooterProps) {
 
   const navItems = [
     { label: dict.nav.services, href: "/services" },
-    { label: dict.nav.locations, href: "/locations/bangalore" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Process", href: "/process" },
+    { label: "Case studies", href: "/case-studies" },
+    { label: "Partners", href: "/partners" },
     { label: dict.nav.about, href: "/about" },
+    { label: "Founders", href: "/about/founders" },
     { label: dict.nav.insights, href: "/insights" },
+    { label: dict.nav.locations, href: "/locations/bangalore" },
     { label: dict.nav.getQuote, href: "/contact" },
+  ];
+
+  const industryItems = [
+    { label: "Dental clinics", href: "/for/dental-clinics-bangalore" },
+    { label: "Coaching institutes", href: "/for/coaching-institutes-bangalore" },
+    { label: "Wedding photographers", href: "/for/wedding-photographers-bangalore" },
+    { label: "Real estate sub-brokers", href: "/for/sub-broker-real-estate-bangalore" },
+    { label: "Contractors", href: "/for/contractors-bangalore" },
+  ];
+
+  const toolItems = [
+    { label: "WhatsApp pricing calculator", href: "/tools/whatsapp-pricing-calculator" },
+    { label: "DSO impact calculator", href: "/tools/dso-impact-calculator" },
   ];
 
   return (
@@ -140,7 +158,34 @@ export function Footer({ locale, dict }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted">
+        <div className="mt-12 pt-10 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <h4 className="text-xs uppercase tracking-widest text-text-muted mb-4">Industries</h4>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2">
+              {industryItems.map((i) => (
+                <li key={i.href}>
+                  <Link href={i.href} className="text-text-secondary hover:text-white text-sm">
+                    {i.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-xs uppercase tracking-widest text-text-muted mb-4">Free tools</h4>
+            <ul className="space-y-2">
+              {toolItems.map((t) => (
+                <li key={t.href}>
+                  <Link href={t.href} className="text-text-secondary hover:text-white text-sm">
+                    {t.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted">
           <p>© {new Date().getFullYear()} {SITE.name}. {dict.footer.rights}</p>
           <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
