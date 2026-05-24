@@ -52,12 +52,14 @@ export function Header({ locale, dict }: HeaderProps) {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href={homeHref} className="group flex items-center gap-2">
-          <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-violet shadow-[0_0_20px_rgba(99,102,241,0.5)]">
-            <div className="absolute inset-0.5 rounded-lg bg-void flex items-center justify-center">
-              <span className="text-aurora font-black text-sm">Z</span>
-            </div>
-          </div>
+        <Link href={homeHref} className="group flex items-center gap-2.5" aria-label="ZentroTECH home">
+          <img
+            src="/brand/logo-mark.svg"
+            alt=""
+            width={36}
+            height={36}
+            className="size-9 drop-shadow-[0_0_18px_rgba(139,92,246,0.45)] transition-transform group-hover:scale-105"
+          />
           <span className="text-white font-bold tracking-tight text-lg group-hover:text-aurora transition-colors">
             {SITE.name}
           </span>

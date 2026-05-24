@@ -46,12 +46,14 @@ export function Footer({ locale, dict }: FooterProps) {
       <Container className="py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <Link href={`/${locale}`} className="flex items-center gap-2 mb-4">
-              <div className="relative size-8 rounded-lg bg-linear-to-br from-indigo to-violet">
-                <div className="absolute inset-0.5 rounded-lg bg-void flex items-center justify-center">
-                  <span className="text-aurora font-black text-sm">Z</span>
-                </div>
-              </div>
+            <Link href={`/${locale}`} className="flex items-center gap-2.5 mb-4" aria-label="ZentroTECH home">
+              <img
+                src="/brand/logo-mark.svg"
+                alt=""
+                width={36}
+                height={36}
+                className="size-9 drop-shadow-[0_0_18px_rgba(139,92,246,0.4)]"
+              />
               <span className="text-white font-bold text-lg">{SITE.name}</span>
             </Link>
             <p className="text-text-muted text-sm leading-relaxed">{dict.footer.tagline}</p>
