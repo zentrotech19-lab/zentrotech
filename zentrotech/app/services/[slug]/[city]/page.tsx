@@ -14,10 +14,10 @@ import { FaWhatsapp } from "react-icons/fa6";
 // Programmatic SEO: every service × every city. 10 × 138 = 1,380 static pages.
 
 export function generateStaticParams() {
-  const params: { service: string; city: string }[] = [];
+  const params: { slug: string; city: string }[] = [];
   for (const s of SERVICES) {
     for (const c of SOUTH_INDIA_CITIES) {
-      params.push({ service: s.slug, city: c.slug });
+      params.push({ slug: s.slug, city: c.slug });
     }
   }
   return params;
@@ -26,10 +26,10 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ service: string; city: string }>;
+  params: Promise<{ slug: string; city: string }>;
 }) {
-  const { service, city } = await params;
-  const s = SERVICES.find((x) => x.slug === service);
+  const { slug, city } = await params;
+  const s = SERVICES.find((x) => x.slug === slug);
   const c = SOUTH_INDIA_CITIES.find((x) => x.slug === city);
   if (!s || !c) return {};
   return buildMetadata({
@@ -51,10 +51,10 @@ const stateLanguage = (state: string): { primary: string; combo: string } => {
 export default async function ServiceCityPage({
   params,
 }: {
-  params: Promise<{ service: string; city: string }>;
+  params: Promise<{ slug: string; city: string }>;
 }) {
-  const { service, city } = await params;
-  const s = SERVICES.find((x) => x.slug === service);
+  const { slug, city } = await params;
+  const s = SERVICES.find((x) => x.slug === slug);
   const c = SOUTH_INDIA_CITIES.find((x) => x.slug === city);
   if (!s || !c) notFound();
 
