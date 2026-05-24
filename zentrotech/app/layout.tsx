@@ -111,6 +111,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "ww07o8n3d7");`}
         </Script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-T55FHNYHSM"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T55FHNYHSM');`}
+        </Script>
       </body>
     </html>
   );
