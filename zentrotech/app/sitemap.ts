@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE, SERVICES } from "@/lib/constants";
+import { SITE, SERVICES, SOUTH_INDIA_CITIES } from "@/lib/constants";
 import { VERTICALS_CONTENT } from "@/lib/verticals-content";
 import { LOCALES } from "@/lib/i18n/locales";
 import { getAllInsights, getAllCaseStudies } from "@/lib/content";
@@ -68,5 +68,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...localizedHomepages, ...englishOnlyRoutes, ...servicePages, ...verticalPages, ...insightPages, ...workPages];
+  // Programmatic location pages (Bangalore neighborhoods + South India metros).
+  // Tier A (Bangalore + neighborhoods) gets priority 0.75 to outrank
+  // verticals; Tier B/C/D South India cities get 0.65.
+  const locationPages: MetadataRoute.Sitemap = SOUTH_INDIA_CITIES.map((c) => ({
+    url: `${SITE.url}/locations/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: c.tier === "A" ? 0.75 : 0.65,
+  }));
+
+  return [
+    ...localizedHomepages,
+    ...englishOnlyRoutes,
+    ...servicePages,
+    ...verticalPages,
+    ...insightPages,
+    ...workPages,
+    ...locationPages,
+  ];
 }
