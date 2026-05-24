@@ -36,7 +36,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const homeHref = `/${locale}`;
   const navItems = [
     { label: dict.nav.services, href: "/services" },
-    { label: dict.nav.locations, href: "/locations/bangalore" },
+    { label: dict.nav.locations, href: "/locations" },
     { label: dict.nav.about, href: "/about" },
     { label: dict.nav.insights, href: "/insights" },
   ];

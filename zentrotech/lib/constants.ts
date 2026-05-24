@@ -3,7 +3,7 @@ export const SITE = {
   url: "https://zentrotech.in",
   tagline: "Build. Automate. Get Paid.",
   description:
-    "ZentroTECH builds lead-engine websites, AI automations, and Android apps for ambitious Indian businesses — and chases the follow-ups and unpaid invoices for you. Headquartered in Bangalore, serving 25+ cities across South India.",
+    "ZentroTECH builds lead-engine websites, AI automations, and Android apps for ambitious Indian businesses — and chases the follow-ups and unpaid invoices for you. Headquartered in Bangalore, serving 138 cities across South India.",
   email: "hello@zentrotech.in",
   phone: "+91 73489 61600",
   whatsapp: "+91 73489 61600",
@@ -386,7 +386,7 @@ export const FAQS = [
   },
   {
     q: "Do you serve businesses outside Bangalore?",
-    a: "Yes. We're headquartered in Bangalore but actively serve 25+ cities across South India — Chennai, Hyderabad, Coimbatore, Kochi, Mysore, Madurai, Trichy, Salem, Mangalore, Vijayawada, Visakhapatnam, Thiruvananthapuram, and more. Anywhere in India for the right project.",
+    a: "Yes. We're headquartered in Bangalore but actively serve 138 cities across South India — Chennai, Hyderabad, Coimbatore, Kochi, Mysore, Madurai, Trichy, Salem, Mangalore, Vijayawada, Visakhapatnam, Thiruvananthapuram, and more. Anywhere in India for the right project.",
   },
   {
     q: "What's your 'business on autopilot' service for solo founders?",

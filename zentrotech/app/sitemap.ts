@@ -46,6 +46,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Legal pages — required for footer linking, DPDP compliance, and to back up
+  // the "money-back trial" claim. Low priority for crawl (rarely change).
+  const legalPages: MetadataRoute.Sitemap = ["/privacy", "/terms", "/refund"].map((path) => ({
+    url: `${SITE.url}${path}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  }));
+
   const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
     url: `${SITE.url}/services/${s.slug}`,
     lastModified: now,
@@ -153,6 +162,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...localizedHomepages,
     ...englishOnlyRoutes,
+    ...legalPages,
     ...servicePages,
     ...verticalPages,
     ...insightPages,

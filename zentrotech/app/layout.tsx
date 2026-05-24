@@ -28,11 +28,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://zentrotech.in"),
   title: {
-    default: "ZentroTECH — Bangalore's #1 Lead Engine Website Agency",
+    default: "ZentroTECH — Bangalore's Lead Engine Website Agency",
     template: "%s · ZentroTECH",
   },
   description:
-    "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 25+ cities across South India.",
+    "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 138 cities across South India.",
   keywords: [
     "AI agency Bangalore",
     "lead generation website",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "ZentroTECH",
     title: "ZentroTECH — Build. Automate. Get Paid.",
     description:
-      "Lead-engine websites + AI automation for Indian SMBs. Bangalore HQ, serving 25+ cities across South India.",
+      "Lead-engine websites + AI automation for Indian SMBs. Bangalore HQ, serving 138 cities across South India.",
   },
   twitter: {
     card: "summary_large_image",

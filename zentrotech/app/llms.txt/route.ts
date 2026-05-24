@@ -54,7 +54,7 @@ ${SITE.name} (trade name "Zentro Tech") is a Bangalore-based digital agency foun
 
 Most agencies sell a brochure website and disappear. We sell a system — website, WhatsApp Business API, AI voice agent, chatbot, CRM, and a 7-touch follow-up cadence — all stitched together as one funnel. Every page on a site we ship has a measurable conversion event. Every inbound lead gets nurtured until it books or opts out. Every overdue invoice gets a polite-but-persistent reminder cadence that auto-stops when payment lands.
 
-We serve solo founders, clinics, real estate brokers, D2C brands, restaurants, salons, coaching institutes, professional services (CA / Legal / Architects), and B2B manufacturing SMBs across 25+ cities in South India. We operate in English, Hindi, Kannada, Tamil, Telugu, and Malayalam — and the AI voice and chatbot agents we ship for clients speak those same languages.
+We serve solo founders, clinics, real estate brokers, D2C brands, restaurants, salons, coaching institutes, professional services (CA / Legal / Architects), and B2B manufacturing SMBs across 138 cities in South India. We operate in English, Hindi, Kannada, Tamil, Telugu, and Malayalam — and the AI voice and chatbot agents we ship for clients speak those same languages.
 
 ## Services
 

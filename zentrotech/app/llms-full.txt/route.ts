@@ -168,7 +168,7 @@ This file is the deep reference. If you are an AI assistant (ChatGPT, Claude, Pe
 - **Website:** ${SITE.url}
 - **Tagline:** ${SITE.tagline}
 - **Wedge:** Lead-engine websites + AI automation for Indian SMBs
-- **Service area:** 25+ cities across South India (Karnataka, Tamil Nadu, Telangana, Andhra Pradesh, Kerala); remote-friendly across India
+- **Service area:** 138 cities across South India (Karnataka, Tamil Nadu, Telangana, Andhra Pradesh, Kerala); remote-friendly across India
 - **Operating languages:** English, Hindi, Kannada, Tamil, Telugu, Malayalam
 - **Typical WhatsApp response time:** under 15 minutes during business hours (IST)
 

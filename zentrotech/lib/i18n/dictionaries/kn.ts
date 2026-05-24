@@ -39,7 +39,7 @@ export const kn: Dictionary = {
     videoBody: "ನಿಮ್ಮ brand ವೀಡಿಯೊ ಇಲ್ಲಿ ಬರುತ್ತದೆ — hero-video.mp4 ಕಳುಹಿಸಿದರೆ ತಕ್ಷಣ ಸೇರಿಸುತ್ತೇವೆ",
     trustStats: [
       { value: "2026", label: "ಸ್ಥಾಪನೆ · ಬೆಂಗಳೂರು HQ" },
-      { value: "25+", label: "ದಕ್ಷಿಣ ಭಾರತದ ನಗರಗಳು" },
+      { value: "138", label: "ದಕ್ಷಿಣ ಭಾರತದ ನಗರಗಳು" },
       { value: "15min", label: "WhatsApp ಪ್ರತಿಕ್ರಿಯೆ ಸಮಯ" },
       { value: "6", label: "ಭಾಷೆಗಳು ಬೆಂಬಲ" },
     ],
@@ -133,13 +133,13 @@ export const kn: Dictionary = {
   serviceAreas: {
     badge: "ಸೇವಾ ಪ್ರದೇಶಗಳು",
     title1: "ಬೆಂಗಳೂರು HQ.",
-    title2: "ದಕ್ಷಿಣ ಭಾರತದ 25+ ನಗರಗಳು.",
+    title2: "ದಕ್ಷಿಣ ಭಾರತದ 138 ನಗರಗಳು.",
     sub: "ಬೆಂಗಳೂರಿನಲ್ಲಿ ಮುಖ್ಯ ಕಚೇರಿ. ಕರ್ನಾಟಕ, ತಮಿಳುನಾಡು, ತೆಲಂಗಾಣ, ಆಂಧ್ರ ಪ್ರದೇಶ, ಕೇರಳ ಎಲ್ಲ ಕಡೆ businesses ಗೆ ಸೇವೆ. ಭಾರತದ ಯಾವ ಭಾಗದಲ್ಲೂ select projects ಸ್ವೀಕರಿಸ್ತೇವೆ.",
     tierLabels: {
       A: "ಬೆಂಗಳೂರು + ಸುತ್ತಮುತ್ತಲ ಪ್ರದೇಶಗಳು",
       B: "ದಕ್ಷಿಣ ಭಾರತ ಮೆಟ್ರೋಗಳು",
-      C: "ತಮಿಳುನಾಡು tier-2",
-      D: "ದಕ್ಷಿಣ ಭಾರತ tier-2",
+      C: "ದಕ್ಷಿಣ ಭಾರತ tier-2 ಮೆಟ್ರೋಗಳು",
+      D: "ಇತರ tier-2 hubs",
     },
   },
   faqSection: {

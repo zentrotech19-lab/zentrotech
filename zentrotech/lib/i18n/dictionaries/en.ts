@@ -8,7 +8,7 @@ export const en: Dictionary = {
     siteName: "ZentroTECH",
     tagline: "Build. Automate. Get Paid.",
     description:
-      "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 25+ cities across South India.",
+      "Lead-engine websites + AI automation for Bangalore SMBs. We follow up on every lead and chase your unpaid invoices for you. Serving 138 cities across South India.",
   },
   nav: {
     services: "Services",
@@ -33,7 +33,7 @@ export const en: Dictionary = {
     videoBody: "Your brand video drops in here — we'll wire it as soon as you send hero-video.mp4",
     trustStats: [
       { value: "2026", label: "Founded · Bengaluru HQ" },
-      { value: "25+", label: "South India Cities Served" },
+      { value: "138", label: "South India Cities Served" },
       { value: "15min", label: "WhatsApp Response Time" },
       { value: "6", label: "Languages We Support" },
     ],
@@ -127,13 +127,13 @@ export const en: Dictionary = {
   serviceAreas: {
     badge: "Service Areas",
     title1: "Bangalore HQ.",
-    title2: "25+ South India cities.",
+    title2: "138 South India cities.",
     sub: "Headquartered in Bangalore. We serve businesses across Karnataka, Tamil Nadu, Telangana, Andhra Pradesh, and Kerala — and accept select projects anywhere in India.",
     tierLabels: {
       A: "Bangalore + neighborhoods",
       B: "South India metros",
-      C: "Tamil Nadu tier-2",
-      D: "South India tier-2",
+      C: "South India tier-2 metros",
+      D: "Other tier-2 hubs",
     },
   },
   faqSection: {
@@ -143,7 +143,7 @@ export const en: Dictionary = {
     items: [
       { question: "How much does a lead-engine website cost?", answer: "It depends on scope, integrations, and ongoing automation needs. Starter SEO sites are affordable; full lead-engine builds with 3D, AI voice, and follow-up automation are a larger investment. Fill the requirements form and we send a custom quote within 1 business day — no obligation." },
       { question: "How is this different from a normal website agency?", answer: "Most agencies sell you a website, then leave. We build the website AND the AI follow-up + payment recovery automation that fills it with leads and gets you paid. We also won't ask you to subscribe to 5 different SaaS tools — we use self-hosted and affordable alternatives. One contract, one team." },
-      { question: "Do you serve businesses outside Bangalore?", answer: "Yes. We're headquartered in Bangalore but actively serve 25+ cities across South India — Chennai, Hyderabad, Coimbatore, Kochi, Mysore, Madurai, Trichy, Salem, Mangalore, Vijayawada, Visakhapatnam, Thiruvananthapuram, and more. Anywhere in India for the right project." },
+      { question: "Do you serve businesses outside Bangalore?", answer: "Yes. We're headquartered in Bangalore but actively serve 138 cities across South India — Chennai, Hyderabad, Coimbatore, Kochi, Mysore, Madurai, Trichy, Salem, Mangalore, Vijayawada, Visakhapatnam, Thiruvananthapuram, and more. Anywhere in India for the right project." },
       { question: "What's your 'business on autopilot' service for solo founders?", answer: "We map your manual process — how you handle sales enquiries, send quotes, chase payments, post on social, manage bookings — then build automated workflows that do those same things while you focus on growth. Built for 1-5 person teams who can't afford an ops manager." },
       { question: "Why does a payment recovery system matter?", answer: "In India, getting paid takes multiple polite reminders. Most businesses stop at 1-2 follow-ups out of awkwardness and lose 20-40% of their receivables. Our system runs a 6-stage reminder cadence over 30 days via WhatsApp + email + AI voice — automatically — and stops the second payment lands. Recovery typically improves 30-50%." },
       { question: "Can you build us an Android app along with the website?", answer: "Yes. We bundle Android app development into a single contract with the website if you need both. Native Kotlin or cross-platform Flutter, your call — we'll recommend based on scope and cost." },
@@ -163,13 +163,13 @@ export const en: Dictionary = {
   },
   footer: {
     tagline: "Build. Automate. Get Paid.",
-    serviceArea: "Headquartered in Bangalore. Serving 25+ cities across South India.",
+    serviceArea: "Headquartered in Bangalore. Serving 138 cities across South India.",
     columns: {
       navigate: "Navigate",
       areas: "Service Areas",
       contact: "Contact",
     },
-    viewAllCities: "View all 25+ cities →",
+    viewAllCities: "View all 138 cities →",
     callPhone: "Call us",
     whatsappUs: "WhatsApp us",
     emailUs: "Email us",

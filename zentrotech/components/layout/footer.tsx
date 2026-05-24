@@ -112,7 +112,7 @@ export function Footer({ locale, dict }: FooterProps) {
             <h4 className="text-xs uppercase tracking-widest text-text-muted mb-4">{dict.footer.columns.contact}</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 text-text-secondary hover:text-white">
+                <a href={`tel:${SITE.phone.replace(/\s+/g, "")}`} className="flex items-center gap-2 text-text-secondary hover:text-white">
                   <Phone aria-hidden="true" className="size-4 text-text-muted" />
                   {SITE.phone}
                 </a>
@@ -142,7 +142,14 @@ export function Footer({ locale, dict }: FooterProps) {
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted">
           <p>© {new Date().getFullYear()} {SITE.name}. {dict.footer.rights}</p>
-          <p>GST: 29FETPS9602L1ZC · Proprietorship · Koramangala, Bengaluru</p>
+          <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <span aria-hidden="true">·</span>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <span aria-hidden="true">·</span>
+            <Link href="/refund" className="hover:text-white transition-colors">Refund</Link>
+          </nav>
+          <p>GST: {SITE.gst} · {SITE.legalForm} · Koramangala, Bengaluru</p>
         </div>
       </Container>
     </footer>

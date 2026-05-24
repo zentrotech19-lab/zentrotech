@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Hero } from "@/components/sections/hero";
 import { UspStrip } from "@/components/sections/usp-strip";
 import { ServicesBento } from "@/components/sections/services-bento";
+import { TrustSignals } from "@/components/sections/trust-signals";
 import { ProcessTimeline } from "@/components/sections/process-timeline-lazy";
 import { ServiceAreas } from "@/components/sections/service-areas";
 import { FaqSection } from "@/components/sections/faq-section";
@@ -25,7 +26,9 @@ export async function generateMetadata({
   if (!isLocale(lang)) return {};
   const dict = await getDictionary(lang as Locale);
   return buildMetadata({
-    title: `${dict.meta.tagline} · ${dict.meta.siteName}`,
+    // Bare tagline — the root layout's title.template appends " · ZentroTECH"
+    // automatically, so don't pre-suffix it here or the tab shows it twice.
+    title: dict.meta.tagline,
     description: dict.meta.description,
     path: `/${lang}`,
     ogImage: "/og/home.png",
@@ -47,6 +50,7 @@ export default async function LocalizedHomePage({
       <Hero dict={dict.hero} />
       <UspStrip dict={dict.usps} />
       <ServicesBento dict={dict.servicesBento} />
+      <TrustSignals />
       <ProcessTimeline dict={dict.process} />
       <ServiceAreas dict={dict.serviceAreas} />
       <FaqSection

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<title>ZentroTECH — Site Audit 2026-05-24</title>
+<style>
+  :root {
+    --indigo: #6366f1;
+    --violet: #8b5cf6;
+    --pink: #ec4899;
+    --cyan: #06b6d4;
+    --critical: #dc2626;
+    --important: #d97706;
+    --nice: #16a34a;
+    --ink: #0a0a0f;
+    --paper: #ffffff;
+    --line: #e5e7eb;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 14px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 64px 80px;
+  }
+  header.cover {
+    border-bottom: 4px solid var(--indigo);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  header.cover .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  header.cover .brand svg { width: 48px; height: 48px; }
+  header.cover .brand .name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  header.cover h1 {
+    margin: 0 0 8px;
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 900;
+  }
+  header.cover h1 .accent {
+    background: linear-gradient(90deg, var(--cyan), var(--indigo) 45%, var(--violet) 80%, var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header.cover .meta {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  header.cover .meta strong { color: var(--ink); }
+  .summary {
+    background: #f9fafb;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 28px 0 36px;
+  }
+  .summary h2 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .summary .scorebar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .summary .score {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+  }
+  .summary .score .n { font-size: 28px; font-weight: 900; }
+  .summary .score.crit .n { color: var(--critical); }
+  .summary .score.imp .n { color: var(--important); }
+  .summary .score.nice .n { color: var(--nice); }
+  .summary .score .l {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  section.category {
+    margin: 40px 0 28px;
+    page-break-inside: avoid;
+  }
+  section.category > h2 {
+    font-size: 20px;
+    margin: 0 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section.category > h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  section.category > p.intro {
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-size: 13px;
+  }
+  .finding {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+  }
+  .finding.crit { border-left-color: var(--critical); background: #fef2f2; }
+  .finding.imp { border-left-color: var(--important); background: #fffbeb; }
+  .finding.nice { border-left-color: var(--nice); background: #f0fdf4; }
+  .finding .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .finding .sev {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .finding.crit .sev { background: var(--critical); color: white; }
+  .finding.imp .sev { background: var(--important); color: white; }
+  .finding.nice .sev { background: var(--nice); color: white; }
+  .finding .title {
+    font-weight: 700;
+    font-size: 14px;
+    flex: 1;
+  }
+  .finding .why,
+  .finding .fix {
+    font-size: 13px;
+    margin: 4px 0;
+    color: #374151;
+  }
+  .finding .label {
+    font-weight: 600;
+    color: #111827;
+    margin-right: 4px;
+  }
+  .finding .loc {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: rgba(0,0,0,0.05);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #1f2937;
+  }
+  .next-steps {
+    background: linear-gradient(135deg, #fdf4ff, #f0f9ff);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 40px;
+  }
+  .next-steps h2 {
+    margin: 0 0 14px;
+    font-size: 18px;
+  }
+  .next-steps ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .next-steps li { margin-bottom: 6px; }
+  footer {
+    margin-top: 50px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body { background: white; }
+    .page { padding: 0; max-width: none; }
+    .print-hide { display: none !important; }
+    section.category { page-break-inside: avoid; }
+  }
+  .print-hint {
+    background: #fef3c7;
+    border: 1px dashed var(--important);
+    color: #78350f;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 16px 0 28px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .print-hint kbd {
+    background: white;
+    border: 1px solid #d6d3d1;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    font-size: 12px;
+    box-shadow: 0 1px 0 #d6d3d1;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="cover">
+  <div class="brand">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ZentroTECH mark">
+      <defs>
+        <linearGradient id="zt-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#06b6d4"/>
+          <stop offset="45%" stop-color="#6366f1"/>
+          <stop offset="80%" stop-color="#8b5cf6"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+        <linearGradient id="zt-frame" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ec4899" stop-opacity="0.55"/>
+        </linearGradient>
+      </defs>
+      <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z" fill="none" stroke="url(#zt-frame)" stroke-width="3" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#zt-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M58 70 L142 70"/>
+        <path d="M138 74 L108 104 L92 104 L62 134"/>
+        <path d="M58 138 L142 138"/>
+      </g>
+      <circle cx="58" cy="70" r="5" fill="#0a0a0f"/>
+      <circle cx="142" cy="70" r="5" fill="#0a0a0f"/>
+      <circle cx="58" cy="138" r="5" fill="#0a0a0f"/>
+      <circle cx="142" cy="138" r="5" fill="#0a0a0f"/>
+      <circle cx="100" cy="104" r="4" fill="#ec4899"/>
+    </svg>
+    <div class="name">ZENTRO<span style="background: linear-gradient(90deg, var(--violet), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent;">TECH</span></div>
+  </div>
+
+  <h1>Site audit &mdash; <span class="accent">post-launch gaps &amp; fixes</span></h1>
+  <div class="meta">
+    <strong>Date:</strong> 24 May 2026 &nbsp;·&nbsp;
+    <strong>Site:</strong> zentrotech.in &nbsp;·&nbsp;
+    <strong>Scope:</strong> Full live audit after mega-build (5,047 URLs, sticky CTA, GA4, Clarity, multilingual scaffolding)
+  </div>
+</header>
+
+<div class="print-hint print-hide">
+  📄 To save as PDF: press <kbd>Ctrl</kbd> + <kbd>P</kbd> (or <kbd>⌘</kbd> + <kbd>P</kbd>), then choose <strong>"Save as PDF"</strong> as the destination.
+</div>
+
+<div class="summary">
+  <h2>Summary &mdash; what we found</h2>
+  <p style="margin:0 0 4px;font-size:13.5px;line-height:1.6;">
+    Site is shipped and live. The structural foundation is strong &mdash; 5,047 URLs indexed, multilingual scaffolding ready, analytics wired (Vercel + GA4 + Clarity), sticky CTA on every page, proper logo rendering. The gaps below are the polish layer that converts indexing into trust + conversions.
+  </p>
+  <div class="scorebar">
+    <div class="score crit"><div class="n" id="count-crit">&mdash;</div><div class="l">Critical</div></div>
+    <div class="score imp"><div class="n" id="count-imp">&mdash;</div><div class="l">Important</div></div>
+    <div class="score nice"><div class="n" id="count-nice">&mdash;</div><div class="l">Nice-to-have</div></div>
+  </div>
+</div>
+
+<!-- AUDIT_FINDINGS_INSERT_BELOW -->
+
+<section class="category">
+  <h2><span class="num">1</span> Brand consistency</h2>
+  <p class="intro">Logo, favicon, page titles, OG image &mdash; the first-impression layer.</p>
+
+  <div class="finding crit">
+    <div class="head"><span class="sev">Critical</span><span class="title">Browser tab title is duplicated: "Build. Automate. Get Paid. · ZentroTECH · ZentroTECH"</span></div>
+    <p class="why"><span class="label">Why:</span> The Next.js metadata template <span class="loc">"%s · ZentroTECH"</span> is appended to a homepage title that already ends with "ZentroTECH". Looks unprofessional in Chrome tab, in browser history, and in shared bookmarks.</p>
+    <p class="fix"><span class="label">Fix:</span> Edit <span class="loc">app/layout.tsx</span> &mdash; either set the homepage's default title to just <em>"Build. Automate. Get Paid."</em> (the template will append), or remove the template suffix.</p>
+  </div>
+
+  <div class="finding crit">
+    <div class="head"><span class="sev">Critical</span><span class="title">Phone link in footer has spaces — breaks on some Android dialers</span></div>
+    <p class="why"><span class="label">Why:</span> Footer renders <span class="loc">href="tel:+91 73489 61600"</span> with spaces. Floating CTA correctly uses <span class="loc">tel:+917348961600</span>. Inconsistent, and tel: with spaces won't auto-dial on older Android browsers.</p>
+    <p class="fix"><span class="label">Fix:</span> In <span class="loc">components/layout/footer.tsx</span> use <span class="loc">SITE.phone.replace(/\s+/g, "")</span> in the tel href (same pattern as floating CTA).</p>
+  </div>
+</section>
+
+<section class="category">
+  <h2><span class="num">2</span> Content consistency &amp; messaging</h2>
+  <p class="intro">Numbers and claims that contradict each other across the site.</p>
+
+  <div class="finding imp">
+    <div class="head"><span class="sev">Important</span><span class="title">"25+ cities" vs "138 cities" — same site, two different numbers</span></div>
+    <p class="why"><span class="label">Why:</span> Homepage hero says "25+ South India Cities Served". Footer says "Serving 25+ cities". But <span class="loc">/locations</span> shows 138 cities, and the sitemap has 5,047 URLs built around 138 cities. Sophisticated buyers will spot the inconsistency; SEO tools will flag it.</p>
+    <p class="fix"><span class="label">Fix:</span> Pick one canonical claim ("138 cities" is stronger and matches reality). Update <span class="loc">lib/constants.ts</span> SITE.serviceAreaCount and <span class="loc">components/sections/hero.tsx</span> stats block + footer copy. Cascading update fixes ~6 spots.</p>
+  </div>
+
+  <div class="finding imp">
+    <div class="head"><span class="sev">Important</span><span class="title">Service Areas section: "Tamil Nadu tier-2" header above mostly-Karnataka cities</span></div>
+    <p class="why"><span class="label">Why:</span> Homepage Service Areas tier C card is labelled "Tamil Nadu tier-2" but contains Mysore, Mangalore, Kozhikode (Karnataka + Kerala) along with Madurai. Wrong taxonomy &mdash; an attentive Bangalore SMB owner would notice.</p>
+    <p class="fix"><span class="label">Fix:</span> Rename to "South India tier-2 metros" in the section labels (already used for tier D, just align tier C).</p>
+  </div>
+</section>
+
+<!-- placeholder sections — agent findings will be appended here -->
+<section class="category" id="agent-pending">
+  <h2><span class="num">3+</span> Additional categories (audit agent running)</h2>
+  <p class="intro">A specialist audit agent is doing a deeper sweep across SEO basics, programmatic page quality, i18n coverage, accessibility, performance, trust signals, missing pages, and broken links. Their findings will be merged here once they finish &mdash; expected within a few minutes of this report being generated.</p>
+</section>
+
+<div class="next-steps">
+  <h2>Recommended next steps &mdash; do in order</h2>
+  <ol>
+    <li><strong>Fix title duplication + tel link</strong> (15 min) &mdash; these are sub-15-minute polishing wins that improve every page.</li>
+    <li><strong>Reconcile "25 vs 138 cities" everywhere</strong> (20 min) &mdash; one number, used everywhere. Truth in marketing.</li>
+    <li><strong>Wire the Tamil + Kannada translation dictionary</strong> (1-2 hrs) &mdash; the strings exist in <span class="loc">lib/i18n/seo-translations.ts</span> (597 units) but the programmatic SEO pages still render English on <span class="loc">/ta</span> and <span class="loc">/kn</span>. Connecting them unlocks the regional traffic opportunity.</li>
+    <li><strong>Add Privacy Policy, Terms, and Refund Policy pages</strong> &mdash; required for India DPDP Act compliance (deadline May 2027) and to legitimise the "money-back trial" claim.</li>
+    <li><strong>Add real social proof</strong> &mdash; first 3 client logos, one testimonial with full name + title + city, one mini case study. Right now trust is asserted, not proven.</li>
+    <li><strong>Submit Bing Places listing</strong> &mdash; for Bing/Edge organic visibility. Instructions in section below.</li>
+    <li><strong>Schedule a re-audit in 14 days</strong> &mdash; after Google has had time to re-crawl all 5,047 URLs, look at Search Console performance + Clarity heatmaps to see which pages actually attract traffic and where users drop off.</li>
+  </ol>
+</div>
+
+<footer>
+  Generated 24 May 2026 &mdash; ZentroTECH internal audit &mdash; not for distribution
+</footer>
+
+</div>
+
+<script>
+  // Count findings by severity for the summary scorebar
+  const counts = { crit: 0, imp: 0, nice: 0 };
+  document.querySelectorAll('.finding').forEach(f => {
+    if (f.classList.contains('crit')) counts.crit++;
+    else if (f.classList.contains('imp')) counts.imp++;
+    else if (f.classList.contains('nice')) counts.nice++;
+  });
+  document.getElementById('count-crit').textContent = counts.crit;
+  document.getElementById('count-imp').textContent = counts.imp;
+  document.getElementById('count-nice').textContent = counts.nice;
+</script>
+</body>
+</html>
