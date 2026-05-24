@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<title>ZentroTECH — 3 Findings That Change Our Plan This Week</title>
+<style>
+  :root {
+    --indigo: #6366f1;
+    --violet: #8b5cf6;
+    --pink: #ec4899;
+    --cyan: #06b6d4;
+    --threat-high: #dc2626;
+    --threat-med: #d97706;
+    --threat-low: #16a34a;
+    --opportunity: #16a34a;
+    --ink: #0a0a0f;
+    --paper: #ffffff;
+    --line: #e5e7eb;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 14px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 56px 80px;
+  }
+  header.cover {
+    border-bottom: 4px solid var(--indigo);
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+  }
+  header.cover .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  header.cover .brand svg { width: 44px; height: 44px; }
+  header.cover .brand .name {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  header.cover h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 900;
+  }
+  header.cover h1 .accent {
+    background: linear-gradient(90deg, var(--cyan), var(--indigo) 45%, var(--violet) 80%, var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header.cover .meta {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  header.cover .meta strong { color: var(--ink); }
+
+  .summary {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid var(--threat-high);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0 36px;
+  }
+  .summary h2 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--threat-high);
+  }
+  .summary p { margin: 4px 0; font-size: 14px; line-height: 1.6; }
+
+  .finding {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    padding: 24px 28px;
+    page-break-inside: avoid;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .finding header.f-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .finding .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    background: var(--threat-high);
+    color: white;
+    white-space: nowrap;
+  }
+  .finding .badge.imp { background: var(--threat-med); }
+  .finding .num {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .finding h2 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.25;
+    flex: 1;
+  }
+  .finding .sub-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 14px 0 18px;
+    font-size: 13px;
+  }
+  .sub-meta .pair {
+    background: #f9fafb;
+    border: 1px solid var(--line);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+  .sub-meta .pair strong { color: var(--ink); margin-right: 4px; }
+
+  .finding section.block {
+    margin: 16px 0;
+  }
+  .finding section.block h3 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .finding section.block p {
+    margin: 4px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .what-they-do {
+    background: #f9fafb;
+    border-left: 3px solid var(--indigo);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+  }
+  .implication {
+    background: #fef3c7;
+    border-left: 3px solid var(--threat-med);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+  }
+  .counter-move {
+    background: #ecfdf5;
+    border-left: 3px solid var(--opportunity);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+  }
+  .counter-move strong { color: #14532d; }
+  .implication strong { color: #78350f; }
+
+  .src-list {
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12.5px;
+  }
+  .src-list li {
+    padding: 4px 0;
+    color: var(--muted);
+  }
+  .src-list a {
+    color: var(--indigo);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--indigo);
+  }
+  .src-list a:hover { color: var(--violet); border-bottom-style: solid; }
+
+  .pricing {
+    margin: 40px 0 28px;
+    background: linear-gradient(135deg, #fdf4ff, #f0f9ff);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+  .pricing h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+  }
+  .pricing .lead {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 18px;
+  }
+  table.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 10px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  table.pricing-table th, table.pricing-table td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.pricing-table th {
+    background: #f3f4f6;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  table.pricing-table tr:last-child td { border-bottom: none; }
+  .price {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 13.5px;
+  }
+  .price.ours {
+    color: var(--indigo);
+    background: rgba(99,102,241,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .opportunities {
+    margin: 36px 0 24px;
+  }
+  .opportunities h2 {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  .opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .opp-card {
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .opp-card h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: #14532d;
+  }
+  .opp-card p {
+    margin: 4px 0;
+    font-size: 12.5px;
+    color: #166534;
+    line-height: 1.5;
+  }
+  .opp-card strong { color: #14532d; }
+
+  .actions {
+    background: white;
+    border: 2px solid var(--indigo);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 36px 0 28px;
+  }
+  .actions h2 {
+    margin: 0 0 14px;
+    font-size: 19px;
+    color: var(--indigo);
+  }
+  .actions ol {
+    margin: 0;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .actions li { margin-bottom: 8px; }
+  .actions li strong { color: var(--ink); }
+
+  footer {
+    margin-top: 50px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background: white; }
+    .page { padding: 0; max-width: none; }
+    .finding, .pricing, .opportunities, .actions, .summary { page-break-inside: avoid; }
+    .print-hide { display: none !important; }
+  }
+  .print-hint {
+    background: #fef3c7;
+    border: 1px dashed var(--threat-med);
+    color: #78350f;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 12px 0 24px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .print-hint kbd {
+    background: white;
+    border: 1px solid #d6d3d1;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    font-size: 12px;
+  }
+
+  @media (max-width: 740px) {
+    .page { padding: 28px 20px 48px; }
+    .opp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="cover">
+  <div class="brand">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ZentroTECH mark">
+      <defs>
+        <linearGradient id="zt-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#06b6d4"/>
+          <stop offset="45%" stop-color="#6366f1"/>
+          <stop offset="80%" stop-color="#8b5cf6"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+        <linearGradient id="zt-frame" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ec4899" stop-opacity="0.55"/>
+        </linearGradient>
+      </defs>
+      <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z" fill="none" stroke="url(#zt-frame)" stroke-width="3" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#zt-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M58 70 L142 70"/>
+        <path d="M138 74 L108 104 L92 104 L62 134"/>
+        <path d="M58 138 L142 138"/>
+      </g>
+      <g fill="#0a0a0f">
+        <circle cx="58" cy="70" r="5"/>
+        <circle cx="142" cy="70" r="5"/>
+        <circle cx="58" cy="138" r="5"/>
+        <circle cx="142" cy="138" r="5"/>
+      </g>
+      <circle cx="100" cy="104" r="4" fill="#ec4899"/>
+    </svg>
+    <div class="name">ZENTRO<span style="background: linear-gradient(90deg, var(--violet), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent;">TECH</span></div>
+  </div>
+
+  <h1>3 competitor findings <span class="accent">that change our plan this week</span></h1>
+  <div class="meta">
+    <strong>Date:</strong> 24 May 2026 &nbsp;·&nbsp;
+    <strong>Source:</strong> Deep intel scan of 35 Indian SMB/automation competitors &nbsp;·&nbsp;
+    <strong>Read time:</strong> ~7 minutes
+  </div>
+</header>
+
+<div class="print-hint print-hide">
+  📄 Save as PDF: press <kbd>Ctrl</kbd> + <kbd>P</kbd> → choose <strong>"Save as PDF"</strong> as destination.
+</div>
+
+<div class="summary">
+  <h2>The bottom line</h2>
+  <p>Our biggest competitive risk isn't WATI, AiSensy, or LimeChat — they're enterprise SaaS platforms hunting different prey. Three smaller, faster operators are sitting in our exact lane in Bangalore + Jaipur, and two of them publish things we don't (yet): <strong>their prices</strong>. If we don't close those gaps in the next 14 days, we're the higher-friction option on every shortlist.</p>
+</div>
+
+<!-- FINDING 1 -->
+<article class="finding">
+  <header class="f-head">
+    <div class="num">1</div>
+    <h2>OperateAI (Ajay Singhadiya, Jaipur) publishes every price &mdash; on his homepage</h2>
+    <span class="badge">Critical</span>
+  </header>
+
+  <div class="sub-meta">
+    <div class="pair"><strong>Founder:</strong> Ajay Singhadiya</div>
+    <div class="pair"><strong>City:</strong> Jaipur (operates remote)</div>
+    <div class="pair"><strong>Stack:</strong> Meta API + Bolna/Sarvam + Razorpay + n8n</div>
+    <div class="pair"><strong>Threat level:</strong> 5/5</div>
+  </div>
+
+  <section class="block">
+    <h3>What they actually do</h3>
+    <div class="what-they-do">
+      OperateAI runs an indie one-man AI automation agency aimed at exactly our ICP &mdash; Indian SMBs that want WhatsApp + voice + payment-recovery as a done-for-you service. The differentiator is radical transparency: setup <strong>₹45,000&ndash;₹1,20,000</strong> one-time + maintenance <strong>₹8,000&ndash;₹12,000/month</strong>, full tech stack named, real case studies with concrete numbers (e.g. <em>"₹1,500/mo running cost, 200&ndash;300 messages/day, 96% accuracy"</em>). Ajay posts founder-bylined builds on LinkedIn and was profiled in a SiliconIndia piece on solo founders using AI tools.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Strategic implication for ZentroTECH</h3>
+    <div class="implication">
+      <strong>Hidden pricing is a 2018 tactic.</strong> Every Bangalore SMB evaluating us is now comparing against Ajay's published price card. Our <code>/contact</code> form asks them to talk to us; his homepage tells them the number. He wins the trust race in the first 30 seconds of the buyer journey.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Counter-move</h3>
+    <div class="counter-move">
+      <strong>Ship a <code>/pricing</code> page on zentrotech.in within 14 days.</strong> Publish three tiers (Starter, Growth, Mid-market) with concrete ranges &mdash; see the pricing landscape table below. Also publish our <strong>stack</strong> (Next.js + Meta WhatsApp API + Bolna/Sarvam voice + Razorpay + n8n) so prospects can verify we're not a black-box reseller. This single move neutralizes Ajay's edge.
+    </div>
+  </section>
+
+  <ul class="src-list">
+    <li>↗ <a href="https://www.operateai.in/" target="_blank">operateai.in (homepage with prices live)</a></li>
+    <li>↗ <a href="https://www.linkedin.com/in/ajay-singhadiya-1a4a75216/" target="_blank">Ajay Singhadiya on LinkedIn</a></li>
+    <li>↗ <a href="https://www.siliconindia.com/news/startups/how-ai-tools-are-letting-solo-founders-build-empires-in-2026-nid-238909-cid-19.html" target="_blank">SiliconIndia: How AI tools are letting solo founders build empires in 2026</a></li>
+  </ul>
+</article>
+
+<!-- FINDING 2 -->
+<article class="finding">
+  <header class="f-head">
+    <div class="num">2</div>
+    <h2>Jinconnect Bangalore — ₹19,999/mo + a 100% refund guarantee already on their site</h2>
+    <span class="badge">Critical</span>
+  </header>
+
+  <div class="sub-meta">
+    <div class="pair"><strong>City:</strong> Bangalore</div>
+    <div class="pair"><strong>Public face:</strong> Imran Khan (Digital Marketing Manager)</div>
+    <div class="pair"><strong>Pricing model:</strong> Tiered retainer</div>
+    <div class="pair"><strong>Threat level:</strong> 5/5</div>
+  </div>
+
+  <section class="block">
+    <h3>What they actually do</h3>
+    <div class="what-they-do">
+      Jinconnect is a Bangalore mid-tier agency publishing two retainer tiers on its homepage: <strong>"Growth Starter" at ₹19,999/month</strong> and <strong>"Scale &amp; Dominate" at ₹39,999/month</strong>. They lead the homepage with the headline <em>"No results, 100% refund"</em> &mdash; identical to our money-back trial &mdash; and they got there first. Their LinkedIn company page is active, their pricing is anchored low against the field, and they've effectively pre-empted our guarantee as a differentiator.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Strategic implication for ZentroTECH</h3>
+    <div class="implication">
+      Our money-back trial <strong>is not unique anymore</strong>. A Bangalore SMB comparing Jinconnect's ₹19,999/mo refund-guaranteed retainer to our "talk to us for a quote" page picks Jinconnect every time. We need to differentiate on <strong>what we ship</strong> in 30 days, not just on the guarantee. The infrastructure proof &mdash; "5,050 SEO pages indexed in 14 days" &mdash; matters more now than the refund promise.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Counter-move</h3>
+    <div class="counter-move">
+      Three plays, in order: <strong>(a)</strong> Position our Starter tier <strong>below</strong> Jinconnect's ₹19,999 (we recommend ₹9,999&ndash;₹14,999/mo entry, see table) but include voice + payment recovery they don't bundle. <strong>(b)</strong> Anchor every sales conversation on what arrives in week 2 of the engagement &mdash; a fully indexed lead-engine site, not a dashboard login. <strong>(c)</strong> Reframe the guarantee from "money-back" to <strong>"first-result-in-21-days or money-back"</strong> &mdash; specific, outcome-anchored, harder to copy.
+    </div>
+  </section>
+
+  <ul class="src-list">
+    <li>↗ <a href="https://www.jinconnect.com/" target="_blank">jinconnect.com (pricing + refund guarantee live)</a></li>
+    <li>↗ <a href="https://in.linkedin.com/company/jinconnect" target="_blank">Jinconnect on LinkedIn</a></li>
+  </ul>
+</article>
+
+<!-- FINDING 3 -->
+<article class="finding">
+  <header class="f-head">
+    <div class="num">3</div>
+    <h2>DigiOn (Amit Kumar, Bangalore) ships the same exact stack &mdash; but gates everything behind "Talk to CEO"</h2>
+    <span class="badge imp">Important</span>
+  </header>
+
+  <div class="sub-meta">
+    <div class="pair"><strong>Founder:</strong> Amit Kumar</div>
+    <div class="pair"><strong>City:</strong> Bangalore</div>
+    <div class="pair"><strong>Stack overlap:</strong> Web + WhatsApp + AI voice + automation</div>
+    <div class="pair"><strong>Threat level:</strong> 4/5</div>
+  </div>
+
+  <section class="block">
+    <h3>What they actually do</h3>
+    <div class="what-they-do">
+      DigiOn is the closest service-stack match to ZentroTECH in Bangalore: a single agency selling websites, WhatsApp chatbots, AI voice, and automation as one stack. They have a smart vertical play &mdash; a dedicated landing page targeting interior designers &mdash; that nobody else in Bangalore has built. <strong>Their weakness</strong>: every conversion path leads to "Talk to CEO" or "Book a Call" with no published pricing, no team page, no published case studies. The funnel friction is high.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Strategic implication for ZentroTECH</h3>
+    <div class="implication">
+      DigiOn already proved the vertical-landing-page tactic works in Bangalore. They just didn't push it across enough verticals. Their friction is our opening: <strong>speed of response and clarity of price</strong> beat their gated funnel every time a buyer is in a hurry &mdash; which is most SMB buyers.
+    </div>
+  </section>
+
+  <section class="block">
+    <h3>Counter-move</h3>
+    <div class="counter-move">
+      Build vertical-specific landing pages for <strong>dental clinics, coaching institutes, wedding photographers, sub-broker real estate, and contractors</strong> &mdash; verticals where no competitor has a landing page today (verified in the scan). Each page: vertical-specific pain points + 3 sample flows + price range + "What you get in 21 days." Our existing 5,050-page programmatic SEO infrastructure already supports this pattern; we just need 5 vertical-content templates.
+    </div>
+  </section>
+
+  <ul class="src-list">
+    <li>↗ <a href="https://www.digion.in/" target="_blank">digion.in (homepage)</a></li>
+    <li>↗ <a href="https://www.digion.in/whatsapp-chatbot/" target="_blank">DigiOn WhatsApp chatbot service</a></li>
+    <li>↗ <a href="https://www.digion.in/ai-chatbot-for-interior-designers/" target="_blank">DigiOn — AI chatbot for interior designers (the vertical play)</a></li>
+    <li>↗ <a href="https://www.digion.in/ai-powered-automation-solutions-for-businesses/" target="_blank">DigiOn AI automation solutions</a></li>
+    <li>↗ <a href="https://in.linkedin.com/company/digion.in" target="_blank">DigiOn on LinkedIn</a></li>
+  </ul>
+</article>
+
+<!-- PRICING TABLE -->
+<div class="pricing">
+  <h2>💰 Pricing landscape — where ZentroTECH should slot in</h2>
+  <p class="lead">Every ₹ figure below is verified from the competitor's own website or a public source. Use this as the anchor for our pricing page.</p>
+
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Competitor &amp; product</th>
+        <th>Their price</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Floor</td>
+        <td>Fiverr / Upwork solo gigs (one-off WhatsApp setup)</td>
+        <td class="price">$5 &ndash; $400</td>
+        <td><a href="https://www.fiverr.com/gigs/whatsapp-chatbot" target="_blank">Fiverr</a> · <a href="https://www.upwork.com/hire/api-developers/cost/" target="_blank">Upwork</a></td>
+      </tr>
+      <tr>
+        <td>SMB done-for-you</td>
+        <td>OperateAI setup</td>
+        <td class="price">₹45,000 &ndash; ₹1,20,000</td>
+        <td><a href="https://www.operateai.in/" target="_blank">operateai.in</a></td>
+      </tr>
+      <tr>
+        <td>SMB done-for-you</td>
+        <td>OperateAI maintenance / month</td>
+        <td class="price">₹8,000 &ndash; ₹12,000</td>
+        <td><a href="https://www.operateai.in/" target="_blank">operateai.in</a></td>
+      </tr>
+      <tr>
+        <td>SMB retainer</td>
+        <td>Jinconnect Growth Starter</td>
+        <td class="price">₹19,999 / mo</td>
+        <td><a href="https://www.jinconnect.com/" target="_blank">jinconnect.com</a></td>
+      </tr>
+      <tr>
+        <td>SMB retainer</td>
+        <td>Jinconnect Scale &amp; Dominate</td>
+        <td class="price">₹39,999 / mo</td>
+        <td><a href="https://www.jinconnect.com/" target="_blank">jinconnect.com</a></td>
+      </tr>
+      <tr>
+        <td>D2C / mid-market</td>
+        <td>Pragma D2C OS (D2C-only)</td>
+        <td class="price">up to ₹1,50,000 / mo</td>
+        <td><a href="https://www.bepragma.ai/" target="_blank">bepragma.ai</a></td>
+      </tr>
+      <tr>
+        <td>Voice AI infra</td>
+        <td>Bolna AI per-minute</td>
+        <td class="price">₹7 → ₹3 / min at volume</td>
+        <td><a href="https://www.bolna.ai/pricing" target="_blank">bolna.ai/pricing</a></td>
+      </tr>
+      <tr style="background:#f0fdf4;">
+        <td><strong>🎯 ZentroTECH Starter</strong></td>
+        <td><strong>Web + 1 WhatsApp flow + analytics</strong></td>
+        <td class="price ours">₹35K &ndash; ₹75K setup + ₹9,999 &ndash; ₹14,999 / mo</td>
+        <td>Recommended (undercuts Jinconnect, signals more than OperateAI)</td>
+      </tr>
+      <tr style="background:#f0fdf4;">
+        <td><strong>🎯 ZentroTECH Growth retainer</strong></td>
+        <td><strong>+ AI voice + payment recovery</strong></td>
+        <td class="price ours">₹24,999 &ndash; ₹39,999 / mo</td>
+        <td>Matches Jinconnect Scale; adds voice + recovery they don't bundle</td>
+      </tr>
+      <tr style="background:#f0fdf4;">
+        <td><strong>🎯 ZentroTECH Mid-market</strong></td>
+        <td><strong>Full stack + multi-language voice</strong></td>
+        <td class="price ours">₹60,000 &ndash; ₹1,50,000 / mo</td>
+        <td>Sits between Jinconnect upper and Pragma lower</td>
+      </tr>
+      <tr style="background:#f0fdf4;">
+        <td><strong>🎯 ZentroTECH Voice add-on</strong></td>
+        <td><strong>Bolna pass-through + our config</strong></td>
+        <td class="price ours">Bolna rate + 30–50% markup</td>
+        <td>Bolna at ₹3–7 / min wholesale; we resell with orchestration + monitoring</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- OPPORTUNITIES -->
+<div class="opportunities">
+  <h2>🟢 Three opportunities ZentroTECH can own — nobody else has them</h2>
+  <div class="opp-grid">
+    <div class="opp-card">
+      <h3>1. The transparency trifecta</h3>
+      <p><strong>Named founder + published stack + published price card.</strong> OperateAI has it from Jaipur. <em>Nobody in Bangalore mid-tier has all three.</em> Whoever publishes this first in Bangalore owns the trust race.</p>
+    </div>
+    <div class="opp-card">
+      <h3>2. Underserved verticals</h3>
+      <p>Zero competitor landing pages for: <strong>dental, coaching institutes, wedding photographers, sub-broker real estate, contractors.</strong> 5 templated SEO pages = 5 vertical moats.</p>
+    </div>
+    <div class="opp-card">
+      <h3>3. Geographic gaps</h3>
+      <p>Bangalore is saturated. Sparse markets with zero native AI+WhatsApp agencies: <strong>Mysuru, Hubballi, Mangaluru, Coimbatore, Madurai, Indore, Bhopal, Kochi, Pune</strong>. Our 138-city programmatic SEO already covers these — just market them.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIONS -->
+<div class="actions">
+  <h2>✅ Recommended action sequence — next 14 days</h2>
+  <ol>
+    <li><strong>Day 1–2:</strong> Ship the <code>/pricing</code> page on zentrotech.in (use the table above). Neutralizes OperateAI + Jinconnect in one move.</li>
+    <li><strong>Day 1–2:</strong> Add a <code>/team</code> or <code>/about/founders</code> page with named-founder photos + LinkedIn links. Pairs with pricing for the trifecta.</li>
+    <li><strong>Day 3–5:</strong> Apply to <a href="https://www.bolna.ai/" target="_blank">Bolna AI</a> and <a href="https://www.ringg.ai/" target="_blank">Ringg AI</a> partner programs. Both raised in Jan 2026 (Bolna $6.3M, Ringg $5.5M) and will need delivery partners. Early applications win the meaty referral deals.</li>
+    <li><strong>Day 6–10:</strong> Build 5 vertical landing pages (dental, coaching, wedding-photographer, sub-broker real estate, contractor). Reuse the existing programmatic-SEO pipeline.</li>
+    <li><strong>Day 11–14:</strong> Reframe the guarantee from "money-back" to "first measurable result in 21 days, or full refund." Update homepage, contact page, and refund policy.</li>
+    <li><strong>Drop from competitor watchlist:</strong> Krayonist (couldn't verify it exists), Browntape (acquired by Ginesys — out of the race).</li>
+  </ol>
+</div>
+
+<footer>
+  Generated 24 May 2026 &middot; ZentroTECH internal strategy &middot; Based on 35-entity competitive scan &middot; Companion report: competitor-deep-intel.md
+</footer>
+
+</div>
+</body>
+</html>
