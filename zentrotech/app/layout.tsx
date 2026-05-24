@@ -10,6 +10,7 @@ import { MagneticCursor } from "@/components/animations/magnetic-cursor";
 import { Starfield } from "@/components/animations/starfield";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { FloatingCta } from "@/components/ui/floating-cta";
 import { LOCALES, LOCALE_META, DEFAULT_LOCALE, isLocale, type Locale } from "@/lib/i18n/locales";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 
@@ -99,6 +100,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Footer locale={locale} dict={dict} />
           </SmoothScrollProvider>
         </LazyMotion>
+        <FloatingCta />
         <Analytics />
         <SpeedInsights />
       </body>

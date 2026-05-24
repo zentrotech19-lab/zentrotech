@@ -11,10 +11,25 @@ interface FooterProps {
   dict: Dictionary;
 }
 
+// Top 12 cities for footer — keeps the column scannable. Full 138-city
+// list lives at /locations index page (linked at the bottom of the column).
+const FOOTER_CITY_SLUGS = new Set([
+  "bangalore",
+  "koramangala",
+  "hsr-layout",
+  "indiranagar",
+  "whitefield",
+  "electronic-city",
+  "jayanagar",
+  "chennai",
+  "hyderabad",
+  "kochi",
+  "coimbatore",
+  "mysore",
+]);
+
 export function Footer({ locale, dict }: FooterProps) {
-  const featuredCities = SOUTH_INDIA_CITIES.filter(
-    (c) => c.tier === "A" || c.tier === "B"
-  );
+  const featuredCities = SOUTH_INDIA_CITIES.filter((c) => FOOTER_CITY_SLUGS.has(c.slug));
 
   const navItems = [
     { label: dict.nav.services, href: "/services" },
@@ -86,7 +101,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 </li>
               ))}
             </ul>
-            <Link href="/locations/bangalore" className="text-indigo-glow hover:text-white text-xs mt-3 inline-block">
+            <Link href="/locations" className="text-indigo-glow hover:text-white text-xs mt-3 inline-block">
               {dict.footer.viewAllCities}
             </Link>
           </div>
