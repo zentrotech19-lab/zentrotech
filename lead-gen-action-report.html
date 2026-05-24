@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<title>ZentroTECH — Lead-Gen Channels · Action Report</title>
+<style>
+  :root {
+    --indigo: #6366f1;
+    --violet: #8b5cf6;
+    --pink: #ec4899;
+    --cyan: #06b6d4;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+    --blue: #0891b2;
+    --ink: #0a0a0f;
+    --paper: #ffffff;
+    --line: #e5e7eb;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--paper); color: var(--ink);
+    font: 14px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page { max-width: 1040px; margin: 0 auto; padding: 44px 56px 80px; }
+
+  header.cover {
+    border-bottom: 4px solid var(--indigo);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+  header.cover .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  header.cover .brand svg { width: 44px; height: 44px; }
+  header.cover .brand .name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+  header.cover h1 { margin: 0 0 8px; font-size: 32px; line-height: 1.15; font-weight: 900; }
+  header.cover h1 .accent {
+    background: linear-gradient(90deg, var(--cyan), var(--indigo) 45%, var(--violet) 80%, var(--pink));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.cover .meta { color: var(--muted); font-size: 13px; }
+  header.cover .meta strong { color: var(--ink); }
+
+  .print-hint {
+    background: #fef3c7;
+    border: 1px dashed var(--amber);
+    color: #78350f;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 12px 0 24px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .print-hint kbd {
+    background: white; border: 1px solid #d6d3d1;
+    border-radius: 4px; padding: 1px 6px;
+    font-family: monospace; font-size: 12px;
+  }
+
+  .live-data {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1px solid #bbf7d0;
+    border-left: 5px solid var(--green);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0 28px;
+  }
+  .live-data h2 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--green);
+  }
+  .live-data .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .live-data .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .live-data .card .n { font-size: 22px; font-weight: 900; color: var(--indigo); }
+  .live-data .card .l { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+
+  h2.section {
+    font-size: 22px;
+    margin-top: 44px;
+    margin-bottom: 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--line);
+    display: flex; align-items: center; gap: 12px;
+  }
+  h2.section .icon { font-size: 22px; }
+  h2.section .sub {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    margin-left: auto;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .gaps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .gap-card {
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .gap-card h3 { margin: 0 0 6px; font-size: 14px; color: #14532d; }
+  .gap-card p { margin: 4px 0; font-size: 12.5px; color: #166534; line-height: 1.5; }
+  .gap-card .stat { font-size: 13px; font-weight: 700; color: #14532d; margin-top: 6px; }
+
+  .danger {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid var(--red);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 14px 0 24px;
+  }
+  .danger h3 { margin: 0 0 6px; color: var(--red); font-size: 15px; }
+  .danger p { margin: 4px 0; font-size: 13px; line-height: 1.55; }
+
+  .channel {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+  }
+  .channel header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 6px;
+  }
+  .channel .rank {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    color: white; font-weight: 900; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .channel h3 { margin: 0; font-size: 15px; flex: 1; }
+  .channel .roi {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-weight: 800;
+    color: var(--green);
+    background: rgba(22,163,74,0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .channel .why { font-size: 12.5px; color: var(--muted); margin: 0; line-height: 1.55; }
+  .channel .meta {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 8px; font-size: 11.5px;
+  }
+  .channel .meta .pill {
+    background: #f3f4f6;
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    border-radius: 999px;
+    color: #1f2937;
+  }
+  .channel .meta .pill strong { color: var(--ink); margin-right: 4px; }
+  .channel.tier1 { border-left: 4px solid var(--green); }
+  .channel.tier2 { border-left: 4px solid var(--amber); }
+
+  .roadmap {
+    background: linear-gradient(135deg, #f0f9ff, #fdf4ff);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 16px 0 28px;
+  }
+  .roadmap h2 { margin: 0 0 4px; font-size: 19px; }
+  .roadmap .lead { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  table.roadmap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  table.roadmap-table th, table.roadmap-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.roadmap-table th {
+    background: #f3f4f6;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .week-badge {
+    display: inline-block;
+    background: var(--indigo);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .matrix {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .matrix h2 { margin: 0 0 4px; font-size: 17px; }
+  .matrix .lead { color: var(--muted); font-size: 12.5px; margin: 0 0 14px; }
+  table.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+  }
+  table.matrix-table th, table.matrix-table td {
+    padding: 6px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  table.matrix-table th:first-child, table.matrix-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    background: #f9fafb;
+  }
+  table.matrix-table th {
+    background: #f3f4f6;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    height: 80px;
+    padding: 8px 4px;
+  }
+  table.matrix-table th:first-child {
+    writing-mode: horizontal-tb;
+    transform: none;
+    height: auto;
+  }
+  .check { color: var(--green); font-weight: 800; }
+  .dormant { color: var(--amber); font-weight: 700; }
+  .absent { color: var(--red); opacity: 0.6; }
+
+  .ours {
+    background: white;
+    border: 2px solid var(--indigo);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .ours h2 { margin: 0 0 14px; font-size: 19px; color: var(--indigo); }
+  .ours ol { margin: 0; padding-left: 22px; font-size: 13.5px; line-height: 1.7; }
+  .ours li { margin-bottom: 8px; }
+  .ours li strong { color: var(--ink); }
+
+  footer {
+    margin-top: 50px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background: white; }
+    .page { padding: 0; max-width: none; }
+    .channel, .gap-card, .roadmap, .matrix, .ours, .live-data, .danger { page-break-inside: avoid; }
+    .print-hide { display: none !important; }
+    table.matrix-table th { writing-mode: horizontal-tb; transform: none; height: auto; }
+  }
+  @media (max-width: 760px) {
+    .page { padding: 28px 20px 48px; }
+    .gaps, .live-data .grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="cover">
+  <div class="brand">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="zt-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#06b6d4"/>
+          <stop offset="45%" stop-color="#6366f1"/>
+          <stop offset="80%" stop-color="#8b5cf6"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+        <linearGradient id="zt-frame" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#6366f1" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ec4899" stop-opacity="0.55"/>
+        </linearGradient>
+      </defs>
+      <path d="M100 18 L168 58 L168 142 L100 182 L32 142 L32 58 Z" fill="none" stroke="url(#zt-frame)" stroke-width="3" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#zt-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M58 70 L142 70"/>
+        <path d="M138 74 L108 104 L92 104 L62 134"/>
+        <path d="M58 138 L142 138"/>
+      </g>
+      <g fill="#0a0a0f">
+        <circle cx="58" cy="70" r="5"/>
+        <circle cx="142" cy="70" r="5"/>
+        <circle cx="58" cy="138" r="5"/>
+        <circle cx="142" cy="138" r="5"/>
+      </g>
+      <circle cx="100" cy="104" r="4" fill="#ec4899"/>
+    </svg>
+    <div class="name">ZENTRO<span style="background: linear-gradient(90deg, var(--violet), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent;">TECH</span></div>
+  </div>
+
+  <h1>Lead-gen channels — <span class="accent">the full universe, ranked, with operator plan</span></h1>
+  <div class="meta">
+    <strong>Date:</strong> 24 May 2026 &nbsp;·&nbsp;
+    <strong>Scope:</strong> 37 channels mapped · 10 competitors audited · 90-day stacked roadmap &nbsp;·&nbsp;
+    <strong>Read time:</strong> ~7 minutes
+  </div>
+</header>
+
+<div class="print-hint print-hide">
+  📄 Save as PDF: press <kbd>Ctrl</kbd> + <kbd>P</kbd> → choose <strong>"Save as PDF"</strong>.
+</div>
+
+<!-- LIVE LINKEDIN DATA -->
+<div class="live-data">
+  <h2>✅ Live LinkedIn data — captured via authenticated session today</h2>
+  <p style="margin: 4px 0; font-size: 13.5px;">Numbers pulled from logged-in Chrome — these can't be reached by unauthenticated scrapers. <strong>LinkedIn is the dominant B2B channel for our space.</strong></p>
+  <div class="grid">
+    <div class="card">
+      <div class="n">165,438</div>
+      <div class="l">AiSensy company page followers</div>
+    </div>
+    <div class="card">
+      <div class="n">91,760</div>
+      <div class="l">LimeChat company page followers</div>
+    </div>
+    <div class="card">
+      <div class="n">41,174</div>
+      <div class="l">Gautam Shelley (AiSensy CEO) personal followers</div>
+    </div>
+    <div class="card">
+      <div class="n">28,645</div>
+      <div class="l">Aniket Bajpai (LimeChat CEO) personal followers</div>
+    </div>
+  </div>
+  <p style="margin: 12px 0 0; font-size: 12.5px; color: var(--muted);">Both competitor companies have ~200 employees. Founder profiles run at 17–25% of company-page reach but typically 5–10× engagement-per-follower. <strong>LinkedIn personal + company together = 100% of the playbook.</strong></p>
+</div>
+
+<!-- THE 3 GAPS -->
+<h2 class="section"><span class="icon">🎯</span>Three "shocking gaps" — channels no competitor occupies <span class="sub">our easy wins</span></h2>
+<div class="gaps">
+  <div class="gap-card">
+    <h3>1. Google Business Profile / Maps</h3>
+    <p>Of 10 audited competitors, <strong>zero</strong> have optimised GBP. Hyperlocal "Bangalore + WhatsApp agency / AI voice / lead generation" map-pack searches are sitting unclaimed.</p>
+    <div class="stat">📈 ROI 8.0 · Time-to-lead: 14–45 days</div>
+  </div>
+  <div class="gap-card">
+    <h3>2. Interview-series content</h3>
+    <p>Only <strong>Interakt</strong> runs an interview series (<em>"D2C Superheroes"</em>). It's the cheapest format that's literally a sales call disguised as content. Nobody in Bangalore mid-tier does it.</p>
+    <div class="stat">📈 ROI 7.5 · Compounds with every guest</div>
+  </div>
+  <div class="gap-card">
+    <h3>3. Build-in-public / stack reveal</h3>
+    <p>Only <strong>OperateAI</strong> (Jaipur) does weekly stack-reveal posts. Wide-open positioning lane in Bangalore for the agency that publishes its tech stack, pricing, and weekly build progress.</p>
+    <div class="stat">📈 ROI 6.5 (compounds to 8+) · 30-day build</div>
+  </div>
+</div>
+
+<!-- DANGER ZONE -->
+<h2 class="section"><span class="icon">🚫</span>One channel we will NOT run <span class="sub">brand-suicide for us</span></h2>
+<div class="danger">
+  <h3>❌ Cold WhatsApp outbound</h3>
+  <p><strong>Reply rate is shockingly high (10–20% on the first 50 manual sends) — but the number gets banned by message ~200</strong> for unsolicited B2B messaging. We sell WhatsApp compliance as a service. Getting our own number banned is brand-suicide. Meta's WhatsApp Business Policy + DPDP Act make this a non-starter regardless of how tempting the early numbers look. <strong>Do not run.</strong></p>
+</div>
+
+<!-- TOP 10 CHANNELS -->
+<h2 class="section"><span class="icon">🏆</span>The 10 highest-ROI channels for ZentroTECH right now <span class="sub">tier-1 priority</span></h2>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">1</div>
+    <h3>LinkedIn cold DMs + connection outreach</h3>
+    <div class="roi">ROI 9.5</div>
+  </header>
+  <p class="why">₹0 capital · founder-only effort · 7-14 day time-to-lead. Most Indian SMBs have never seen a transparent rate card — our pricing transparency is a closer that 3–5× generic "let's chat."</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 45 min/day</span>
+    <span class="pill"><strong>Capital:</strong> ₹0 → ₹4,999/mo (Sales Nav)</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 8–15 conversations → 1–2 closed</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">2</div>
+    <h3>LinkedIn personal founder posting</h3>
+    <div class="roi">ROI 9.0</div>
+  </header>
+  <p class="why">Every winning Indian agency founder does this (Gautam Shelley, Aniket Bajpai, Vinayak Aggarwal, Ajay Singhadiya). Not doing it = choosing invisibility. Founder-bylined numbered case-study posts = highest-trust content type.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 30 min/day</span>
+    <span class="pill"><strong>Capital:</strong> ₹0</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 2–6 inbound DMs by wk 4</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">3</div>
+    <h3>Website SEO (programmatic + content)</h3>
+    <div class="roi">ROI 8.5</div>
+  </header>
+  <p class="why">Our 5,050-page spine is a moat already shipped. Competitors can't replicate this in 6 months. Add 8 vertical landing pages + 4 long-form pillars in month 1.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 4–6 hrs/wk</span>
+    <span class="pill"><strong>Capital:</strong> ₹0</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 1–2 organic; ramps to 4+ by month 3</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">4</div>
+    <h3>Strategic partnerships (Bolna, Sarvam, Ringg, 360dialog, Razorpay)</h3>
+    <div class="roi">ROI 8.5</div>
+  </header>
+  <p class="why">Bolna ($6.3M Jan 2026) and Ringg ($5.5M Jan 2026) will publish partner directories soon. First-mover access = 12-month tenure advantage. Each partner ref worth 2–4 SMB leads/mo.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 4 hrs (one-off applications)</span>
+    <span class="pill"><strong>Capital:</strong> ₹0</span>
+    <span class="pill"><strong>Month 1 outcome:</strong> 1–2 partner approvals · directory listings by month 3</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">5</div>
+    <h3>Case study marketing</h3>
+    <div class="roi">ROI 8.0</div>
+  </header>
+  <p class="why">First published case study with ₹ numbers is worth 100 generic agency posts. Every conversion in this market hinges on proof. Even an unpaid pilot for a friend's dental clinic counts if we ship results and get consent to publish.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 4 hrs to ship 1 case study</span>
+    <span class="pill"><strong>Capital:</strong> ₹0</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 2–5 inbound DMs from week-4 post</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">6</div>
+    <h3>Google Business Profile + Maps</h3>
+    <div class="roi">ROI 8.0</div>
+  </header>
+  <p class="why">Zero competitor optimisation = wide-open hyperlocal market for "Bangalore + service" map-pack queries. 12 photos + 5 reviews + weekly posts + Q&amp;A seeding = ready to rank in 4 weeks.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 45 min/wk</span>
+    <span class="pill"><strong>Capital:</strong> ₹0</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 1–3 GBP-sourced calls/wk by wk 4</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">7</div>
+    <h3>Free tools / lead magnets</h3>
+    <div class="roi">ROI 7.5</div>
+  </header>
+  <p class="why">Our dev velocity is the unfair advantage — tools that competitors take 2 months to launch we can ship in 1 day. WhatsApp cost calculator → DSO impact calculator → Kannada voice demo. Each captures email at 5–10× a "request demo" CTA.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 6–10 hrs/tool</span>
+    <span class="pill"><strong>Capital:</strong> ₹0 (we host on Vercel)</span>
+    <span class="pill"><strong>Month 1 captures:</strong> 3–8 emails/wk from tool 1</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">8</div>
+    <h3>Local IRL meetups (TiE Bangalore, NASSCOM 10000, SaaSBoomi)</h3>
+    <div class="roi">ROI 7.5</div>
+  </header>
+  <p class="why">Zero documented competitor presence at Bangalore in-person events. 30 ICP conversations/month beats 300 cold DMs. Pair attendance with a printed 1-pager + business cards.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 4 hrs/event × 3-4 events/mo</span>
+    <span class="pill"><strong>Capital:</strong> ₹0 to ₹2K event fees</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 4–5 demo calls → 1–2 closed</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">9</div>
+    <h3>Strategic collabs / interview format ("ZentroTECH Interviews")</h3>
+    <div class="roi">ROI 7.5</div>
+  </header>
+  <p class="why">Sales call disguised as content. Highest meeting-conversion rate per outreach. Interakt's "D2C Superheroes" proves the format works — and no Bangalore competitor copies it.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 2–3 hrs per interview</span>
+    <span class="pill"><strong>Capital:</strong> ₹0 (Zoom + Descript free tier)</span>
+    <span class="pill"><strong>Month 1 outcome:</strong> 3 warm prospects set up for month 2</span>
+  </div>
+</div>
+
+<div class="channel tier1">
+  <header>
+    <div class="rank">10</div>
+    <h3>Cold email outbound</h3>
+    <div class="roi">ROI 7.0</div>
+  </header>
+  <p class="why">Scales beyond what LinkedIn DMs alone can do. Pair every cold email with a LinkedIn DM 48 hrs later (multi-touch sequence). Use secondary domain to protect zentrotech.in deliverability.</p>
+  <div class="meta">
+    <span class="pill"><strong>Effort:</strong> 2 hrs/day list-building + sending</span>
+    <span class="pill"><strong>Capital:</strong> ₹6,500–₹11,000/mo (Lemlist + Apollo)</span>
+    <span class="pill"><strong>Month 1 leads:</strong> 1–2 demos · ramps to 4–6/mo by month 3</span>
+  </div>
+</div>
+
+<!-- 90-DAY ROADMAP -->
+<div class="roadmap">
+  <h2>📆 The 90-day stacked roadmap</h2>
+  <p class="lead">One new channel added per week. Earlier channels kept active. Budget: 1.5 person team (founder full-time + fractional assistant 20 hrs/wk). Stops at ~50 hrs/wk — beyond this, hire #1 = SDR or content writer.</p>
+
+  <table class="roadmap-table">
+    <thead><tr><th>Week</th><th>New channel added</th><th>Stack so far</th><th>Hrs/wk</th></tr></thead>
+    <tbody>
+      <tr><td><span class="week-badge">Wk 1</span></td><td>LinkedIn cold DMs + posting (already active) + GBP setup</td><td>LinkedIn DMs + posts + GBP</td><td>14</td></tr>
+      <tr><td><span class="week-badge">Wk 2</span></td><td>Website SEO sprint (8 vertical pages + 4 pillars)</td><td>+ SEO content</td><td>22</td></tr>
+      <tr><td><span class="week-badge">Wk 3</span></td><td>Partner program applications (Bolna / Sarvam / Ringg / 360dialog / Razorpay / Shopify)</td><td>+ Partner outreach</td><td>24</td></tr>
+      <tr><td><span class="week-badge">Wk 4</span></td><td>Case study template + first pilot client identification</td><td>+ Case study infra</td><td>26</td></tr>
+      <tr><td><span class="week-badge">Wk 5</span></td><td>Free tool #1 (WhatsApp cost calculator)</td><td>+ Lead magnet</td><td>28</td></tr>
+      <tr><td><span class="week-badge">Wk 6</span></td><td>Local IRL meetups (1 event/wk; TiE + SaaSBoomi + NASSCOM)</td><td>+ IRL</td><td>31</td></tr>
+      <tr><td><span class="week-badge">Wk 7</span></td><td>Strategic collabs (interview series; 1 interview/wk)</td><td>+ Interview series</td><td>33</td></tr>
+      <tr><td><span class="week-badge">Wk 8</span></td><td>Cold email outbound (Lemlist + secondary domain, after 14-day warmup)</td><td>+ Cold email</td><td>35</td></tr>
+      <tr><td><span class="week-badge">Wk 9</span></td><td>First case study live (pilot → publication)</td><td>+ Live case study</td><td>36</td></tr>
+      <tr><td><span class="week-badge">Wk 10</span></td><td>Quora answering (3 sessions/wk)</td><td>+ Quora</td><td>36</td></tr>
+      <tr><td><span class="week-badge">Wk 11</span></td><td>LinkedIn Company Page activated (repost founder content)</td><td>+ Company page</td><td>36</td></tr>
+      <tr><td><span class="week-badge">Wk 12</span></td><td>Free tool #2 (DSO impact calculator)</td><td>+ Tool #2</td><td>36</td></tr>
+      <tr><td><span class="week-badge">Wk 13</span></td><td>Agency directory applications (Clutch, GoodFirms, DesignRush)</td><td>+ Directories</td><td>36</td></tr>
+      <tr><td><span class="week-badge">Wk 14–21</span></td><td>AI directories, phone cold-calling, webinars, Shorts, PR pitches, affiliates, B2B marketplaces</td><td>+ Long-tail channels</td><td>37–46</td></tr>
+      <tr><td><span class="week-badge">Wk 21+</span></td><td>Maintain stack; double-down on top-3 by actual ROI</td><td>Full stack</td><td>45–50</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- COMPETITOR MATRIX -->
+<div class="matrix">
+  <h2>📊 Competitor channel mix audit — what they actually use</h2>
+  <p class="lead">Legend: ✅ = active · ⚠️ = dormant · ❌ = absent. Pattern: <strong>everyone uses LinkedIn Company Pages + cold email + partner programs. Nobody uses GBP, Reddit, Quora, or interview series</strong> — those are the gaps we own.</p>
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th>Channel</th>
+        <th>OperateAI</th>
+        <th>Jinconnect</th>
+        <th>DigiOn</th>
+        <th>WATI</th>
+        <th>AiSensy</th>
+        <th>Interakt</th>
+        <th>LimeChat</th>
+        <th>BiteSpeed</th>
+        <th>Pragma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Website SEO</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td></tr>
+      <tr><td>Programmatic SEO</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>GBP / Maps</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>LinkedIn founder</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="check">✅</td><td class="dormant">⚠️</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>LinkedIn Company</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>X / Twitter</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>Reddit</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>Quora</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>Cold email</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td></tr>
+      <tr><td>Partner programs</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>Interview series</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>IRL events</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>Webinars</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>YouTube</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>Instagram B2B</td><td class="absent">❌</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="absent">❌</td></tr>
+      <tr><td>Free tools</td><td class="absent">❌</td><td class="dormant">⚠️</td><td class="absent">❌</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td></tr>
+      <tr><td>Numbered case studies</td><td class="check">✅</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+      <tr><td>PR placements</td><td class="check">✅</td><td class="absent">❌</td><td class="absent">❌</td><td class="check">✅</td><td class="dormant">⚠️</td><td class="dormant">⚠️</td><td class="check">✅</td><td class="check">✅</td><td class="absent">❌</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- OUR UNFAIR ADVANTAGES -->
+<div class="ours">
+  <h2>⚡ Our 5 unfair advantages — weaponise these</h2>
+  <ol>
+    <li><strong>5,050-page programmatic SEO spine.</strong> We can spin up a vertical landing page in 1 day. Troika Tech has per-city sprawl but weak content. DigiOn has 1 vertical page. We can ship 8 vertical pages in week 1, 50 over 90 days. <strong>The single most defensible technical moat in the stack.</strong></li>
+    <li><strong>Bangalore HQ + Kannada-first wedge.</strong> LimeChat ignores SMB. OperateAI is Jaipur — can't credibly claim Kannada. AiSensy is Gurugram. Bangalore HQ + 11-language voice stack + Kannada credibility moat that remote competitors physically cannot copy.</li>
+    <li><strong>Existing Google Sheet + Apps Script lead pipeline.</strong> We know our cost-per-lead-handling is near-zero. Most competitors don't even publish where their leads land. We can run aggressive top-of-funnel without choking on lead processing.</li>
+    <li><strong>Published-stack + published-pricing wedge.</strong> Only OperateAI has both (from Jaipur). Bangalore mid-tier has neither. First Bangalore agency to publish stack + pricing owns the trust trifecta.</li>
+    <li><strong>Build-in-public + transparency narrative.</strong> No Bangalore competitor does weekly build-in-public posts. The agency that publishes its tech stack, pricing, and weekly build progress becomes the default trusted choice.</li>
+  </ol>
+</div>
+
+<footer>
+  Generated 24 May 2026 &middot; ZentroTECH internal · 37 channels analysed · 10 competitors audited · Sources: `lead-gen-channels-research.md`
+</footer>
+
+</div>
+</body>
+</html>
