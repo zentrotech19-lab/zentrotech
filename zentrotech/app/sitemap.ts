@@ -4,6 +4,9 @@ import { VERTICALS_CONTENT } from "@/lib/verticals-content";
 import { LOCALES } from "@/lib/i18n/locales";
 import { getAllInsights, getAllCaseStudies } from "@/lib/content";
 
+// Priority by city tier — Bangalore + neighborhoods at top of Google crawl queue.
+const TIER_PRIORITY: Record<string, number> = { A: 0.75, B: 0.65, C: 0.55, D: 0.5 };
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const insights = await getAllInsights();
@@ -69,14 +72,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Programmatic location pages (Bangalore neighborhoods + South India metros).
-  // Tier A (Bangalore + neighborhoods) gets priority 0.75 to outrank
-  // verticals; Tier B/C/D South India cities get 0.65.
   const locationPages: MetadataRoute.Sitemap = SOUTH_INDIA_CITIES.map((c) => ({
     url: `${SITE.url}/locations/${c.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: c.tier === "A" ? 0.75 : 0.65,
   }));
+
+  // Programmatic Service × City matrix — 10 services × 138 cities = 1,380 pages.
+  const serviceCityPages: MetadataRoute.Sitemap = [];
+  for (const s of SERVICES) {
+    for (const c of SOUTH_INDIA_CITIES) {
+      serviceCityPages.push({
+        url: `${SITE.url}/services/${s.slug}/${c.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: TIER_PRIORITY[c.tier] ?? 0.5,
+      });
+    }
+  }
+
+  // Programmatic Vertical × City matrix — 8 verticals × 138 cities = 1,104 pages.
+  const verticalCityPages: MetadataRoute.Sitemap = [];
+  for (const v of Object.keys(VERTICALS_CONTENT)) {
+    for (const c of SOUTH_INDIA_CITIES) {
+      verticalCityPages.push({
+        url: `${SITE.url}/verticals/${v}/${c.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: TIER_PRIORITY[c.tier] ?? 0.5,
+      });
+    }
+  }
 
   return [
     ...localizedHomepages,
@@ -86,5 +113,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...insightPages,
     ...workPages,
     ...locationPages,
+    ...serviceCityPages,
+    ...verticalCityPages,
   ];
 }
