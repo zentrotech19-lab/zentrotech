@@ -3,20 +3,56 @@ import { SITE, SERVICES, SOUTH_INDIA_CITIES } from "@/lib/constants";
 import { VERTICALS_CONTENT } from "@/lib/verticals-content";
 import { LOCALES } from "@/lib/i18n/locales";
 import { getAllInsights, getAllCaseStudies } from "@/lib/content";
-import { ANSWERS } from "@/lib/data/answers";
-import { COMPARE_ENTRIES } from "@/lib/data/compare";
-import { TOP_30_CITIES } from "@/lib/data/top-cities";
 
-// Priority by city tier — Bangalore + neighborhoods at top of Google crawl queue.
-const TIER_PRIORITY: Record<string, number> = { A: 0.75, B: 0.65, C: 0.55, D: 0.5 };
+// PHASE-1 SITEMAP (new-domain, pre-authority).
+//
+// Why this is so small (~100 URLs vs 5,050 total):
+// Google's "Crawled - currently not indexed" status on a new domain (~11
+// days old) almost always means: too many low-trust programmatic pages
+// flooded the index queue. The standard remediation (per Google's John
+// Mueller guidance) is to ship a small, high-quality sitemap first, prove
+// quality + earn backlinks, then expand. We re-include the matrix pages
+// in phases as indexing rate climbs.
+//
+// The programmatic pages (service×city, vertical×city, 3-way matrix,
+// answers, compare, tier-C/D locations) are STILL LIVE — internal links
+// from breadcrumbs/footer still work — they are just hidden from the
+// sitemap AND marked noindex via page metadata so Google deprioritizes
+// them while we build trust.
+
+// Top-20 city slugs for Phase 1. The rest stay live but are excluded
+// from sitemap + marked noindex. Re-include in Phase 2 (day 30+).
+const PHASE_1_LOCATION_SLUGS = new Set([
+  // Tier A — Bangalore + key neighborhoods + IT parks
+  "bangalore",
+  "koramangala",
+  "hsr-layout",
+  "indiranagar",
+  "whitefield",
+  "electronic-city",
+  "jayanagar",
+  "marathahalli",
+  "bellandur",
+  "sarjapur-road",
+  "btm-layout",
+  // Tier B — South India metros
+  "chennai",
+  "hyderabad",
+  "mysore",
+  "kochi",
+  "coimbatore",
+  "trivandrum",
+  "mangalore",
+  "hubli",
+  "vijayawada",
+]);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const insights = await getAllInsights();
   const work = await getAllCaseStudies();
 
-  // Localized homepages — one entry per supported language with hreflang
-  // alternates so Google can serve the right one per region.
+  // Localized homepages with hreflang
   const homepageAlternates = Object.fromEntries(
     LOCALES.map((l) => [l, `${SITE.url}/${l}`])
   );
@@ -29,19 +65,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     alternates: { languages: homepageAlternates },
   }));
 
-  const englishOnlyRoutes: MetadataRoute.Sitemap = [
+  // Core marketing pages — top priority for Phase-1 indexing.
+  const coreRoutes: MetadataRoute.Sitemap = [
     "/services",
-    "/showcase",
-    "/work",
     "/about",
     "/about/founders",
-    "/insights",
     "/contact",
     "/pricing",
     "/partners",
     "/process",
     "/case-studies",
     "/case-studies/sample-bangalore-dental-clinic",
+    "/insights",
+    "/showcase",
+    "/work",
     "/ai-consultancy-bangalore",
     "/ai-agency-dubai",
     "/ai-development-uae",
@@ -52,7 +89,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Vertical landing pages (Bangalore SMB segments) — high commercial intent.
+  // Vertical landing pages (highest commercial intent).
   const verticalLandingPages: MetadataRoute.Sitemap = [
     "/for/dental-clinics-bangalore",
     "/for/coaching-institutes-bangalore",
@@ -66,7 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
-  // Free interactive tools — top-of-funnel acquisition + backlink magnets.
+  // Free tools — top-of-funnel + backlink magnets.
   const toolPages: MetadataRoute.Sitemap = [
     "/tools/whatsapp-pricing-calculator",
     "/tools/dso-impact-calculator",
@@ -77,8 +114,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Legal pages — required for footer linking, DPDP compliance, and to back up
-  // the "money-back trial" claim. Low priority for crawl (rarely change).
+  // Legal pages — required for footer.
   const legalPages: MetadataRoute.Sitemap = ["/privacy", "/terms", "/refund"].map((path) => ({
     url: `${SITE.url}${path}`,
     lastModified: now,
@@ -86,6 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.3,
   }));
 
+  // 10 service detail pages.
   const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
     url: `${SITE.url}/services/${s.slug}`,
     lastModified: now,
@@ -93,6 +130,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // 8 vertical hub pages — keep, /verticals/clinics is already indexed.
   const verticalPages: MetadataRoute.Sitemap = Object.keys(VERTICALS_CONTENT).map((slug) => ({
     url: `${SITE.url}/verticals/${slug}`,
     lastModified: now,
@@ -100,6 +138,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Blog / insights — real content, keep.
   const insightPages: MetadataRoute.Sitemap = insights.map((p) => ({
     url: `${SITE.url}/insights/${p.slug}`,
     lastModified: p.date ? new Date(p.date) : now,
@@ -107,6 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  // Case-study pages from MDX.
   const workPages: MetadataRoute.Sitemap = work.map((c) => ({
     url: `${SITE.url}/work/${c.slug}`,
     lastModified: now,
@@ -114,85 +154,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // Programmatic location pages (Bangalore neighborhoods + South India metros).
-  const locationPages: MetadataRoute.Sitemap = SOUTH_INDIA_CITIES.map((c) => ({
-    url: `${SITE.url}/locations/${c.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: c.tier === "A" ? 0.75 : 0.65,
-  }));
+  // Top-20 location pages only (not all 138).
+  const locationPages: MetadataRoute.Sitemap = SOUTH_INDIA_CITIES
+    .filter((c) => PHASE_1_LOCATION_SLUGS.has(c.slug))
+    .map((c) => ({
+      url: `${SITE.url}/locations/${c.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: c.tier === "A" ? 0.75 : 0.65,
+    }));
 
-  // Programmatic Service × City matrix — 10 services × 138 cities = 1,380 pages.
-  const serviceCityPages: MetadataRoute.Sitemap = [];
-  for (const s of SERVICES) {
-    for (const c of SOUTH_INDIA_CITIES) {
-      serviceCityPages.push({
-        url: `${SITE.url}/services/${s.slug}/${c.slug}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: TIER_PRIORITY[c.tier] ?? 0.5,
-      });
-    }
-  }
-
-  // Programmatic Vertical × City matrix — 8 verticals × 138 cities = 1,104 pages.
-  const verticalCityPages: MetadataRoute.Sitemap = [];
-  for (const v of Object.keys(VERTICALS_CONTENT)) {
-    for (const c of SOUTH_INDIA_CITIES) {
-      verticalCityPages.push({
-        url: `${SITE.url}/verticals/${v}/${c.slug}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: TIER_PRIORITY[c.tier] ?? 0.5,
-      });
-    }
-  }
-
-  // 3-way matrix: Service × Vertical × Top-30-cities = 2,400 pages.
-  // Lower priority than 2-way matrices since intent is narrower.
-  const serviceVerticalCityPages: MetadataRoute.Sitemap = [];
-  const verticalSlugs = Object.keys(VERTICALS_CONTENT);
-  for (const s of SERVICES) {
-    for (const v of verticalSlugs) {
-      for (const citySlug of TOP_30_CITIES) {
-        const c = SOUTH_INDIA_CITIES.find((x) => x.slug === citySlug);
-        if (!c) continue;
-        serviceVerticalCityPages.push({
-          url: `${SITE.url}/services/${s.slug}/for/${v}/${c.slug}`,
-          lastModified: now,
-          changeFrequency: "monthly" as const,
-          priority: TIER_PRIORITY[c.tier] ?? 0.5,
-        });
-      }
-    }
-  }
-
-  // FAQ / Answers pages (100). High value — Q&A format ranks well + AI search citation-worthy.
-  const answerPages: MetadataRoute.Sitemap = ANSWERS.map((a) => ({
-    url: `${SITE.url}/answers/${a.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.65,
-  }));
-  // Answers index hub
-  const answersIndex: MetadataRoute.Sitemap = [
-    { url: `${SITE.url}/answers`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7 },
+  // Locations index hub.
+  const locationsIndex: MetadataRoute.Sitemap = [
+    { url: `${SITE.url}/locations`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7 },
   ];
 
-  // Compare / Alternatives pages (20). High commercial intent.
-  const comparePages: MetadataRoute.Sitemap = COMPARE_ENTRIES.map((c) => ({
-    url: `${SITE.url}/compare/${c.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-  const compareIndex: MetadataRoute.Sitemap = [
-    { url: `${SITE.url}/compare`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7 },
-  ];
+  // ----- EXCLUDED FROM PHASE-1 SITEMAP (still live, marked noindex):
+  //   • /services/[slug]/[city]                    — 1,380 URLs
+  //   • /services/[slug]/for/[vertical]/[city]     — 2,400 URLs
+  //   • /verticals/[vertical]/[city]               — 1,104 URLs
+  //   • /locations/[city] (tier-C/D, ~118 URLs)
+  //   • /answers + /answers/[slug]                 — 101 URLs
+  //   • /compare + /compare/[slug]                 — 21 URLs
+  // Re-include in Phase 2 once Phase-1 indexing > 60%.
 
   return [
     ...localizedHomepages,
-    ...englishOnlyRoutes,
+    ...coreRoutes,
     ...verticalLandingPages,
     ...toolPages,
     ...legalPages,
@@ -200,13 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...verticalPages,
     ...insightPages,
     ...workPages,
+    ...locationsIndex,
     ...locationPages,
-    ...serviceCityPages,
-    ...verticalCityPages,
-    ...serviceVerticalCityPages,
-    ...answerPages,
-    ...answersIndex,
-    ...comparePages,
-    ...compareIndex,
   ];
 }

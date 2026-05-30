@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${a.question} | ZentroTECH Answers`,
     description: a.shortAnswer,
     path: `/answers/${a.slug}`,
+    noindex: true, // Phase-1 strategy — 100 answers pages hidden until domain earns authority
   });
 }
 

@@ -25,14 +25,20 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const dict = await getDictionary(lang as Locale);
-  return buildMetadata({
-    // Bare tagline — the root layout's title.template appends " · ZentroTECH"
-    // automatically, so don't pre-suffix it here or the tab shows it twice.
-    title: dict.meta.tagline,
+  // Brand-first absolute title. Google's title-rewriting algorithm appends
+  // the site name automatically when a title ends in the brand — that's
+  // what produced the "· ZentroTECH · ZentroTECH" duplication seen in SERPs.
+  // Brand-first format ("ZentroTECH — ...") prevents the re-append.
+  const meta = buildMetadata({
+    title: "ZentroTECH — Kannada-First AI Agency for Bangalore SMBs",
     description: dict.meta.description,
     path: `/${lang}`,
     ogImage: "/og/home.png",
   });
+  return {
+    ...meta,
+    title: { absolute: "ZentroTECH — Kannada-First AI Agency for Bangalore SMBs" },
+  };
 }
 
 export default async function LocalizedHomePage({

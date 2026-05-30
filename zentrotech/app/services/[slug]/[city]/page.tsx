@@ -36,6 +36,7 @@ export async function generateMetadata({
     title: `${s.title} in ${c.label} | ZentroTECH`,
     description: `${s.short} ZentroTECH builds ${s.title.toLowerCase()} for businesses in ${c.label}, ${c.state}. Free 30-min audit. Quote within 1 business day.`,
     path: `/services/${s.slug}/${c.slug}`,
+    noindex: true, // Phase-1 strategy — programmatic, hidden until domain earns authority
   });
 }
 

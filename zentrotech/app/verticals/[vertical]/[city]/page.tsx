@@ -37,6 +37,7 @@ export async function generateMetadata({
     title: `${v.label} ${c.label} — Websites + AI Automation | ZentroTECH`,
     description: `Lead-engine websites, AI voice agents, WhatsApp chatbots, and CRM for ${v.label.toLowerCase()} in ${c.label}, ${c.state}. ${v.sub.slice(0, 120)}`,
     path: `/verticals/${v.slug}/${c.slug}`,
+    noindex: true, // Phase-1 strategy — vertical×city matrix hidden until domain earns authority
   });
 }
 

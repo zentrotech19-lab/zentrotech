@@ -23,6 +23,15 @@ export function generateStaticParams() {
   return SOUTH_INDIA_CITIES.map((c) => ({ city: c.slug }));
 }
 
+// Phase-1 indexable cities (must mirror PHASE_1_LOCATION_SLUGS in app/sitemap.ts).
+// Tier-C/D cities are kept live but marked noindex until domain earns authority.
+const PHASE_1_CITY_SLUGS = new Set([
+  "bangalore", "koramangala", "hsr-layout", "indiranagar", "whitefield",
+  "electronic-city", "jayanagar", "marathahalli", "bellandur", "sarjapur-road",
+  "btm-layout", "chennai", "hyderabad", "mysore", "kochi", "coimbatore",
+  "trivandrum", "mangalore", "hubli", "vijayawada",
+]);
+
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }) {
   const { city } = await params;
   const c = SOUTH_INDIA_CITIES.find((x) => x.slug === city);
@@ -31,6 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
     title: `Lead Engine Websites + AI Automation in ${c.label} | ZentroTECH`,
     description: `Professional websites, AI automation, voice agents, chatbots, Android apps, and SEO for businesses in ${c.label}, ${c.state}. Free 30-min audit. Quote within 1 business day.`,
     path: `/locations/${c.slug}`,
+    noindex: !PHASE_1_CITY_SLUGS.has(c.slug),
   });
 }
 
