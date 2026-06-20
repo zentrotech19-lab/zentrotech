@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { m } from "framer-motion";
 import { SITE } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { cn } from "@/lib/utils";
@@ -88,8 +89,13 @@ export function Header({ locale, dict }: HeaderProps) {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher currentLocale={locale} label={dict.nav.languageLabel} />
-          <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-            {dict.nav.getQuote}
+          <Button
+            href="/audit"
+            size="sm"
+            className="hidden sm:inline-flex"
+            onClick={() => track("audit_view", { location: "header_cta", source: "nav" })}
+          >
+            Free Audit
           </Button>
           <MobileNav />
         </div>

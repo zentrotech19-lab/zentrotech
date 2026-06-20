@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { Phone, X } from "lucide-react";
 import { SITE, SOCIAL } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 
 // Sticky floating CTA bar — shows on every page.
 // Mobile: full-width bottom bar with WhatsApp + Call buttons (high tap-target).
@@ -47,6 +48,7 @@ export function FloatingCta() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp ZentroTECH"
+              onClick={() => track("whatsapp_click", { location: "floating_cta_mobile" })}
               className="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold py-3.5 px-4 rounded-full shadow-lg shadow-emerald-500/30 transition-colors text-base"
             >
               <FaWhatsapp className="size-5" />
@@ -55,6 +57,7 @@ export function FloatingCta() {
             <a
               href={PHONE_HREF}
               aria-label={`Call ZentroTECH at ${SITE.phone}`}
+              onClick={() => track("call_click", { location: "floating_cta_mobile" })}
               className="inline-flex items-center justify-center bg-indigo hover:bg-indigo/80 text-white font-bold py-3.5 px-4 rounded-full shadow-lg shadow-indigo/30 transition-colors size-[52px] shrink-0"
             >
               <Phone className="size-5" />
@@ -77,6 +80,7 @@ export function FloatingCta() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp ZentroTECH"
+          onClick={() => track("whatsapp_click", { location: "floating_cta_desktop" })}
           className="group inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold py-3 pl-3.5 pr-5 rounded-full shadow-lg shadow-emerald-500/30 transition-all hover:scale-105"
         >
           <FaWhatsapp className="size-5" />
@@ -85,6 +89,7 @@ export function FloatingCta() {
         <a
           href={PHONE_HREF}
           aria-label={`Call ZentroTECH at ${SITE.phone}`}
+          onClick={() => track("call_click", { location: "floating_cta_desktop" })}
           className="group inline-flex items-center gap-2.5 bg-indigo hover:bg-indigo/85 text-white font-bold py-3 pl-3.5 pr-5 rounded-full shadow-lg shadow-indigo/30 transition-all hover:scale-105"
         >
           <Phone className="size-5" />

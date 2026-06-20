@@ -432,8 +432,25 @@ export const NAV_LINKS = [
   { label: "Get Quote", href: "/contact" },
 ];
 
+// IMPORTANT — LinkedIn brand-confusion fix.
+// There are 3 firms named some variant of "Zentro Tech" (a Dubai web-design
+// shop + a Thiruvarur firm + us). The bare slug /company/zentrotech does NOT
+// reliably resolve to OUR Bangalore page (the one with ~110 followers, Buffer
+// channel "Zentro Tech") — it can land on a competitor or a dead page, which
+// leaks every footer/CTA click straight to a rival.
+//
+// Fix: drive the canonical handle from an env var so the founder can paste the
+// EXACT vanity URL from the live page's address bar (Admin → Edit page → Public
+// URL) without a code change, and it's identical everywhere (footer, email sig,
+// brochure, schema sameAs). Set NEXT_PUBLIC_LINKEDIN_URL in Vercel once the
+// real slug is confirmed. Until then the default below uses our org id-style
+// slug — VERIFY IT POINTS TO OUR PAGE before relying on it.
+const LINKEDIN_URL =
+  process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() ||
+  "https://www.linkedin.com/company/zentrotech-in";
+
 export const SOCIAL = {
-  linkedin: "https://linkedin.com/company/zentrotech",
+  linkedin: LINKEDIN_URL,
   twitter: "https://twitter.com/zentrotech",
   instagram: "https://instagram.com/zentrotech",
   whatsapp: "https://wa.me/917348961600?text=Hi%20ZentroTECH%20%E2%80%94%20I%27d%20like%20a%20quote",

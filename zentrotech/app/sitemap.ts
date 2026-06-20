@@ -67,6 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Core marketing pages — top priority for Phase-1 indexing.
   const coreRoutes: MetadataRoute.Sitemap = [
+    "/audit",
     "/services",
     "/about",
     "/about/founders",
