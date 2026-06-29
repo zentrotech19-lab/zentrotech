@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/animations/reveal";
+import { LeakMeter } from "./leak-meter";
 import { track } from "@/lib/analytics";
 import { auditWaLink } from "@/lib/whatsapp";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -48,7 +50,7 @@ const AuditSchema = z.object({
 type AuditValues = z.infer<typeof AuditSchema>;
 
 const inputClass =
-  "mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void";
+  "mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-text-muted transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void focus-visible:border-indigo/50 focus-visible:shadow-[0_0_24px_rgba(99,102,241,0.35)]";
 const labelClass = "block text-sm text-text-secondary";
 const errorClass = "mt-2 text-sm text-pink-pulse";
 
@@ -66,6 +68,7 @@ export function AuditForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<AuditValues>({
     resolver: zodResolver(AuditSchema),
@@ -87,6 +90,19 @@ export function AuditForm() {
     setStarted(true);
     track("audit_form_start", { location: "audit_page" });
   };
+
+  // Live-watch the 4 meter fields so the LeakMeter re-targets on every change.
+  const meterFields = {
+    vertical: watch("vertical"),
+    biggestLeak: watch("biggestLeak"),
+    monthlyMissed: watch("monthlyMissed") ?? "",
+    consent: watch("consent"),
+  };
+  const allLit =
+    !!meterFields.vertical &&
+    !!meterFields.biggestLeak &&
+    !!meterFields.monthlyMissed &&
+    meterFields.consent === true;
 
   const onSubmit = handleSubmit(async (values) => {
     setStatus("sending");
@@ -126,8 +142,8 @@ export function AuditForm() {
 
   if (status === "sent") {
     return (
-      <div className="glass-glow rounded-3xl p-8 md:p-10 text-center">
-        <CheckCircle2 className="size-14 text-indigo-glow mx-auto" aria-hidden="true" />
+      <Reveal className="glass-glow rounded-3xl p-8 md:p-10 text-center">
+        <CheckCircle2 className="size-14 text-indigo-glow mx-auto pulse-glow" aria-hidden="true" />
         <h2 className="mt-5 text-3xl font-black text-white tracking-tight">Got it. Your audit is booked.</h2>
         <p className="mt-3 text-text-secondary">
           We&rsquo;ll WhatsApp you within the hour (usually within 15 minutes in working hours) with the first thing we&rsquo;d fix.
@@ -145,7 +161,7 @@ export function AuditForm() {
           </Button>
         </div>
         <p className="mt-4 text-text-muted text-sm">No spam. No 20-email drip. One human, one message.</p>
-      </div>
+      </Reveal>
     );
   }
 
@@ -154,8 +170,11 @@ export function AuditForm() {
       onSubmit={onSubmit}
       onFocusCapture={onFirstFocus}
       noValidate
-      className="glass-glow rounded-3xl p-6 md:p-8 space-y-5"
+      className={`glass-glow rounded-3xl p-6 md:p-8 space-y-5 ${sending ? "shimmer" : ""}`}
     >
+      {/* Live Leak Meter — ignites as the 4 key fields fill. */}
+      <LeakMeter fields={meterFields} />
+
       <div className="grid sm:grid-cols-2 gap-4">
         <label className={labelClass}>
           Your name *
@@ -222,7 +241,12 @@ export function AuditForm() {
       </label>
       {errors.consent && <p className={errorClass} role="alert">{errors.consent.message}</p>}
 
-      <Button type="submit" size="lg" className="w-full" disabled={sending}>
+      <Button
+        type="submit"
+        size="lg"
+        className={`w-full ${allLit ? "glass-glow ring-2 ring-indigo/40" : ""}`}
+        disabled={sending}
+      >
         {sending ? "Booking your audit…" : "Get my free lead-flow audit"}
         <ArrowRight aria-hidden="true" className="size-4" />
       </Button>

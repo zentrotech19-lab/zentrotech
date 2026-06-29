@@ -1,12 +1,14 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ServicesBento } from "@/components/sections/services-bento";
 import { CTASection } from "@/components/sections/cta-section";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { PathPicker } from "./_components/path-picker";
+import type { PathRoute } from "./_components/path-router-card";
 import { buildMetadata } from "@/lib/seo";
-import { ArrowRight, Sparkles, Target, FileSearch, Cpu } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { SOCIAL } from "@/lib/constants";
 
@@ -17,23 +19,23 @@ export const metadata = buildMetadata({
   path: "/services",
 });
 
-const PATHS = [
+const PATHS: PathRoute[] = [
   {
-    icon: Target,
+    icon: "Target",
     title: "I'm starting from scratch",
     body: "No website yet, or one that should be replaced. You want the full lead engine built fresh.",
     primary: { label: "Lead Engine Websites", href: "/services/lead-generation-websites" },
     secondary: ["seo-services-bangalore", "lead-followup-automation"],
   },
   {
-    icon: FileSearch,
+    icon: "FileSearch",
     title: "I have a website, but leads are flat",
     body: "The site looks fine but it's not converting or ranking. You want a fix, not a rebuild.",
     primary: { label: "Website Audit + Lead Boost", href: "/services/website-audit-and-seo-fix" },
     secondary: ["seo-services-bangalore", "lead-management-crm"],
   },
   {
-    icon: Cpu,
+    icon: "Cpu",
     title: "Leads are fine — I'm drowning in operations",
     body: "Sales follow-up, payment recovery, scheduling, social, admin — you need the routine 60% automated.",
     primary: { label: "Business on Autopilot", href: "/services/business-on-autopilot" },
@@ -85,52 +87,8 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      {/* PATH PICKER */}
-      <section className="py-20" id="pick-your-path">
-        <Container>
-          <div className="max-w-3xl">
-            <Badge>Not sure where to start?</Badge>
-            <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
-              Three paths most clients take.
-            </h2>
-            <p className="mt-5 text-text-secondary text-lg">
-              We don't sell ten services to one buyer. We sell the right two or three for what's actually broken. Pick the path that sounds like you.
-            </p>
-          </div>
-
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {PATHS.map((p) => (
-              <div key={p.title} className="glass rounded-2xl p-8 flex flex-col">
-                <div className="size-12 rounded-xl bg-indigo/15 text-indigo-glow flex items-center justify-center">
-                  <p.icon className="size-6" aria-hidden="true" />
-                </div>
-                <h3 className="mt-6 text-white font-bold text-xl">{p.title}</h3>
-                <p className="mt-3 text-text-muted text-sm leading-relaxed">{p.body}</p>
-                <div className="mt-auto pt-8 space-y-2">
-                  <Link
-                    href={p.primary.href}
-                    className="flex items-center justify-between rounded-xl bg-indigo/15 border border-indigo/30 px-4 py-3 text-white font-medium text-sm hover:bg-indigo/25 transition-colors"
-                  >
-                    <span>{p.primary.label}</span>
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  </Link>
-                  <p className="text-text-muted text-xs">
-                    Often paired with{" "}
-                    {p.secondary.map((s, i) => (
-                      <span key={s}>
-                        <Link href={`/services/${s}`} className="text-indigo-glow hover:text-white">
-                          {s.replace(/-/g, " ")}
-                        </Link>
-                        {i < p.secondary.length - 1 ? " + " : ""}
-                      </span>
-                    ))}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* PATH PICKER — Diagnose → Branch path router */}
+      <PathPicker paths={PATHS} />
 
       {/* FULL SERVICES GRID */}
       <ServicesBento />
@@ -140,7 +98,7 @@ export default function ServicesPage() {
         <Container>
           <div className="rounded-3xl glass-glow p-12 md:p-16">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-              <div>
+              <Reveal>
                 <Badge>Why one contract beats six</Badge>
                 <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
                   Stop stitching SaaS. <span className="text-aurora">Start shipping outcomes.</span>
@@ -148,21 +106,23 @@ export default function ServicesPage() {
                 <p className="mt-6 text-text-muted text-lg leading-relaxed">
                   Most agencies happily set you up with HubSpot + Zapier + Calendly + Twilio + ClickFunnels and walk away. Your monthly tool bill grows from ₹5K to ₹50K and you still don't have leads. We do it differently.
                 </p>
-              </div>
-              <ul className="space-y-5">
+              </Reveal>
+              <Stagger className="space-y-5">
                 {STACK_HIGHLIGHTS.map((s) => (
-                  <li key={s.title} className="border-l-2 border-indigo/40 pl-5">
+                  <StaggerItem key={s.title} className="border-l-2 border-indigo/40 pl-5">
                     <h3 className="text-white font-bold">{s.title}</h3>
                     <p className="mt-1 text-text-muted text-sm leading-relaxed">{s.body}</p>
-                  </li>
+                  </StaggerItem>
                 ))}
-              </ul>
+              </Stagger>
             </div>
           </div>
         </Container>
       </section>
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

@@ -6,6 +6,10 @@ import { ServicesBento } from "@/components/sections/services-bento";
 import { TrustSignals } from "@/components/sections/trust-signals";
 import { CTASection } from "@/components/sections/cta-section";
 import { LocalBusinessSchema } from "@/components/seo/local-business-schema";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
+import { CountUp } from "@/components/animations/count-up";
+import { HQReachMap } from "./_components/hq-reach-map";
 import { buildMetadata } from "@/lib/seo";
 import { FAQS_BANGALORE } from "@/lib/faqs";
 import { OFFICES, SITE } from "@/lib/constants";
@@ -37,32 +41,38 @@ export default function BangaloreLanding() {
       {/* Hero */}
       <section className="py-24">
         <Container>
-          <Badge>
-            <MapPin className="size-3" /> Bangalore, Karnataka
-          </Badge>
+          <Reveal>
+            <Badge>
+              <MapPin className="size-3" /> Bangalore, Karnataka
+            </Badge>
+          </Reveal>
           <h1 className="mt-4 text-5xl md:text-7xl font-black text-white tracking-tight max-w-4xl">
             Bangalore&apos;s <span className="text-aurora">AI consultancy</span>
             , built for India&apos;s IT capital.
           </h1>
-          <p className="mt-6 text-text-secondary text-lg max-w-3xl">
-            We are headquartered on Residency Road, a stone&apos;s throw from
-            MG Road and Koramangala, and we ship production AI for teams across
-            the Outer Ring Road, Whitefield, HSR Layout, Indiranagar, and the
-            Electronic City corridor. Local engineers, NASSCOM-aligned
-            engagement model, INR or USD billing, and the global delivery
-            standards Bangalore expects from a tier-one consulting partner.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="/contact" size="lg">
-              Talk to our Bangalore team <ArrowRight className="size-4" />
-            </Button>
-            <Button href="/services" variant="secondary" size="lg">
-              Explore services
-            </Button>
-            <Button href="/ai-agency-dubai" variant="ghost" size="lg">
-              Also serving Dubai &amp; the UAE
-            </Button>
-          </div>
+          <Reveal delay={0.05}>
+            <p className="mt-6 text-text-secondary text-lg max-w-3xl">
+              We are headquartered on Residency Road, a stone&apos;s throw from
+              MG Road and Koramangala, and we ship production AI for teams across
+              the Outer Ring Road, Whitefield, HSR Layout, Indiranagar, and the
+              Electronic City corridor. Local engineers, NASSCOM-aligned
+              engagement model, INR or USD billing, and the global delivery
+              standards Bangalore expects from a tier-one consulting partner.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button href="/contact" size="lg">
+                Talk to our Bangalore team <ArrowRight className="size-4" />
+              </Button>
+              <Button href="/services" variant="secondary" size="lg">
+                Explore services
+              </Button>
+              <Button href="/ai-agency-dubai" variant="ghost" size="lg">
+                Also serving Dubai &amp; the UAE
+              </Button>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -85,44 +95,67 @@ export default function BangaloreLanding() {
             </p>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <Building2 className="size-6 text-indigo-glow" />
-              <CardTitle className="mt-4">Local engineering footprint</CardTitle>
-              <CardBody>
-                Senior AI engineers on the ground from MG Road to Whitefield,
-                with on-site workshops and weekly in-person syncs across the
-                ORR / Outer Ring Road belt.
-              </CardBody>
-            </Card>
-            <Card>
-              <ShieldCheck className="size-6 text-indigo-glow" />
-              <CardTitle className="mt-4">DPDP &amp; Karnataka GST aware</CardTitle>
-              <CardBody>
-                Engagements scoped against India&apos;s Digital Personal Data
-                Protection Act, Karnataka GST registration, ESI / PF / TDS
-                compliance, and SOC 2 controls for international clients.
-              </CardBody>
-            </Card>
-            <Card>
-              <Banknote className="size-6 text-indigo-glow" />
-              <CardTitle className="mt-4">INR or USD pricing</CardTitle>
-              <CardBody>
-                Bill in INR with full GST invoicing, or in USD via our SEZ /
-                STPI-friendly export structure. AED billing also available for
-                cross-border GCC engagements out of our Dubai office.
-              </CardBody>
-            </Card>
-            <Card>
-              <Users className="size-6 text-indigo-glow" />
-              <CardTitle className="mt-4">Founder-friendly delivery</CardTitle>
-              <CardBody>
-                Most of our Bangalore clients are funded startups (Series A-C)
-                or family-run SMBs modernising operations — not Fortune 500
-                steering committees. We size the engagement to your stage.
-              </CardBody>
-            </Card>
-          </div>
+          <Stagger className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StaggerItem>
+              <Tilt className="h-full">
+                <Card className="h-full">
+                  <Building2 className="size-6 text-indigo-glow" />
+                  <CardTitle className="mt-4">
+                    Local engineering footprint
+                  </CardTitle>
+                  <CardBody>
+                    Senior AI engineers on the ground from MG Road to
+                    Whitefield, with on-site workshops and weekly in-person syncs
+                    across the ORR / Outer Ring Road belt.
+                  </CardBody>
+                </Card>
+              </Tilt>
+            </StaggerItem>
+            <StaggerItem>
+              <Tilt className="h-full">
+                <Card className="h-full">
+                  <ShieldCheck className="size-6 text-indigo-glow" />
+                  <CardTitle className="mt-4">
+                    DPDP &amp; Karnataka GST aware
+                  </CardTitle>
+                  <CardBody>
+                    Engagements scoped against India&apos;s Digital Personal Data
+                    Protection Act, Karnataka GST registration, ESI / PF / TDS
+                    compliance, and SOC 2 controls for international clients.
+                  </CardBody>
+                </Card>
+              </Tilt>
+            </StaggerItem>
+            <StaggerItem>
+              <Tilt className="h-full">
+                <Card className="h-full">
+                  <Banknote className="size-6 text-indigo-glow" />
+                  <CardTitle className="mt-4">INR or USD pricing</CardTitle>
+                  <CardBody>
+                    Bill in INR with full GST invoicing, or in USD via our SEZ /
+                    STPI-friendly export structure. AED billing also available
+                    for cross-border GCC engagements out of our Dubai office.
+                  </CardBody>
+                </Card>
+              </Tilt>
+            </StaggerItem>
+            <StaggerItem>
+              <Tilt className="h-full">
+                <Card className="h-full">
+                  <Users className="size-6 text-indigo-glow" />
+                  <CardTitle className="mt-4">
+                    Founder-friendly delivery
+                  </CardTitle>
+                  <CardBody>
+                    Most of our Bangalore clients are funded startups (Series
+                    A-C) or family-run SMBs modernising operations — not Fortune
+                    500 steering committees. We size the engagement to your
+                    stage.
+                  </CardBody>
+                </Card>
+              </Tilt>
+            </StaggerItem>
+          </Stagger>
         </Container>
       </section>
 
@@ -180,10 +213,11 @@ export default function BangaloreLanding() {
             </div>
 
             <div className="lg:col-span-2">
-              <Card glow className="space-y-3">
-                <p className="text-aurora text-xs uppercase tracking-widest font-mono">
-                  Headquarters
-                </p>
+              <Reveal delay={0.1}>
+                <Card glow className="space-y-3">
+                  <p className="text-aurora text-xs uppercase tracking-widest font-mono">
+                    Headquarters
+                  </p>
                 <h3 className="text-2xl font-bold text-white">
                   {bangalore?.city}, {bangalore?.region}
                 </h3>
@@ -208,9 +242,17 @@ export default function BangaloreLanding() {
                     Koramangala, Indiranagar, HSR Layout, Whitefield, ORR
                   </p>
                 </div>
-              </Card>
+                </Card>
+              </Reveal>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* HQ Reach Map */}
+      <section className="py-24">
+        <Container>
+          <HQReachMap />
         </Container>
       </section>
 
@@ -235,41 +277,57 @@ export default function BangaloreLanding() {
             </p>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            <Card>
-              <p className="text-aurora text-xs uppercase tracking-widest font-mono">
-                Week 1
-              </p>
-              <CardTitle className="mt-3">Discovery sprint</CardTitle>
-              <CardBody>
-                On-site workshops in Bangalore, problem framing, technical
-                spike, and a fixed-price proposal — typically INR 5-8 lakh for
-                the discovery itself, credited against the build.
-              </CardBody>
-            </Card>
-            <Card>
-              <p className="text-aurora text-xs uppercase tracking-widest font-mono">
-                Weeks 2-12
-              </p>
-              <CardTitle className="mt-3">Build &amp; ship</CardTitle>
-              <CardBody>
-                Vertical slices, weekly demos at your Bangalore office or
-                ours, production deployment to your AWS Mumbai / GCP Mumbai
-                tenancy, and a written eval suite handed over with the code.
-              </CardBody>
-            </Card>
-            <Card>
-              <p className="text-aurora text-xs uppercase tracking-widest font-mono">
-                Months 3-12
-              </p>
-              <CardTitle className="mt-3">Run &amp; improve</CardTitle>
-              <CardBody>
-                Optional INR-billed monthly retainer for monitoring, model
-                upgrades, eval regression, and incremental capability adds —
-                with a Bangalore engineer on a Slack response SLA.
-              </CardBody>
-            </Card>
-          </div>
+          <Stagger className="mt-12 grid md:grid-cols-3 gap-6">
+            <StaggerItem>
+              <Card className="h-full">
+                <p className="text-aurora text-xs uppercase tracking-widest font-mono">
+                  Week 1
+                </p>
+                <CardTitle className="mt-3">Discovery sprint</CardTitle>
+                <CardBody>
+                  On-site workshops in Bangalore, problem framing, technical
+                  spike, and a fixed-price proposal — credited against the
+                  build.
+                </CardBody>
+                <p className="mt-4 text-sm text-text-muted">
+                  Typically from{" "}
+                  <CountUp
+                    value={5}
+                    prefix="₹"
+                    suffix=" lakh"
+                    className="inline-block min-w-[5ch] font-bold tabular-nums text-white"
+                  />{" "}
+                  for the discovery itself.
+                </p>
+              </Card>
+            </StaggerItem>
+            <StaggerItem>
+              <Card className="h-full">
+                <p className="text-aurora text-xs uppercase tracking-widest font-mono">
+                  Weeks 2-12
+                </p>
+                <CardTitle className="mt-3">Build &amp; ship</CardTitle>
+                <CardBody>
+                  Vertical slices, weekly demos at your Bangalore office or ours,
+                  production deployment to your AWS Mumbai / GCP Mumbai tenancy,
+                  and a written eval suite handed over with the code.
+                </CardBody>
+              </Card>
+            </StaggerItem>
+            <StaggerItem>
+              <Card className="h-full">
+                <p className="text-aurora text-xs uppercase tracking-widest font-mono">
+                  Months 3-12
+                </p>
+                <CardTitle className="mt-3">Run &amp; improve</CardTitle>
+                <CardBody>
+                  Optional INR-billed monthly retainer for monitoring, model
+                  upgrades, eval regression, and incremental capability adds —
+                  with a Bangalore engineer on a Slack response SLA.
+                </CardBody>
+              </Card>
+            </StaggerItem>
+          </Stagger>
         </Container>
       </section>
 
@@ -277,8 +335,9 @@ export default function BangaloreLanding() {
       <section className="py-24">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <Card glow className="text-center">
-              <Quote className="size-8 text-aurora mx-auto" />
+            <Reveal>
+              <Card glow className="text-center">
+                <Quote className="size-8 text-aurora mx-auto" />
               <p className="mt-6 text-2xl md:text-3xl text-white leading-relaxed">
                 &ldquo;We met the ZentroTECH team in person at their Residency
                 Road office, scoped a fraud-detection agent in two weeks, and
@@ -296,7 +355,8 @@ export default function BangaloreLanding() {
                   reference available on NDA)
                 </p>
               </div>
-            </Card>
+              </Card>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -309,24 +369,23 @@ export default function BangaloreLanding() {
             <h2 className="mt-4 text-4xl md:text-5xl font-black text-white tracking-tight">
               Questions Bangalore clients actually ask.
             </h2>
-            <div className="mt-12 space-y-4">
+            <Stagger className="mt-12 space-y-4">
               {FAQS_BANGALORE.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="group glass rounded-2xl p-6 transition-colors open:border-indigo/40"
-                >
-                  <summary className="flex cursor-pointer items-start justify-between gap-4 text-lg font-semibold text-white marker:hidden list-none">
-                    <span>{faq.question}</span>
-                    <span className="text-aurora text-2xl leading-none transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-text-secondary leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </details>
+                <StaggerItem key={faq.question}>
+                  <details className="group glass rounded-2xl p-6 transition-colors open:border-indigo/40">
+                    <summary className="flex cursor-pointer items-start justify-between gap-4 text-lg font-semibold text-white marker:hidden list-none">
+                      <span>{faq.question}</span>
+                      <span className="text-aurora text-2xl leading-none transition-transform group-open:rotate-45">
+                        +
+                      </span>
+                    </summary>
+                    <p className="mt-4 text-text-secondary leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </details>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
             <p className="mt-12 text-text-muted text-sm">
               More questions? Email{" "}
               <a
@@ -345,7 +404,9 @@ export default function BangaloreLanding() {
         </Container>
       </section>
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

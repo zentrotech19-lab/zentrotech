@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/animations/reveal";
 import { SOCIAL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+import { StackWireUp, type Vendor } from "./_components/stack-wireup";
+import { PulseButton } from "./_components/pulse-button";
 
 export const metadata: Metadata = buildMetadata({
   title: "Stack & partners — Meta, Bolna, Sarvam, Razorpay, Vercel",
@@ -14,13 +16,14 @@ export const metadata: Metadata = buildMetadata({
   path: "/partners",
 });
 
-const PARTNERS = [
+const PARTNERS: readonly Vendor[] = [
   {
     name: "Meta WhatsApp Business",
     powers: "WhatsApp Business API · BSP architecture",
     detail:
       "Meta-approved Business Solution Provider architecture. Wholesale pricing: ₹0.86 per marketing message · ₹0.13 per utility message — billed direct to your Meta wallet, no markup from us.",
     href: "https://business.whatsapp.com/products/business-platform",
+    meta: true,
   },
   {
     name: "Bolna AI",
@@ -47,14 +50,14 @@ const PARTNERS = [
     name: "Next.js + Vercel",
     powers: "Lead-engine site runtime + edge hosting",
     detail:
-      "Every ZentroTECH site is built on Next.js 16 and shipped on Vercel&rsquo;s edge network. Core Web Vitals in the green by default, global CDN, automatic image optimization — the table stakes most Indian agencies skip.",
+      "Every ZentroTECH site is built on Next.js 16 and shipped on Vercel’s edge network. Core Web Vitals in the green by default, global CDN, automatic image optimization — the table stakes most Indian agencies skip.",
     href: "https://vercel.com",
   },
   {
     name: "Google Cloud + Microsoft Azure",
     powers: "Voice + AI infra fallback · enterprise-grade",
     detail:
-      "Where India-first vendors don&rsquo;t cover a use case, we fall back to GCP Vertex AI / Azure OpenAI / Azure Communication Services. Redundancy you can&rsquo;t buy from a single-vendor agency.",
+      "Where India-first vendors don’t cover a use case, we fall back to GCP Vertex AI / Azure OpenAI / Azure Communication Services. Redundancy you can’t buy from a single-vendor agency.",
     href: "https://cloud.google.com",
   },
 ] as const;
@@ -79,49 +82,17 @@ export default function PartnersPage() {
         </Container>
       </section>
 
-      {/* Partner grid */}
+      {/* Partner grid — Stack Wire-Up */}
       <section className="pb-24">
         <Container>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PARTNERS.map((p) => (
-              <div
-                key={p.name}
-                className="glass rounded-3xl p-8 hover:border-indigo/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
-              >
-                <div
-                  className="size-16 rounded-2xl bg-linear-to-br from-indigo/20 to-violet/20 flex items-center justify-center"
-                  aria-hidden="true"
-                >
-                  {/* TODO (Founder): swap brand mark for real partner logos in /public/partners/ */}
-                  <Image
-                    src="/brand/logo-mark.svg"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="size-8 object-contain opacity-80"
-                  />
-                </div>
-                <h2 className="mt-6 text-xl font-black text-white">{p.name}</h2>
-                <p className="mt-1 text-sm text-indigo-glow font-mono">{p.powers}</p>
-                <p className="mt-4 text-sm text-text-secondary leading-relaxed flex-1">{p.detail}</p>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm text-indigo-glow hover:text-white transition-colors"
-                >
-                  Visit {p.name} →
-                </a>
-              </div>
-            ))}
-          </div>
+          <StackWireUp vendors={PARTNERS} />
         </Container>
       </section>
 
       {/* Positioning */}
       <section className="pb-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-14 max-w-4xl">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-14 max-w-4xl">
             <Badge>How we use the stack</Badge>
             <h2 className="mt-4 text-3xl md:text-4xl font-black text-white">
               We don&rsquo;t sell their software.
@@ -143,14 +114,14 @@ export default function PartnersPage() {
                 lock-in vendor.
               </p>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* CTA */}
       <section className="pb-24">
         <Container>
-          <div className="glass rounded-3xl p-12 md:p-20 text-center">
+          <Reveal className="glass rounded-3xl p-12 md:p-20 text-center">
             <Badge>Talk integration</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white max-w-3xl mx-auto">
               Want us to wire this stack into your business?
@@ -160,9 +131,9 @@ export default function PartnersPage() {
               and we&rsquo;ll map a 21-day migration plan. No charge for the plan.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button href="/contact" variant="primary" size="lg">
+              <PulseButton href="/contact" variant="primary" size="lg">
                 Map my migration
-              </Button>
+              </PulseButton>
               <Button href={SOCIAL.whatsapp} external variant="secondary" size="lg">
                 WhatsApp us
               </Button>
@@ -175,7 +146,7 @@ export default function PartnersPage() {
               </Link>
               .
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

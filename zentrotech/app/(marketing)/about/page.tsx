@@ -1,11 +1,12 @@
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/sections/cta-section";
 import { TrustSignals } from "@/components/sections/trust-signals";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { Reveal } from "@/components/animations/reveal";
 import { buildMetadata } from "@/lib/seo";
-import { Eye, Rocket, Heart, Globe2 } from "lucide-react";
+import { CredoSplit } from "./_components/credo-split";
+import { ValuesGrid } from "./_components/values-grid";
 
 export const metadata = buildMetadata({
   title: "About ZentroTECH — Bangalore's Kannada-First AI Agency",
@@ -14,68 +15,39 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-const VALUES = [
-  { icon: Eye, title: "Radical transparency", text: "We tell you when AI is the wrong answer. No hammers looking for nails." },
-  { icon: Rocket, title: "Ship over slides", text: "Working software in weeks, not deck cycles in quarters." },
-  { icon: Heart, title: "Human-first", text: "Every agent we build amplifies humans. Never replaces care." },
-  { icon: Globe2, title: "Globally local", text: "Bangalore engineering, Dubai presence, partnerships everywhere." },
-];
-
 export default function AboutPage() {
   return (
     <>
       <OrganizationSchema />
       <section className="py-24">
         <Container>
-          <Badge>About</Badge>
+          <Reveal>
+            <Badge>About</Badge>
+          </Reveal>
           <h1 className="mt-4 text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight max-w-4xl">
             <span className="text-aurora">Bangalore SMBs</span> deserve better than SaaS dashboards.
           </h1>
-          <p className="mt-8 text-xl text-text-secondary max-w-2xl">
-            ZentroTECH was founded in 2026 on one bet: Indian SMBs doing ₹50L–₹5Cr in revenue don&apos;t need another SaaS to set up &mdash; they need a Bangalore team that ships the whole system. Lead-engine website. AI voice agent in Kannada. WhatsApp follow-up. Payment recovery. One contract. 21 days. Money back if we don&apos;t move your numbers.
-          </p>
+          <Reveal delay={0.1}>
+            <p className="mt-8 text-xl text-text-secondary max-w-2xl">
+              ZentroTECH was founded in 2026 on one bet: Indian SMBs doing ₹50L–₹5Cr in revenue don&apos;t need another SaaS to set up &mdash; they need a Bangalore team that ships the whole system. Lead-engine website. AI voice agent in Kannada. WhatsApp follow-up. Payment recovery. One contract. 21 days. Money back if we don&apos;t move your numbers.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
       <section className="py-24">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="glass-glow rounded-3xl p-12">
-              <h2 className="text-3xl font-black text-white">Our vision</h2>
-              <p className="mt-6 text-text-secondary leading-relaxed">
-                A world where every business — from a 5-person startup in Bangalore to a 50,000-person enterprise in Dubai — has access to the kind of AI infrastructure that until now only Big Tech could build.
-              </p>
-            </div>
-            <div className="glass rounded-3xl p-12">
-              <h2 className="text-3xl font-black text-white">Our mission</h2>
-              <p className="mt-6 text-text-secondary leading-relaxed">
-                Design, build, and operate production-grade agentic AI systems for businesses across India, the UAE, and the world — and to do it with engineering discipline, design taste, and radical honesty about what AI can and can&apos;t do.
-              </p>
-            </div>
-          </div>
+          <CredoSplit />
         </Container>
       </section>
 
       <section className="py-24">
         <Container>
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <Badge>What we believe</Badge>
             <h2 className="mt-4 text-4xl md:text-5xl font-black text-white">Four values, no exceptions.</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {VALUES.map((v) => {
-              const Icon = v.icon;
-              return (
-                <Card key={v.title} className="text-center">
-                  <div className="size-14 rounded-2xl bg-linear-to-br from-indigo/20 to-violet/20 mx-auto flex items-center justify-center">
-                    <Icon className="size-6 text-indigo-glow" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mt-6">{v.title}</h3>
-                  <p className="text-text-muted text-sm mt-3">{v.text}</p>
-                </Card>
-              );
-            })}
-          </div>
+          </Reveal>
+          <ValuesGrid />
         </Container>
       </section>
 
@@ -83,19 +55,23 @@ export default function AboutPage() {
 
       <section className="py-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-12 md:p-20">
-            <Badge>Our 2050 promise</Badge>
-            <h2 className="mt-6 text-4xl md:text-5xl font-black text-white max-w-3xl">
-              We promise to keep you ahead — not chasing — the AI curve, every year, every quarter, every release.
-            </h2>
-            <p className="mt-8 text-text-secondary text-lg max-w-2xl">
-              The frontier moves fast. Our job is to absorb that speed for you, translate it into capability you can ship, and hand you a business that compounds in value while your competitors are still benchmarking.
-            </p>
-          </div>
+          <Reveal>
+            <div className="glass-glow rounded-3xl p-12 md:p-20">
+              <Badge>Our 2050 promise</Badge>
+              <h2 className="mt-6 text-4xl md:text-5xl font-black text-white max-w-3xl">
+                We promise to keep you ahead — not chasing — the AI curve, every year, every quarter, every release.
+              </h2>
+              <p className="mt-8 text-text-secondary text-lg max-w-2xl">
+                The frontier moves fast. Our job is to absorb that speed for you, translate it into capability you can ship, and hand you a business that compounds in value while your competitors are still benchmarking.
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

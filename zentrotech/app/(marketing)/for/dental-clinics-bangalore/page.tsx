@@ -7,6 +7,10 @@ import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { SITE } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 import { waLink } from "@/lib/whatsapp";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
+import { CountUp } from "@/components/animations/count-up";
+import { RealNumbers } from "../_components/real-numbers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Dental clinic AI voice + WhatsApp · Bangalore",
@@ -166,7 +170,7 @@ export default function DentalClinicsBangalorePage() {
       {/* PAIN POINTS */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>Pain points we fix</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               The four leaks <span className="text-aurora">draining your chair time</span>.
@@ -175,22 +179,26 @@ export default function DentalClinicsBangalorePage() {
               We&rsquo;ve mapped these by talking to dentists in Koramangala, Indiranagar, Jayanagar, and HSR. None of them
               are theoretical. All of them are fixable inside 21 days.
             </p>
-          </div>
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-5">
             {PAIN_POINTS.map((p) => (
-              <div key={p.title} className="glass rounded-2xl p-6">
-                <h3 className="text-white font-bold text-lg">{p.title}</h3>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">{p.body}</p>
-              </div>
+              <StaggerItem key={p.title}>
+                <Tilt className="h-full">
+                  <div className="glass rounded-2xl p-6 h-full">
+                    <h3 className="text-white font-bold text-lg">{p.title}</h3>
+                    <p className="mt-3 text-text-secondary text-sm leading-relaxed">{p.body}</p>
+                  </div>
+                </Tilt>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
       {/* WHAT WE SHIP */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>21-day delivery</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               What we ship in <span className="text-aurora">21 days</span>.
@@ -199,48 +207,61 @@ export default function DentalClinicsBangalorePage() {
               Concrete deliverables, signed off in week 1 scoping, live by week 3. No rolling delays, no &ldquo;phase 2&rdquo;
               evasion.
             </p>
-          </div>
-          <ul className="mt-10 grid md:grid-cols-2 gap-4">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-4">
             {SHIP_IN_21_DAYS.map((d, i) => (
-              <li key={d} className="flex gap-3 glass rounded-xl p-5">
-                <div className="text-indigo-glow font-mono font-bold shrink-0">{String(i + 1).padStart(2, "0")}</div>
-                <span className="text-text-secondary text-sm leading-relaxed">{d}</span>
-              </li>
+              <StaggerItem key={d}>
+                <li className="flex gap-3 glass rounded-xl p-5 h-full list-none">
+                  <div className="text-indigo-glow font-mono font-bold shrink-0">{String(i + 1).padStart(2, "0")}</div>
+                  <span className="text-text-secondary text-sm leading-relaxed">{d}</span>
+                </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </section>
 
       {/* REAL NUMBERS */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>Real numbers for dental</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               The math is <span className="text-aurora">brutal and fixable</span>.
             </h2>
-          </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {STATS.map((s) => (
-              <div key={s.label} className="glass-glow rounded-2xl p-8">
-                <div className="text-5xl md:text-6xl font-black text-aurora tracking-tight">{s.headline}</div>
-                <div className="mt-3 text-white font-semibold">{s.label}</div>
-                <p className="mt-3 text-text-muted text-sm leading-relaxed">{s.body}</p>
-              </div>
-            ))}
-          </div>
+          </Reveal>
+          <RealNumbers
+            left={{
+              count: 85,
+              suffix: "%",
+              label: STATS[0].label,
+              body: STATS[0].body,
+            }}
+            right={{
+              headline: "30–50%",
+              label: STATS[2].label,
+              body: STATS[2].body,
+            }}
+            recovered={{
+              language: "Kannada",
+              greeting: "ನಮಸ್ಕಾರ, ಕ್ಲಿನಿಕ್‌ಗೆ ಸ್ವಾಗತ.",
+              subtitle: "“Hello, welcome to the clinic.” — booked while you slept.",
+              lostRange: "₹5K–₹50K per missed call",
+              recovered: 240000,
+            }}
+          />
         </Container>
       </section>
 
       {/* HOW WE'RE DIFFERENT */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>How we&rsquo;re different</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               Not another <span className="text-aurora">SaaS subscription pile</span>.
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-10 grid md:grid-cols-3 gap-5">
             <div className="glass rounded-2xl p-6">
               <div className="text-indigo-glow text-3xl font-black font-mono">01</div>
@@ -273,7 +294,7 @@ export default function DentalClinicsBangalorePage() {
       {/* PRICING TEASER */}
       <section className="py-20">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-14 max-w-5xl mx-auto">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-14 max-w-5xl mx-auto">
             <Badge>Pricing teaser</Badge>
             <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
               Transparent, India-priced, no surprises.
@@ -281,22 +302,30 @@ export default function DentalClinicsBangalorePage() {
             <div className="mt-8 grid md:grid-cols-3 gap-5">
               <div className="rounded-2xl border border-white/10 p-6">
                 <div className="text-text-muted text-xs uppercase tracking-widest font-mono">Starter</div>
-                <div className="mt-3 text-2xl font-bold text-white">From ₹35K setup</div>
-                <div className="text-text-secondary">+ ₹9,999/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  From <CountUp value={35} prefix="₹" suffix="K" className="tabular-nums" /> setup
+                </div>
+                <div className="text-text-secondary">
+                  + <CountUp value={9999} prefix="₹" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   Single-doctor clinic. Voice agent + WhatsApp + basic follow-up.
                 </p>
               </div>
-              <div className="rounded-2xl border border-indigo/40 p-6 bg-indigo/5">
+              <div className="rounded-2xl border border-indigo/40 p-6 bg-indigo/5 pulse-glow">
                 <div className="text-indigo-glow text-xs uppercase tracking-widest font-mono">Growth</div>
-                <div className="mt-3 text-2xl font-bold text-white">₹24,999/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  <CountUp value={24999} prefix="₹" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   Multi-doctor practice. Full 5–7 touch nurture, recall automation, monthly content.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 p-6">
                 <div className="text-text-muted text-xs uppercase tracking-widest font-mono">Mid-market</div>
-                <div className="mt-3 text-2xl font-bold text-white">₹60K+/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  <CountUp value={60} prefix="₹" suffix="K+" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   Chain or 4+ locations. Custom workflows, dedicated success manager.
                 </p>
@@ -306,34 +335,36 @@ export default function DentalClinicsBangalorePage() {
               Voice-minute and WhatsApp Business API usage billed at platform rates, no markup. First measurable result
               in 21 days, or full refund — see refund policy.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* FAQ */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>FAQ</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               Questions Bangalore dentists ask us first.
             </h2>
-          </div>
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-5">
             {FAQS.map((f) => (
-              <div key={f.q} className="glass rounded-2xl p-6">
-                <h3 className="text-white font-bold">{f.q}</h3>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">{f.a}</p>
-              </div>
+              <StaggerItem key={f.q}>
+                <div className="glass rounded-2xl p-6 h-full">
+                  <h3 className="text-white font-bold">{f.q}</h3>
+                  <p className="mt-3 text-text-secondary text-sm leading-relaxed">{f.a}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
       {/* FINAL CTA */}
       <section className="py-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
             <Badge>Talk to us</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white tracking-tight">
               Stop losing patients to the clinic <span className="text-aurora">200m down the road</span>.
@@ -343,14 +374,14 @@ export default function DentalClinicsBangalorePage() {
               Hindi, or English — we&rsquo;ll respond the same way.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 justify-center">
-              <Button href={WHATSAPP_HREF} size="lg" external>
+              <Button href={WHATSAPP_HREF} size="lg" external className="shimmer">
                 WhatsApp ZentroTECH
               </Button>
-              <Button href="/contact" variant="secondary" size="lg">
+              <Button href="/contact" variant="secondary" size="lg" className="shimmer">
                 Get a Quote
               </Button>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

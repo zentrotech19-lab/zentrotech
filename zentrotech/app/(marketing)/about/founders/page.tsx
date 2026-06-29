@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SITE, SOCIAL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { FounderGrid } from "./_components/founder-grid";
+import { RealNumbers } from "./_components/real-numbers";
+import { PulseGlowOnce, GradientPanOnce } from "./_components/one-shot";
 
 export const metadata: Metadata = buildMetadata({
   title: "Founders — ZentroTECH Bangalore AI agency team",
@@ -70,7 +73,9 @@ export default function FoundersPage() {
       {/* Hero */}
       <section className="py-24">
         <Container>
-          <Badge>The team</Badge>
+          <Reveal>
+            <Badge>The team</Badge>
+          </Reveal>
           <h1 className="mt-4 text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight max-w-4xl">
             Built by{" "}
             <span className="bg-linear-to-r from-indigo-glow via-violet to-pink bg-clip-text text-transparent">
@@ -78,10 +83,12 @@ export default function FoundersPage() {
             </span>
             , not a sales team.
           </h1>
-          <p className="mt-8 text-xl text-text-secondary max-w-2xl leading-relaxed">
-            Every Indian agency hides behind a logo. We don&rsquo;t. Named founders, named bios, named LinkedIn
-            profiles. If something breaks on your project, you know exactly who to message.
-          </p>
+          <Reveal delay={0.08}>
+            <p className="mt-8 text-xl text-text-secondary max-w-2xl leading-relaxed">
+              Every Indian agency hides behind a logo. We don&rsquo;t. Named founders, named bios, named LinkedIn
+              profiles. If something breaks on your project, you know exactly who to message.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -89,7 +96,7 @@ export default function FoundersPage() {
       <section className="pb-24">
         <Container>
           {/* Placeholder disclosure — required while founder bios are pending. */}
-          <div
+          <PulseGlowOnce
             role="note"
             className="mb-10 rounded-3xl border-2 border-pink/60 bg-pink/10 p-6 md:p-7 max-w-3xl"
           >
@@ -100,39 +107,13 @@ export default function FoundersPage() {
               The agency is real and operating; the photos and bios below are placeholders. We&rsquo;ll have
               named LinkedIn profiles and verifiable bios published before our first paid engagement.
             </p>
-          </div>
+          </PulseGlowOnce>
           {/* TODO (Founder): Replace placeholder cards with real photo + name + title + bio + LinkedIn for each founder. */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FOUNDERS.map((f) => (
-              <div
-                key={f.slug}
-                className="glass rounded-3xl p-8 hover:border-indigo/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
-              >
-                <div
-                  className="size-24 rounded-2xl bg-linear-to-br from-indigo/20 to-violet/20 flex items-center justify-center overflow-hidden"
-                  aria-hidden="true"
-                >
-                  <Image
-                    src={f.photo}
-                    alt=""
-                    width={64}
-                    height={64}
-                    className="size-16 object-contain"
-                  />
-                </div>
-                <h2 className="mt-6 text-xl font-black text-white">{f.name}</h2>
-                <p className="mt-1 text-sm text-indigo-glow font-mono">{f.title}</p>
-                <p className="mt-4 text-sm text-text-secondary leading-relaxed flex-1">{f.bio}</p>
-                <a
-                  href={f.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm text-indigo-glow hover:text-white transition-colors"
-                >
-                  LinkedIn →
-                </a>
-              </div>
-            ))}
+          <FounderGrid founders={FOUNDERS} />
+
+          {/* Real numbers — measurable proof, CountUp on scroll-in */}
+          <div className="mt-12">
+            <RealNumbers />
           </div>
         </Container>
       </section>
@@ -174,27 +155,27 @@ export default function FoundersPage() {
             <Badge>What we stand for</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white">Three principles. No exceptions.</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <Stagger className="grid md:grid-cols-3 gap-6">
             {PRINCIPLES.map((p) => (
-              <div
+              <StaggerItem
                 key={p.title}
                 className="glass rounded-3xl p-8 hover:border-indigo/40 hover:-translate-y-1 transition-all duration-300"
               >
                 <h3 className="text-2xl font-black text-white">{p.title}</h3>
                 <p className="mt-4 text-sm text-text-secondary leading-relaxed">{p.text}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
       {/* CTA */}
       <section className="pb-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-12 md:p-20 text-center">
+          <Reveal className="glass-glow rounded-3xl p-12 md:p-20 text-center">
             <Badge>Talk to us directly</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white max-w-3xl mx-auto">
-              DM us <span className="text-aurora">&ldquo;AUDIT&rdquo;</span> on WhatsApp for a free 15-min lead-flow teardown.
+              DM us <GradientPanOnce>&ldquo;AUDIT&rdquo;</GradientPanOnce> on WhatsApp for a free 15-min lead-flow teardown.
             </h2>
             <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
               No deck. No sales call. We&rsquo;ll record a 15-minute Loom looking at your current funnel and tell
@@ -211,7 +192,7 @@ export default function FoundersPage() {
                 Or use the contact form →
               </Link>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

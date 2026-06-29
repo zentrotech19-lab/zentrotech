@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/animations/reveal";
 import { CTASection } from "@/components/sections/cta-section";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { SOUTH_INDIA_CITIES } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
-import { ArrowRight, MapPin } from "lucide-react";
+import { CoverageMap } from "./_components/coverage-map";
+import { CityGrid } from "./_components/city-grid";
 
 export const metadata = buildMetadata({
   title: "138 Locations — ZentroTECH Service Areas Across South India",
@@ -33,54 +33,23 @@ export default function LocationsIndexPage() {
   return (
     <>
       <OrganizationSchema />
-      <section className="relative overflow-hidden pt-12 pb-16">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[-15%] top-[-10%] size-[700px] rounded-full blur-3xl opacity-50"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.45) 0%, transparent 65%)" }}
-        />
+      <section className="relative overflow-hidden pb-16 pt-12">
         <Container className="relative">
-          <div className="max-w-3xl">
-            <Badge>
-              <MapPin className="size-3" />
-              <span>138 locations</span>
-            </Badge>
-            <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.0]">
-              Service areas across <span className="text-aurora">South India</span>.
-            </h1>
-            <p className="mt-8 text-lg md:text-xl text-text-secondary leading-relaxed">
-              ZentroTECH delivers websites + AI automation across 138 commercial centres — every Bangalore neighborhood, every major IT park, plus key South India metros and Tier-2 cities. Pick your location.
-            </p>
-          </div>
+          <CoverageMap />
         </Container>
       </section>
 
       {grouped.map((g) => (
-        <section key={g.tier} className="py-10 border-t border-white/5">
+        <section key={g.tier} className="border-t border-white/5 py-10">
           <Container>
-            <div className="max-w-6xl">
-              <div className="flex items-baseline gap-4 flex-wrap">
-                <h2 className="text-xl md:text-2xl font-black text-white tracking-tight">{g.meta.label}</h2>
-                <span className="text-text-muted text-sm">{g.meta.sub} · {g.items.length} locations</span>
-              </div>
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                {g.items.map((c) => (
-                  <Link
-                    key={c.slug}
-                    href={`/locations/${c.slug}`}
-                    className="glass rounded-lg px-4 py-3 text-white hover:bg-white/10 transition-colors flex items-center justify-between gap-2 text-sm"
-                  >
-                    <span className="font-medium truncate">{c.label}</span>
-                    <ArrowRight className="size-3.5 text-indigo-glow shrink-0" aria-hidden="true" />
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <CityGrid label={g.meta.label} sub={g.meta.sub} items={g.items} />
           </Container>
         </section>
       ))}
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

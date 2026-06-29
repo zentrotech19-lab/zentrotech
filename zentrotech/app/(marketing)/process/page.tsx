@@ -3,8 +3,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
 import { SOCIAL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+import { TimelineSpine } from "./_components/timeline-spine";
 
 export const metadata: Metadata = buildMetadata({
   title: "Process — 21-day delivery",
@@ -92,50 +95,19 @@ export default function ProcessPage() {
             21 days.{" "}
             <span className="text-text-muted">Not 6 months. Not &ldquo;let&rsquo;s scope it.&rdquo;</span>
           </h1>
-          <p className="mt-8 text-xl text-text-secondary max-w-2xl leading-relaxed">
-            A published, day-by-day delivery process. Daily Loom updates. Founders on the call. Money-back
-            trial starting Day 21.
-          </p>
+          <Reveal y={20} delay={0.1}>
+            <p className="mt-8 text-xl text-text-secondary max-w-2xl leading-relaxed">
+              A published, day-by-day delivery process. Daily Loom updates. Founders on the call. Money-back
+              trial starting Day 21.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
-      {/* Phase timeline */}
+      {/* Phase timeline — "The 21-Day Clock" */}
       <section className="pb-24">
         <Container>
-          <div className="space-y-6">
-            {PHASES.map((phase, i) => (
-              <div
-                key={phase.title}
-                className="relative glass rounded-3xl p-8 md:p-10 hover:border-indigo/40 transition-all duration-300"
-              >
-                <div
-                  className={`absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-linear-to-r ${phase.accent}`}
-                  aria-hidden
-                />
-                <div className="grid md:grid-cols-[200px_1fr] gap-6">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-indigo-glow font-mono">
-                      Phase {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-2 text-2xl font-black text-white">{phase.days}</p>
-                    <p className="mt-1 text-xl font-bold bg-linear-to-r from-indigo-glow to-violet bg-clip-text text-transparent">
-                      {phase.title}
-                    </p>
-                  </div>
-                  <ul className="space-y-2 text-text-secondary">
-                    {phase.bullets.map((b) => (
-                      <li key={b} className="flex gap-3">
-                        <span className="text-indigo-glow mt-0.5" aria-hidden>
-                          ✓
-                        </span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TimelineSpine phases={PHASES} />
         </Container>
       </section>
 
@@ -151,14 +123,16 @@ export default function ProcessPage() {
               No &ldquo;phase 2 in Q3.&rdquo; No &ldquo;let&rsquo;s revisit after the discovery extension.&rdquo;
               Every Day-22 deliverable is in production, measurable, and reporting to you.
             </p>
-            <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Stagger className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {DAY_22.map((row) => (
-                <div key={row.label} className="rounded-2xl border border-white/10 bg-void/40 p-5">
-                  <p className="text-sm font-bold text-white">{row.label}</p>
-                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{row.detail}</p>
-                </div>
+                <StaggerItem key={row.label}>
+                  <Tilt className="h-full rounded-2xl border border-white/10 bg-void/40 p-5 transition-colors duration-300 hover:border-indigo/40">
+                    <p className="text-sm font-bold text-white">{row.label}</p>
+                    <p className="mt-2 text-sm text-text-muted leading-relaxed">{row.detail}</p>
+                  </Tilt>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </Container>
       </section>
@@ -166,6 +140,7 @@ export default function ProcessPage() {
       {/* CTA */}
       <section className="pb-24">
         <Container>
+          <Reveal>
           <div className="glass rounded-3xl p-12 md:p-20 text-center">
             <Badge>Ready to ship?</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white max-w-3xl mx-auto">
@@ -176,7 +151,7 @@ export default function ProcessPage() {
               start date inside 1 business day.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button href="/contact" variant="primary" size="lg">
+              <Button href="/contact" variant="primary" size="lg" className="pulse-glow">
                 Start a project
               </Button>
               <Button href={SOCIAL.whatsapp} external variant="secondary" size="lg">
@@ -192,6 +167,7 @@ export default function ProcessPage() {
               .
             </p>
           </div>
+          </Reveal>
         </Container>
       </section>
     </>

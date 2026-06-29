@@ -6,6 +6,10 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { LocalBusinessSchema } from "@/components/seo/local-business-schema";
 import { AuditForm } from "./audit-form";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
+import { CountUp } from "@/components/animations/count-up";
+import { DrawLine } from "@/components/animations/draw-line";
 import { buildMetadata } from "@/lib/seo";
 import { auditWaLink } from "@/lib/whatsapp";
 import { SITE } from "@/lib/constants";
@@ -182,15 +186,17 @@ export default function AuditPage() {
               are theoretical. The audit tells you which ones are costing you the most.
             </p>
           </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <Stagger className="mt-10 grid md:grid-cols-3 gap-5">
             {LEAKS.map((l) => (
-              <div key={l.title} className="glass rounded-2xl p-6">
-                <l.icon className="size-6 text-indigo-glow" aria-hidden="true" />
-                <h3 className="mt-4 text-white font-bold text-lg">{l.title}</h3>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">{l.body}</p>
-              </div>
+              <StaggerItem key={l.title}>
+                <Tilt className="glass rounded-2xl p-6 h-full">
+                  <l.icon className="size-6 text-indigo-glow" aria-hidden="true" />
+                  <h3 className="mt-4 text-white font-bold text-lg">{l.title}</h3>
+                  <p className="mt-3 text-text-secondary text-sm leading-relaxed">{l.body}</p>
+                </Tilt>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
@@ -211,14 +217,14 @@ export default function AuditPage() {
                 <Button href="#book" size="lg">Book my free audit</Button>
               </div>
             </div>
-            <ul className="space-y-3">
+            <Stagger className="space-y-3">
               {WHAT_YOU_GET.map((w, i) => (
-                <li key={w} className="flex gap-3 glass rounded-xl p-4">
+                <StaggerItem key={w} className="flex gap-3 glass rounded-xl p-4">
                   <span className="text-indigo-glow font-mono font-bold shrink-0">{String(i + 1).padStart(2, "0")}</span>
                   <span className="text-text-secondary text-sm leading-relaxed">{w}</span>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
         </Container>
       </section>
@@ -232,9 +238,11 @@ export default function AuditPage() {
               From booking to <span className="text-aurora">your leak map</span> in 3 steps.
             </h2>
           </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
+          <div className="relative mt-10 grid md:grid-cols-3 gap-5">
+            {/* 01 → 02 → 03 connector — draws across as you scroll (desktop only). */}
+            <DrawLine orientation="horizontal" className="hidden md:block left-[16%] right-[16%] top-12" />
             {STEPS.map((s) => (
-              <div key={s.n} className="glass rounded-2xl p-6">
+              <div key={s.n} className="glass rounded-2xl p-6 relative">
                 <div className="text-indigo-glow text-3xl font-black font-mono">{s.n}</div>
                 <h3 className="mt-4 text-white font-bold">{s.t}</h3>
                 <p className="mt-3 text-text-secondary text-sm leading-relaxed">{s.d}</p>
@@ -247,9 +255,15 @@ export default function AuditPage() {
       {/* PROOF STRIP */}
       <section className="py-16">
         <Container>
-          <div className="glass-glow rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-center">
+          <Reveal className="glass-glow rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-center">
             <IndianRupee className="size-8 text-aurora mx-auto" aria-hidden="true" />
-            <p className="mt-5 text-2xl md:text-3xl text-white leading-relaxed">
+            <p className="mt-5 text-5xl md:text-6xl font-black tracking-tight text-aurora">
+              <CountUp value={45} suffix="%" className="tabular-nums inline-block min-w-[4ch]" />
+            </p>
+            <p className="mt-2 text-text-muted text-sm uppercase tracking-widest font-mono">
+              of unpaid invoices clawed back (30–50% range)
+            </p>
+            <p className="mt-6 text-2xl md:text-3xl text-white leading-relaxed">
               &ldquo;A Jayanagar clinic recovered <span className="text-aurora">30–50% of unpaid invoices</span> once
               the follow-up ran automatically — the exact kind of leak the audit surfaces in the first 20 minutes.&rdquo;
             </p>
@@ -257,7 +271,7 @@ export default function AuditPage() {
               Real outcome from the ZentroTECH follow-up + recovery engine. Your numbers depend on your vertical — the
               audit gives you yours.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -270,21 +284,21 @@ export default function AuditPage() {
               Fair questions before you book.
             </h2>
           </div>
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          <Reveal className="mt-10 grid md:grid-cols-2 gap-5">
             {FAQS.map((f) => (
               <div key={f.q} className="glass rounded-2xl p-6">
                 <h3 className="text-white font-bold">{f.q}</h3>
                 <p className="mt-3 text-text-secondary text-sm leading-relaxed">{f.a}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* FINAL CTA */}
       <section className="py-20">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
             <Badge>Free · No obligation</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white tracking-tight">
               Stop guessing where your <span className="text-aurora">leads go to die</span>.
@@ -300,7 +314,7 @@ export default function AuditPage() {
                 WhatsApp ZentroTECH
               </Button>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

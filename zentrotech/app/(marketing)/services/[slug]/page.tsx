@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,13 @@ import { SITE, SOCIAL } from "@/lib/constants";
 import { SERVICE_CONTENT } from "@/lib/services-content";
 import { buildMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
-import { ArrowRight, ArrowUpRight, Check, Sparkles } from "lucide-react";
+import { Reveal } from "@/components/animations/reveal";
+import { WhoCards } from "./_components/who-cards";
+import { HowItWorks } from "./_components/how-it-works";
+import { Deliverables } from "./_components/deliverables";
+import { WhyCards } from "./_components/why-cards";
+import { RelatedCards } from "./_components/related-cards";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
 export function generateStaticParams() {
@@ -64,7 +69,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             </div>
           </Container>
         </section>
-        <CTASection />
+        <Reveal>
+          <CTASection />
+        </Reveal>
       </>
     );
   }
@@ -87,33 +94,42 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <Container className="relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge>
-                <Sparkles className="size-3" />
-                <span>{content.accentLabel}</span>
-              </Badge>
+              <Reveal y={16} duration={0.5}>
+                <Badge>
+                  <Sparkles className="size-3" />
+                  <span>{content.accentLabel}</span>
+                </Badge>
+              </Reveal>
+              {/* h1 stays static server-rendered text — it is the LCP */}
               <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.05]">
                 {service.title}
               </h1>
-              <p className="mt-6 text-xl md:text-2xl text-aurora font-bold leading-tight">
-                {content.outcomePromise}
-              </p>
-              <p className="mt-6 text-text-secondary text-lg leading-relaxed">
-                {content.overview}
-              </p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Button href={SOCIAL.whatsapp} size="lg" external>
-                  <FaWhatsapp className="size-5" />
-                  WhatsApp us
-                </Button>
-                <Button href="/contact" variant="secondary" size="lg">
-                  Get a Custom Quote <ArrowRight className="size-4" />
-                </Button>
-              </div>
+              <Reveal delay={0.08}>
+                <p className="mt-6 text-xl md:text-2xl text-aurora font-bold leading-tight">
+                  {content.outcomePromise}
+                </p>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <p className="mt-6 text-text-secondary text-lg leading-relaxed">
+                  {content.overview}
+                </p>
+              </Reveal>
+              <Reveal delay={0.24}>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Button href={SOCIAL.whatsapp} size="lg" external>
+                    <FaWhatsapp className="size-5" />
+                    WhatsApp us
+                  </Button>
+                  <Button href="/contact" variant="secondary" size="lg">
+                    Get a Custom Quote <ArrowRight className="size-4" />
+                  </Button>
+                </div>
+              </Reveal>
             </div>
 
-            <div className="relative aspect-square rounded-3xl glass-glow overflow-hidden">
+            <Reveal delay={0.12} className="relative aspect-square rounded-3xl glass-glow overflow-hidden">
               <ServiceArt motif={content.artMotif} className="absolute inset-0 p-8" />
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -121,19 +137,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {/* WHO IT'S FOR */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>Who it's for</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               Built for businesses that <span className="text-aurora">need outcomes</span>, not just outputs.
             </h2>
-          </div>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {content.whoItsFor.map((w) => (
-              <div key={w.vertical} className="glass rounded-2xl p-6">
-                <h3 className="text-white font-bold">{w.vertical}</h3>
-                <p className="mt-3 text-text-muted text-sm leading-relaxed">{w.body}</p>
-              </div>
-            ))}
+          </Reveal>
+          <div className="mt-10">
+            <WhoCards items={content.whoItsFor} />
           </div>
         </Container>
       </section>
@@ -143,38 +154,23 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <Container>
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5">
-              <Badge>What's included</Badge>
-              <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
-                What you get.
-              </h2>
-              <ul className="mt-8 space-y-3">
-                {service.deliverables.map((d) => (
-                  <li key={d} className="flex gap-3 items-start glass rounded-xl p-4">
-                    <div className="size-6 rounded-full bg-indigo/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="size-3.5 text-indigo-glow" />
-                    </div>
-                    <span className="text-text-secondary text-sm">{d}</span>
-                  </li>
-                ))}
-              </ul>
+              <Reveal>
+                <Badge>What's included</Badge>
+                <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
+                  What you get.
+                </h2>
+              </Reveal>
+              <Deliverables items={service.deliverables} />
             </div>
 
             <div className="lg:col-span-7">
-              <Badge>How it works</Badge>
-              <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
-                Four steps to live.
-              </h2>
-              <ol className="mt-8 space-y-4">
-                {content.howItWorks.map((s) => (
-                  <li key={s.step} className="flex gap-5 glass rounded-2xl p-6">
-                    <div className="text-indigo-glow font-mono font-black text-2xl tabular-nums">{s.step}</div>
-                    <div>
-                      <h3 className="text-white font-bold text-lg">{s.title}</h3>
-                      <p className="text-text-muted text-sm mt-2 leading-relaxed">{s.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <Reveal>
+                <Badge>How it works</Badge>
+                <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
+                  Four steps to live.
+                </h2>
+              </Reveal>
+              <HowItWorks steps={content.howItWorks} />
             </div>
           </div>
         </Container>
@@ -183,19 +179,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {/* WHY ZENTROTECH */}
       <section className="py-20">
         <Container>
-          <div className="max-w-3xl">
+          <Reveal className="max-w-3xl">
             <Badge>Why ZentroTECH</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               We do this <span className="text-aurora">differently</span>.
             </h2>
-          </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {content.whyZentro.map((w, i) => (
-              <div key={i} className="glass rounded-2xl p-6">
-                <div className="text-indigo-glow text-3xl font-black font-mono">0{i + 1}</div>
-                <p className="mt-4 text-text-secondary text-sm leading-relaxed">{w}</p>
-              </div>
-            ))}
+          </Reveal>
+          <div className="mt-10">
+            <WhyCards items={content.whyZentro} />
           </div>
         </Container>
       </section>
@@ -212,7 +203,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {related.length > 0 && (
         <section className="py-20">
           <Container>
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <Badge>Stack with</Badge>
               <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
                 Often paired with.
@@ -220,28 +211,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               <p className="mt-4 text-text-muted">
                 One contract gets you any combination. These are the services that work well alongside {service.title.toLowerCase()}.
               </p>
-            </div>
-            <div className="mt-10 grid md:grid-cols-3 gap-5">
-              {related.map((r) => (
-                <Link
-                  key={r.slug}
-                  href={`/services/${r.slug}`}
-                  className="group glass rounded-2xl p-6 hover:border-indigo/40 transition-colors"
-                >
-                  <h3 className="text-white font-bold">{r.title}</h3>
-                  <p className="mt-2 text-text-muted text-sm leading-relaxed">{r.short}</p>
-                  <div className="mt-4 flex items-center gap-1 text-indigo-glow text-sm">
-                    <span>Learn more</span>
-                    <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                </Link>
-              ))}
+            </Reveal>
+            <div className="mt-10">
+              <RelatedCards
+                items={related.map((r) => ({ slug: r.slug, title: r.title, short: r.short }))}
+              />
             </div>
           </Container>
         </section>
       )}
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

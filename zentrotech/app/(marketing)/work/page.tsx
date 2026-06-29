@@ -1,20 +1,33 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { CTASection } from "@/components/sections/cta-section";
 import { getAllCaseStudies } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
-import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/animations/reveal";
+import { ResultCard } from "./_components/result-card";
+import { ProofLedger, type LedgerStat } from "./_components/proof-ledger";
 
 export const metadata = buildMetadata({
   title: "Work — Case Studies",
-  description: "Explore our portfolio of AI agents, automation systems, and AI-native websites we've shipped for clients across India, UAE, and globally.",
+  description:
+    "Explore our portfolio of AI agents, automation systems, and AI-native websites we've shipped for clients across India, UAE, and globally.",
   path: "/work",
 });
 
 export default async function WorkPage() {
   const cases = await getAllCaseStudies();
+
+  // Aggregate the results[] into a 2×2 proof ledger. These are clean integers so
+  // CountUp never sees a NaN; the per-card cards surface the raw metrics.
+  const totalMetrics = cases.reduce((n, c) => n + c.results.length, 0);
+  const industries = new Set(cases.map((c) => c.industry)).size;
+  const ledger: LedgerStat[] = [
+    { value: cases.length, prefix: "", suffix: "", decimals: 0, sign: "", label: "Case studies shipped" },
+    { value: industries, prefix: "", suffix: "", decimals: 0, sign: "", label: "Industries served" },
+    { value: totalMetrics, prefix: "", suffix: "", decimals: 0, sign: "", label: "Measured outcomes" },
+    { value: 100, prefix: "", suffix: "%", decimals: 0, sign: "", label: "Projects shipped to prod" },
+  ];
+
   return (
     <>
       <section className="py-24">
@@ -26,29 +39,36 @@ export default async function WorkPage() {
         </Container>
       </section>
 
+      <section className="pb-12">
+        <Container>
+          <Reveal y={24}>
+            <ProofLedger stats={ledger} />
+          </Reveal>
+        </Container>
+      </section>
+
       <section className="py-12">
         <Container>
           <div className="grid md:grid-cols-2 gap-6">
             {cases.map((c) => (
-              <Link key={c.slug} href={`/work/${c.slug}`} className="group block">
-                <Card className="h-full">
-                  <div className="aspect-[16/9] rounded-xl bg-linear-to-br from-indigo/30 via-violet/20 to-pink-pulse/30 mb-6 flex items-center justify-center">
-                    <span className="text-6xl font-black text-white/10">{c.client.split(" ")[0]}</span>
-                  </div>
-                  <p className="text-xs uppercase tracking-widest text-indigo-glow">{c.industry} · {c.service}</p>
-                  <h2 className="text-2xl font-bold text-white mt-2 group-hover:text-aurora flex items-start gap-2">
-                    {c.title}
-                    <ArrowUpRight className="size-5 shrink-0 mt-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </h2>
-                  <p className="text-text-muted mt-3">{c.excerpt}</p>
-                </Card>
-              </Link>
+              <ResultCard
+                key={c.slug}
+                slug={c.slug}
+                client={c.client}
+                title={c.title}
+                excerpt={c.excerpt}
+                industry={c.industry}
+                service={c.service}
+                results={c.results}
+              />
             ))}
           </div>
         </Container>
       </section>
 
-      <CTASection />
+      <Reveal y={24}>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

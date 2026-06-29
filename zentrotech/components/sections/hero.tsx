@@ -5,6 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { HeroDemo } from "@/components/sections/hero-demo";
 import { SOCIAL } from "@/lib/constants";
 import type { Dictionary } from "@/lib/i18n/types";
 
@@ -27,48 +28,64 @@ export function Hero({ dict }: HeroProps) {
       />
 
       <Container className="relative z-10">
-        <m.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-4xl"
-        >
-          <Badge>
-            <Sparkles className="size-3" />
-            <span>{dict.badge}</span>
-          </Badge>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+          <m.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="max-w-2xl"
+          >
+            <Badge>
+              <Sparkles className="size-3" />
+              <span>{dict.badge}</span>
+            </Badge>
 
-          <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95]">
-            <span className="block text-white">{dict.title1}</span>
-            <span className="block text-aurora">{dict.title2}</span>
-          </h1>
+            {/* Slogan kept as a bold eyebrow; the real H1 below carries the
+                search keywords (homepage's strongest on-page ranking signal). */}
+            <p className="mt-6 text-2xl md:text-3xl font-black tracking-tight text-aurora">
+              {dict.title1} {dict.title2}
+            </p>
 
-          <p className="mt-8 text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed">
-            {dict.sub}
-          </p>
+            <h1 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.06] text-white">
+              {"AI Voice & WhatsApp Lead Engines for Bangalore SMBs "}
+              <span className="text-aurora">— in Kannada</span>
+            </h1>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button href={SOCIAL.whatsapp} size="lg" external>
-              <FaWhatsapp className="size-5" />
-              {dict.ctaWhatsapp}
-            </Button>
-            <Button href="/contact" size="lg" variant="secondary">
-              {dict.ctaQuote}
-              <ArrowRight className="size-4" />
-            </Button>
-          </div>
+            <p className="mt-8 text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed">
+              {dict.sub}
+            </p>
 
-          <p className="mt-4 text-sm text-text-muted">{dict.ctaSubtext}</p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button href={SOCIAL.whatsapp} size="lg" external>
+                <FaWhatsapp className="size-5" />
+                {dict.ctaWhatsapp}
+              </Button>
+              <Button href="/contact" size="lg" variant="secondary">
+                {dict.ctaQuote}
+                <ArrowRight className="size-4" />
+              </Button>
+            </div>
 
-          <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
-            {dict.trustStats.map((s) => (
-              <div key={s.label}>
-                <p className="text-2xl md:text-3xl font-black text-white">{s.value}</p>
-                <p className="text-xs text-text-muted mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </m.div>
+            <p className="mt-4 text-sm text-text-muted">{dict.ctaSubtext}</p>
+
+            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
+              {dict.trustStats.map((s) => (
+                <div key={s.label}>
+                  <p className="text-2xl md:text-3xl font-black text-white">{s.value}</p>
+                  <p className="text-xs text-text-muted mt-1">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </m.div>
+
+          <m.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
+          >
+            <HeroDemo />
+          </m.div>
+        </div>
       </Container>
     </section>
   );

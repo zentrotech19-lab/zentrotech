@@ -3,10 +3,12 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/sections/cta-section";
+import { Reveal } from "@/components/animations/reveal";
 import { getAllInsights, getInsight } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { mdxComponents } from "@/lib/mdx-components";
+import { ArticleShell } from "./_components/article-shell";
 
 export async function generateStaticParams() {
   const all = await getAllInsights();
@@ -29,7 +31,9 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
     <>
       <section className="py-24">
         <Container className="max-w-3xl">
-          <Badge>{p.category} · {p.readingTime}</Badge>
+          <Reveal>
+            <Badge>{p.category} · {p.readingTime}</Badge>
+          </Reveal>
           <h1 className="mt-4 text-4xl md:text-6xl font-black text-white tracking-tight">{p.title}</h1>
           <p className="mt-6 text-text-muted">{p.author} · {formatDate(p.date)}</p>
         </Container>
@@ -37,13 +41,15 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
       <section className="py-12">
         <Container className="max-w-3xl">
-          <article className="prose prose-invert max-w-none">
+          <ArticleShell>
             <MDXRemote source={p.body} components={mdxComponents} />
-          </article>
+          </ArticleShell>
         </Container>
       </section>
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </>
   );
 }

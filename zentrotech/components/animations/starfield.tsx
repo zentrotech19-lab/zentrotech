@@ -65,11 +65,17 @@ export function Starfield() {
       }
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
+    const start = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+    start();
 
+    // Don't burn the main thread repainting stars on a tab nobody's looking at.
+    const onVis = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVis);
     window.addEventListener("resize", resize);
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      document.removeEventListener("visibilitychange", onVis);
       window.removeEventListener("resize", resize);
     };
   }, []);

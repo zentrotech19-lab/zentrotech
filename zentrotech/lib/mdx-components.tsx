@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import { Reveal } from "@/components/animations/reveal";
 
 /**
  * Shared MDX component map for the dark-glass + indigo brand.
@@ -30,16 +31,20 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   h2: (props) => (
-    <h2
-      className="mt-12 mb-4 text-3xl md:text-4xl font-black tracking-tight text-white"
-      {...props}
-    />
+    <Reveal y={20}>
+      <h2
+        className="mt-12 mb-4 text-3xl md:text-4xl font-black tracking-tight text-white"
+        {...props}
+      />
+    </Reveal>
   ),
   h3: (props) => (
-    <h3
-      className="mt-10 mb-3 text-2xl font-bold tracking-tight text-white"
-      {...props}
-    />
+    <Reveal y={20}>
+      <h3
+        className="mt-10 mb-3 text-2xl font-bold tracking-tight text-white"
+        {...props}
+      />
+    </Reveal>
   ),
   h4: (props) => (
     <h4

@@ -25,7 +25,7 @@ export function LocalBusinessSchema({ city }: { city: string }) {
       longitude: office.coords.lng,
     },
     openingHours: "Mo-Fr 09:00-19:00",
-    priceRange: "$$$",
+    priceRange: "₹₹",
   };
   return <JsonLd data={data} />;
 }

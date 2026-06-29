@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SOCIAL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+import { PricingTiers } from "./_components/pricing-tiers";
+import { ShimmerOnce } from "./_components/shimmer-once";
 
 export const metadata: Metadata = buildMetadata({
   title: "Pricing — Indian SMB AI agency (real INR, no quotes)",
@@ -122,64 +124,10 @@ export default function PricingPage() {
         </Container>
       </section>
 
-      {/* Tier cards */}
+      {/* Tier cards — scroll-in rise L→R, ranged prices tally locally */}
       <section className="pb-24">
         <Container>
-          <div className="grid lg:grid-cols-3 gap-6">
-            {TIERS.map((tier) => (
-              <div
-                key={tier.name}
-                className={`relative rounded-3xl p-8 ${
-                  tier.highlight ? "glass-glow" : "glass"
-                } transition-all duration-300 hover:-translate-y-1 hover:border-indigo/40 flex flex-col`}
-              >
-                {/* Gradient ribbon */}
-                <div
-                  className={`absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-linear-to-r ${tier.accent}`}
-                  aria-hidden
-                />
-                {tier.highlight && (
-                  <span className="absolute -top-3 right-6 inline-flex items-center rounded-full bg-linear-to-r from-indigo to-violet px-3 py-1 text-xs font-bold text-white shadow-[0_0_30px_rgba(99,102,241,0.5)]">
-                    Most picked
-                  </span>
-                )}
-
-                <h2 className="text-2xl font-black text-white">{tier.name}</h2>
-                <p className="mt-2 text-sm text-text-muted leading-relaxed">{tier.tagline}</p>
-
-                <div className="mt-6 space-y-1">
-                  <p className="text-xs uppercase tracking-widest text-indigo-glow font-mono">Setup</p>
-                  <p className="text-xl font-bold text-white">{tier.setup}</p>
-                </div>
-                <div className="mt-4 space-y-1">
-                  <p className="text-xs uppercase tracking-widest text-indigo-glow font-mono">Monthly</p>
-                  <p className="text-2xl font-black text-white">{tier.monthly}</p>
-                </div>
-                <p className="mt-3 text-sm text-text-secondary">{tier.delivery}</p>
-
-                <ul className="mt-6 space-y-2 text-sm text-text-secondary flex-1">
-                  {tier.features.map((f) => (
-                    <li key={f} className="flex gap-2">
-                      <span className="text-indigo-glow mt-0.5" aria-hidden>
-                        ✓
-                      </span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-8">
-                  <Button
-                    href="/contact"
-                    variant={tier.highlight ? "primary" : "secondary"}
-                    className="w-full"
-                  >
-                    Get a quote for {tier.name}
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PricingTiers tiers={TIERS} />
         </Container>
       </section>
 
@@ -238,7 +186,7 @@ export default function PricingPage() {
           <div className="glass-glow rounded-3xl p-12 md:p-20 text-center">
             <Badge>21-day guarantee</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white max-w-3xl mx-auto">
-              First measurable result in 21 days or full refund.
+              First measurable result in <ShimmerOnce>21 days</ShimmerOnce> or full refund.
             </h2>
             <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
               We commit to a measurable outcome &mdash; leads captured, calls answered, invoices recovered &mdash;

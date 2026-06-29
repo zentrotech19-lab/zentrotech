@@ -36,9 +36,11 @@ export function proxy(request: NextRequest) {
   }
 
   // Root → redirect to the user's preferred supported locale (or English).
+  // 308 (permanent) so Google consolidates link equity onto the canonical
+  // homepage — the default NextResponse.redirect is a temporary 307.
   if (pathname === "/") {
     const locale = pickLocale(request.headers.get("accept-language"));
-    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+    return NextResponse.redirect(new URL(`/${locale}`, request.url), 308);
   }
 
   // All other routes (services, contact, etc.) stay English-shell for V1

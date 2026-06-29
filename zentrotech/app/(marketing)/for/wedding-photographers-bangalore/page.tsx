@@ -7,6 +7,10 @@ import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { SITE } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 import { waLink } from "@/lib/whatsapp";
+import { Reveal, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
+import { CountUp } from "@/components/animations/count-up";
+import { RealNumbers } from "../_components/real-numbers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Wedding photographer lead engine · Bangalore",
@@ -165,7 +169,7 @@ export default function WeddingPhotographersBangalorePage() {
       {/* PAIN POINTS */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>Pain points we fix</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               The four leaks <span className="text-aurora">costing you weddings</span>.
@@ -174,22 +178,26 @@ export default function WeddingPhotographersBangalorePage() {
               Mapped from conversations with photographers across Indiranagar, JP Nagar, Koramangala, and Whitefield.
               Different studios, same leaks.
             </p>
-          </div>
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-5">
             {PAIN_POINTS.map((p) => (
-              <div key={p.title} className="glass rounded-2xl p-6">
-                <h3 className="text-white font-bold text-lg">{p.title}</h3>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">{p.body}</p>
-              </div>
+              <StaggerItem key={p.title}>
+                <Tilt className="h-full">
+                  <div className="glass rounded-2xl p-6 h-full">
+                    <h3 className="text-white font-bold text-lg">{p.title}</h3>
+                    <p className="mt-3 text-text-secondary text-sm leading-relaxed">{p.body}</p>
+                  </div>
+                </Tilt>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
       {/* WHAT WE SHIP */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>21-day delivery</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               What we ship in <span className="text-aurora">21 days</span>.
@@ -197,48 +205,60 @@ export default function WeddingPhotographersBangalorePage() {
             <p className="mt-4 text-text-muted">
               Scope locked in week 1. Built and tested in weeks 2–3. Live before your next wedding weekend.
             </p>
-          </div>
-          <ul className="mt-10 grid md:grid-cols-2 gap-4">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-4">
             {SHIP_IN_21_DAYS.map((d, i) => (
-              <li key={d} className="flex gap-3 glass rounded-xl p-5">
-                <div className="text-indigo-glow font-mono font-bold shrink-0">{String(i + 1).padStart(2, "0")}</div>
-                <span className="text-text-secondary text-sm leading-relaxed">{d}</span>
-              </li>
+              <StaggerItem key={d}>
+                <li className="flex gap-3 glass rounded-xl p-5 h-full list-none">
+                  <div className="text-indigo-glow font-mono font-bold shrink-0">{String(i + 1).padStart(2, "0")}</div>
+                  <span className="text-text-secondary text-sm leading-relaxed">{d}</span>
+                </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </section>
 
       {/* REAL NUMBERS */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>Real numbers for wedding photography</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               What changes <span className="text-aurora">by month 2</span>.
             </h2>
-          </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {STATS.map((s) => (
-              <div key={s.label} className="glass-glow rounded-2xl p-8">
-                <div className="text-5xl md:text-6xl font-black text-aurora tracking-tight">{s.headline}</div>
-                <div className="mt-3 text-white font-semibold">{s.label}</div>
-                <p className="mt-3 text-text-muted text-sm leading-relaxed">{s.body}</p>
-              </div>
-            ))}
-          </div>
+          </Reveal>
+          <RealNumbers
+            left={{
+              headline: "2–3×",
+              label: STATS[0].label,
+              body: STATS[0].body,
+            }}
+            right={{
+              headline: "30–50%",
+              label: STATS[1].label,
+              body: STATS[1].body,
+            }}
+            recovered={{
+              language: "Kannada · Hindi",
+              greeting: "ನಮಸ್ಕಾರ, ಮದುವೆ ಯಾವ ತಾರೀಖು?",
+              subtitle: "“Hello, what’s the wedding date?” — the bride’s father, at 11pm.",
+              lostRange: "₹50K–₹3L bookings die in 6 hours",
+              recovered: 240000,
+            }}
+          />
         </Container>
       </section>
 
       {/* HOW WE'RE DIFFERENT */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>How we&rsquo;re different</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               Not a generic <span className="text-aurora">creative-portfolio template</span>.
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-10 grid md:grid-cols-3 gap-5">
             <div className="glass rounded-2xl p-6">
               <div className="text-indigo-glow text-3xl font-black font-mono">01</div>
@@ -271,7 +291,7 @@ export default function WeddingPhotographersBangalorePage() {
       {/* PRICING TEASER */}
       <section className="py-20">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-14 max-w-5xl mx-auto">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-14 max-w-5xl mx-auto">
             <Badge>Pricing teaser</Badge>
             <h2 className="mt-4 text-3xl md:text-4xl font-black text-white tracking-tight">
               Transparent, India-priced, no surprises.
@@ -279,22 +299,30 @@ export default function WeddingPhotographersBangalorePage() {
             <div className="mt-8 grid md:grid-cols-3 gap-5">
               <div className="rounded-2xl border border-white/10 p-6">
                 <div className="text-text-muted text-xs uppercase tracking-widest font-mono">Starter</div>
-                <div className="mt-3 text-2xl font-bold text-white">From ₹35K setup</div>
-                <div className="text-text-secondary">+ ₹9,999/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  From <CountUp value={35} prefix="₹" suffix="K" className="tabular-nums" /> setup
+                </div>
+                <div className="text-text-secondary">
+                  + <CountUp value={9999} prefix="₹" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   Solo studio, 20–40 weddings/year. Voice agent + WhatsApp + basic nurture.
                 </p>
               </div>
-              <div className="rounded-2xl border border-indigo/40 p-6 bg-indigo/5">
+              <div className="rounded-2xl border border-indigo/40 p-6 bg-indigo/5 pulse-glow">
                 <div className="text-indigo-glow text-xs uppercase tracking-widest font-mono">Growth</div>
-                <div className="mt-3 text-2xl font-bold text-white">₹24,999/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  <CountUp value={24999} prefix="₹" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   2–3 shooter studio. Full 5-touch nurture, payment recovery, monthly portfolio refresh.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 p-6">
                 <div className="text-text-muted text-xs uppercase tracking-widest font-mono">Mid-market</div>
-                <div className="mt-3 text-2xl font-bold text-white">₹60K+/mo</div>
+                <div className="mt-3 text-2xl font-bold text-white">
+                  <CountUp value={60} prefix="₹" suffix="K+" className="tabular-nums" />/mo
+                </div>
                 <p className="mt-4 text-sm text-text-muted">
                   Larger studios, destination work, brand-team operations. Custom workflows.
                 </p>
@@ -304,34 +332,36 @@ export default function WeddingPhotographersBangalorePage() {
               Razorpay, WhatsApp API, voice-minute usage billed at platform rates direct to your accounts. First
               measurable result in 21 days, or full refund.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* FAQ */}
       <section className="py-20">
         <Container>
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Badge>FAQ</Badge>
             <h2 className="mt-4 text-3xl md:text-5xl font-black text-white tracking-tight">
               Questions photographers ask us first.
             </h2>
-          </div>
-          <div className="mt-10 grid md:grid-cols-2 gap-5">
+          </Reveal>
+          <Stagger className="mt-10 grid md:grid-cols-2 gap-5">
             {FAQS.map((f) => (
-              <div key={f.q} className="glass rounded-2xl p-6">
-                <h3 className="text-white font-bold">{f.q}</h3>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">{f.a}</p>
-              </div>
+              <StaggerItem key={f.q}>
+                <div className="glass rounded-2xl p-6 h-full">
+                  <h3 className="text-white font-bold">{f.q}</h3>
+                  <p className="mt-3 text-text-secondary text-sm leading-relaxed">{f.a}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </section>
 
       {/* FINAL CTA */}
       <section className="py-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
+          <Reveal className="glass-glow rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto">
             <Badge>Talk to us</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white tracking-tight">
               Book the wedding. <span className="text-aurora">Get paid on time</span>.
@@ -341,14 +371,14 @@ export default function WeddingPhotographersBangalorePage() {
               language — we respond the same way.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 justify-center">
-              <Button href={WHATSAPP_HREF} size="lg" external>
+              <Button href={WHATSAPP_HREF} size="lg" external className="shimmer">
                 WhatsApp ZentroTECH
               </Button>
-              <Button href="/contact" variant="secondary" size="lg">
+              <Button href="/contact" variant="secondary" size="lg" className="shimmer">
                 Get a Quote
               </Button>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

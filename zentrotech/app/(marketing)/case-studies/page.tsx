@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SOCIAL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+import { Reveal } from "@/components/animations/reveal";
+import { CaseCard } from "./_components/case-card";
+import { ComingSoonCard } from "./_components/coming-soon-card";
 
 export const metadata: Metadata = buildMetadata({
   title: "Case studies — Indian SMB outcomes",
@@ -16,11 +18,12 @@ export const metadata: Metadata = buildMetadata({
 const CASES = [
   {
     slug: "sample-bangalore-dental-clinic",
-    title: "How a Bangalore dental clinic recovered ₹2.1L in unpaid invoices in 21 days",
+    title: "Ledger Resolve — how a Bangalore dental clinic recovered ₹2.1L in unpaid invoices in 21 days",
     vertical: "Multi-clinic dental chain",
     location: "Indiranagar · HSR · Whitefield",
     summary:
       "ICP example showing how our Kannada voice agent + Razorpay-integrated recovery cadence pulled ₹2.1L of overdue invoices back in three weeks.",
+    recovered: 210000,
     isSample: true,
   },
 ] as const;
@@ -49,47 +52,29 @@ export default function CaseStudiesIndexPage() {
         <Container>
           <div className="grid md:grid-cols-2 gap-6">
             {CASES.map((c) => (
-              <Link
+              <CaseCard
                 key={c.slug}
-                href={`/case-studies/${c.slug}`}
-                className="group glass rounded-3xl p-8 hover:border-indigo/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
-              >
-                {c.isSample && (
-                  <span className="self-start inline-flex items-center gap-2 rounded-full bg-pink/20 border border-pink/50 px-3 py-1 text-xs font-black uppercase tracking-widest text-pink">
-                    ⚠ Sample template — not a real client
-                  </span>
-                )}
-                <h2 className="mt-5 text-2xl font-black text-white group-hover:text-indigo-glow transition-colors">
-                  {c.title}
-                </h2>
-                <p className="mt-2 text-sm text-indigo-glow font-mono">
-                  {c.vertical} · {c.location}
-                </p>
-                <p className="mt-4 text-sm text-text-secondary leading-relaxed flex-1">{c.summary}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm text-indigo-glow group-hover:text-white transition-colors">
-                  Read the breakdown →
-                </span>
-              </Link>
+                slug={c.slug}
+                title={c.title}
+                vertical={c.vertical}
+                location={c.location}
+                summary={c.summary}
+                recovered={c.recovered}
+                isSample={c.isSample}
+              />
             ))}
 
-            {/* Placeholder slots so the grid doesn't look empty */}
-            <div className="rounded-3xl border border-dashed border-white/10 p-8 flex flex-col items-start justify-center min-h-[260px]">
-              <p className="text-xs uppercase tracking-widest text-text-muted font-mono">Coming soon</p>
-              <p className="mt-3 text-lg font-bold text-white/70">
-                Bangalore salon · WhatsApp + voice agent
-              </p>
-              <p className="mt-2 text-sm text-text-muted">
-                Currently shipping. Case study lands Day 22.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-dashed border-white/10 p-8 flex flex-col items-start justify-center min-h-[260px]">
-              <p className="text-xs uppercase tracking-widest text-text-muted font-mono">Coming soon</p>
-              <p className="mt-3 text-lg font-bold text-white/70">
-                Mysore manufacturer · payment recovery
-              </p>
-              <p className="mt-2 text-sm text-text-muted">In discovery. ETA published once we sign.</p>
-            </div>
+            {/* Dashed placeholders — Reveal staggered AFTER the real card, stay inert */}
+            <ComingSoonCard
+              headline="Bangalore salon · WhatsApp + voice agent"
+              note="Currently shipping. Case study lands Day 22."
+              delay={0.12}
+            />
+            <ComingSoonCard
+              headline="Mysore manufacturer · payment recovery"
+              note="In discovery. ETA published once we sign."
+              delay={0.24}
+            />
           </div>
         </Container>
       </section>
@@ -97,7 +82,13 @@ export default function CaseStudiesIndexPage() {
       {/* CTA */}
       <section className="pb-24">
         <Container>
-          <div className="glass-glow rounded-3xl p-12 md:p-20 text-center">
+          <Reveal>
+          <div className="relative glass-glow rounded-3xl p-12 md:p-20 text-center overflow-hidden">
+            {/* Low-intensity pulsing border glow ring (contained, no harsh edge) */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-2 rounded-[1.25rem] border border-indigo/25 pulse-glow opacity-40 blur-[1px]"
+            />
             <Badge>Want to be case study #1?</Badge>
             <h2 className="mt-6 text-3xl md:text-5xl font-black text-white max-w-3xl mx-auto">
               We&rsquo;re offering founding-client pricing.
@@ -115,6 +106,7 @@ export default function CaseStudiesIndexPage() {
               </Button>
             </div>
           </div>
+          </Reveal>
         </Container>
       </section>
     </>

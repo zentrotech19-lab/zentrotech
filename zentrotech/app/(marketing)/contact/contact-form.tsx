@@ -8,8 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SITE, SOCIAL, SOUTH_INDIA_CITIES } from "@/lib/constants";
 import { FaWhatsapp } from "react-icons/fa6";
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { LocalBusinessSchema } from "@/components/seo/local-business-schema";
+import { ReplySequence } from "./reply-sequence";
+import { FieldFocus } from "./field-focus";
+import { Stagger, StaggerItem } from "@/components/animations/reveal";
 
 const NEEDS_OPTIONS = [
   { value: "new-website", label: "New website" },
@@ -158,30 +161,7 @@ export function ContactForm() {
   const sending = status === "sending" || isSubmitting;
 
   if (status === "sent") {
-    return (
-      <section className="py-24">
-        <Container>
-          <div className="max-w-xl mx-auto text-center glass-glow rounded-3xl p-12">
-            <CheckCircle2 className="size-16 text-indigo-glow mx-auto" aria-hidden="true" />
-            <h1 className="mt-6 text-4xl font-black text-white tracking-tight">
-              Got it. We're on it.
-            </h1>
-            <p className="mt-4 text-text-secondary">
-              Your requirements are with our team. We'll WhatsApp you within 1 business day with a custom quote and next steps.
-            </p>
-            <p className="mt-2 text-text-muted text-sm">
-              In a hurry? Ping us directly on WhatsApp.
-            </p>
-            <div className="mt-8">
-              <Button href={SOCIAL.whatsapp} size="lg" external>
-                <FaWhatsapp className="size-5" />
-                Open WhatsApp
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-    );
+    return <ReplySequence />;
   }
 
   return (
@@ -215,48 +195,60 @@ export function ContactForm() {
                 <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">A · Contact</legend>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    Your full name *
-                    <input {...register("name")} className={inputClass} placeholder="Ramesh Kumar" />
-                    {errors.name && <p className={errorClass} role="alert">{errors.name.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    Business name *
-                    <input {...register("businessName")} className={inputClass} placeholder="Kumar & Sons" />
-                    {errors.businessName && <p className={errorClass} role="alert">{errors.businessName.message}</p>}
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Your full name *
+                      <input {...register("name")} className={inputClass} placeholder="Ramesh Kumar" />
+                      {errors.name && <p className={errorClass} role="alert">{errors.name.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Business name *
+                      <input {...register("businessName")} className={inputClass} placeholder="Kumar & Sons" />
+                      {errors.businessName && <p className={errorClass} role="alert">{errors.businessName.message}</p>}
+                    </label>
+                  </FieldFocus>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    WhatsApp number *
-                    <input {...register("whatsapp")} className={inputClass} placeholder="+91 98765 43210" />
-                    {errors.whatsapp && <p className={errorClass} role="alert">{errors.whatsapp.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    Alternate phone (optional)
-                    <input {...register("phone")} className={inputClass} placeholder="+91 80 1234 5678" />
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      WhatsApp number *
+                      <input {...register("whatsapp")} className={inputClass} placeholder="+91 98765 43210" />
+                      {errors.whatsapp && <p className={errorClass} role="alert">{errors.whatsapp.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Alternate phone (optional)
+                      <input {...register("phone")} className={inputClass} placeholder="+91 80 1234 5678" />
+                    </label>
+                  </FieldFocus>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    Email *
-                    <input {...register("email")} type="email" className={inputClass} placeholder="ramesh@business.com" />
-                    {errors.email && <p className={errorClass} role="alert">{errors.email.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    City *
-                    <select {...register("city")} className={inputClass}>
-                      <option value="">Select your city…</option>
-                      {SOUTH_INDIA_CITIES.map((c) => (
-                        <option key={c.slug} value={c.label}>{c.label}</option>
-                      ))}
-                      <option value="Other Indian city">Other Indian city</option>
-                      <option value="International">International</option>
-                    </select>
-                    {errors.city && <p className={errorClass} role="alert">{errors.city.message}</p>}
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Email *
+                      <input {...register("email")} type="email" className={inputClass} placeholder="ramesh@business.com" />
+                      {errors.email && <p className={errorClass} role="alert">{errors.email.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      City *
+                      <select {...register("city")} className={inputClass}>
+                        <option value="">Select your city…</option>
+                        {SOUTH_INDIA_CITIES.map((c) => (
+                          <option key={c.slug} value={c.label}>{c.label}</option>
+                        ))}
+                        <option value="Other Indian city">Other Indian city</option>
+                        <option value="International">International</option>
+                      </select>
+                      {errors.city && <p className={errorClass} role="alert">{errors.city.message}</p>}
+                    </label>
+                  </FieldFocus>
                 </div>
               </fieldset>
 
@@ -265,37 +257,45 @@ export function ContactForm() {
                 <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">B · Your business</legend>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    Industry *
-                    <select {...register("industry")} className={inputClass}>
-                      <option value="">Select an industry…</option>
-                      {INDUSTRIES.map((i) => (<option key={i} value={i}>{i}</option>))}
-                    </select>
-                    {errors.industry && <p className={errorClass} role="alert">{errors.industry.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    Business size *
-                    <select {...register("businessSize")} className={inputClass}>
-                      <option value="">Select team size…</option>
-                      {BUSINESS_SIZES.map((b) => (<option key={b} value={b}>{b} people</option>))}
-                    </select>
-                    {errors.businessSize && <p className={errorClass} role="alert">{errors.businessSize.message}</p>}
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Industry *
+                      <select {...register("industry")} className={inputClass}>
+                        <option value="">Select an industry…</option>
+                        {INDUSTRIES.map((i) => (<option key={i} value={i}>{i}</option>))}
+                      </select>
+                      {errors.industry && <p className={errorClass} role="alert">{errors.industry.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Business size *
+                      <select {...register("businessSize")} className={inputClass}>
+                        <option value="">Select team size…</option>
+                        {BUSINESS_SIZES.map((b) => (<option key={b} value={b}>{b} people</option>))}
+                      </select>
+                      {errors.businessSize && <p className={errorClass} role="alert">{errors.businessSize.message}</p>}
+                    </label>
+                  </FieldFocus>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    Years in business *
-                    <select {...register("yearsInBusiness")} className={inputClass}>
-                      <option value="">Select…</option>
-                      {YEARS.map((y) => (<option key={y} value={y}>{y} years</option>))}
-                    </select>
-                    {errors.yearsInBusiness && <p className={errorClass} role="alert">{errors.yearsInBusiness.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    Current website (optional)
-                    <input {...register("currentWebsite")} className={inputClass} placeholder="https://yoursite.com" />
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Years in business *
+                      <select {...register("yearsInBusiness")} className={inputClass}>
+                        <option value="">Select…</option>
+                        {YEARS.map((y) => (<option key={y} value={y}>{y} years</option>))}
+                      </select>
+                      {errors.yearsInBusiness && <p className={errorClass} role="alert">{errors.yearsInBusiness.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Current website (optional)
+                      <input {...register("currentWebsite")} className={inputClass} placeholder="https://yoursite.com" />
+                    </label>
+                  </FieldFocus>
                 </div>
               </fieldset>
 
@@ -303,96 +303,114 @@ export function ContactForm() {
               <fieldset className="space-y-4">
                 <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">C · What you need *</legend>
                 <p className="text-text-muted text-sm">Tick everything that applies — we don't charge per item, we bundle.</p>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <Stagger className="grid sm:grid-cols-2 gap-3">
                   {NEEDS_OPTIONS.map((n) => (
-                    <label key={n.value} className="flex items-start gap-3 cursor-pointer rounded-xl border border-white/10 bg-white/5 p-3 hover:border-indigo/40 transition-colors">
-                      <input
-                        type="checkbox"
-                        value={n.value}
-                        {...register("needs")}
-                        className="mt-1 size-4 rounded accent-indigo"
-                      />
-                      <span className="text-sm text-white">{n.label}</span>
-                    </label>
+                    <StaggerItem key={n.value}>
+                      <label className="flex items-start gap-3 cursor-pointer rounded-xl border border-white/10 bg-white/5 p-3 hover:border-indigo/40 transition-colors">
+                        <input
+                          type="checkbox"
+                          value={n.value}
+                          {...register("needs")}
+                          className="mt-1 size-4 rounded accent-indigo"
+                        />
+                        <span className="text-sm text-white">{n.label}</span>
+                      </label>
+                    </StaggerItem>
                   ))}
-                </div>
+                </Stagger>
                 {errors.needs && <p className={errorClass} role="alert">{errors.needs.message as string}</p>}
 
-                <label className={labelClass}>
-                  If "Something else", describe briefly
-                  <input {...register("needsOther")} className={inputClass} placeholder="e.g. iOS app, custom dashboard…" />
-                </label>
+                <FieldFocus>
+                  <label className={labelClass}>
+                    If "Something else", describe briefly
+                    <input {...register("needsOther")} className={inputClass} placeholder="e.g. iOS app, custom dashboard…" />
+                  </label>
+                </FieldFocus>
               </fieldset>
 
               {/* Section D — Goals */}
               <fieldset className="space-y-6">
                 <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">D · Goals & timeline</legend>
 
-                <label className={labelClass}>
-                  Primary goal *
-                  <select {...register("primaryGoal")} className={inputClass}>
-                    <option value="">What matters most?</option>
-                    {PRIMARY_GOALS.map((g) => (<option key={g} value={g}>{g}</option>))}
-                  </select>
-                  {errors.primaryGoal && <p className={errorClass} role="alert">{errors.primaryGoal.message}</p>}
-                </label>
+                <FieldFocus>
+                  <label className={labelClass}>
+                    Primary goal *
+                    <select {...register("primaryGoal")} className={inputClass}>
+                      <option value="">What matters most?</option>
+                      {PRIMARY_GOALS.map((g) => (<option key={g} value={g}>{g}</option>))}
+                    </select>
+                    {errors.primaryGoal && <p className={errorClass} role="alert">{errors.primaryGoal.message}</p>}
+                  </label>
+                </FieldFocus>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    Current monthly leads *
-                    <select {...register("monthlyLeads")} className={inputClass}>
-                      <option value="">Approx range</option>
-                      {MONTHLY_LEADS.map((m) => (<option key={m} value={m}>{m} per month</option>))}
-                    </select>
-                    {errors.monthlyLeads && <p className={errorClass} role="alert">{errors.monthlyLeads.message}</p>}
-                  </label>
-                  <label className={labelClass}>
-                    Investment range comfortable for you *
-                    <select {...register("investmentRange")} className={inputClass}>
-                      <option value="">Pick a range</option>
-                      {INVESTMENT.map((i) => (<option key={i} value={i}>{i}</option>))}
-                    </select>
-                    {errors.investmentRange && <p className={errorClass} role="alert">{errors.investmentRange.message}</p>}
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Current monthly leads *
+                      <select {...register("monthlyLeads")} className={inputClass}>
+                        <option value="">Approx range</option>
+                        {MONTHLY_LEADS.map((m) => (<option key={m} value={m}>{m} per month</option>))}
+                      </select>
+                      {errors.monthlyLeads && <p className={errorClass} role="alert">{errors.monthlyLeads.message}</p>}
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Investment range comfortable for you *
+                      <select {...register("investmentRange")} className={inputClass}>
+                        <option value="">Pick a range</option>
+                        {INVESTMENT.map((i) => (<option key={i} value={i}>{i}</option>))}
+                      </select>
+                      {errors.investmentRange && <p className={errorClass} role="alert">{errors.investmentRange.message}</p>}
+                    </label>
+                  </FieldFocus>
                 </div>
 
-                <label className={labelClass}>
-                  When do you want to start? *
-                  <select {...register("timeline")} className={inputClass}>
-                    <option value="">Pick a timeline</option>
-                    {TIMELINES.map((t) => (<option key={t} value={t}>{t}</option>))}
-                  </select>
-                  {errors.timeline && <p className={errorClass} role="alert">{errors.timeline.message}</p>}
-                </label>
+                <FieldFocus>
+                  <label className={labelClass}>
+                    When do you want to start? *
+                    <select {...register("timeline")} className={inputClass}>
+                      <option value="">Pick a timeline</option>
+                      {TIMELINES.map((t) => (<option key={t} value={t}>{t}</option>))}
+                    </select>
+                    {errors.timeline && <p className={errorClass} role="alert">{errors.timeline.message}</p>}
+                  </label>
+                </FieldFocus>
               </fieldset>
 
               {/* Section E — Description */}
               <fieldset className="space-y-6">
                 <legend className="text-xs uppercase tracking-widest text-indigo-glow font-mono">E · Tell us more</legend>
 
-                <label className={labelClass}>
-                  Briefly describe what you want to achieve *
-                  <textarea
-                    {...register("description")}
-                    rows={5}
-                    className={inputClass}
-                    placeholder="What's the business problem you want solved? What does success look like in 6 months?"
-                  />
-                  {errors.description && <p className={errorClass} role="alert">{errors.description.message}</p>}
-                </label>
+                <FieldFocus>
+                  <label className={labelClass}>
+                    Briefly describe what you want to achieve *
+                    <textarea
+                      {...register("description")}
+                      rows={5}
+                      className={inputClass}
+                      placeholder="What's the business problem you want solved? What does success look like in 6 months?"
+                    />
+                    {errors.description && <p className={errorClass} role="alert">{errors.description.message}</p>}
+                  </label>
+                </FieldFocus>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <label className={labelClass}>
-                    How did you find us?
-                    <select {...register("source")} className={inputClass}>
-                      <option value="">Optional</option>
-                      {SOURCES.map((s) => (<option key={s} value={s}>{s}</option>))}
-                    </select>
-                  </label>
-                  <label className={labelClass}>
-                    Anything else? (optional)
-                    <input {...register("additionalNotes")} className={inputClass} placeholder="Any context we should know" />
-                  </label>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      How did you find us?
+                      <select {...register("source")} className={inputClass}>
+                        <option value="">Optional</option>
+                        {SOURCES.map((s) => (<option key={s} value={s}>{s}</option>))}
+                      </select>
+                    </label>
+                  </FieldFocus>
+                  <FieldFocus>
+                    <label className={labelClass}>
+                      Anything else? (optional)
+                      <input {...register("additionalNotes")} className={inputClass} placeholder="Any context we should know" />
+                    </label>
+                  </FieldFocus>
                 </div>
               </fieldset>
 
@@ -407,9 +425,12 @@ export function ContactForm() {
                 {errors.consent && <p className={errorClass} role="alert">{errors.consent.message}</p>}
               </fieldset>
 
-              <Button type="submit" size="lg" className="w-full" disabled={sending}>
+              <Button type="submit" size="lg" className="group w-full" disabled={sending}>
                 {sending ? "Sending…" : "Send my requirements"}
-                <Send aria-hidden="true" className="size-4" />
+                <Send
+                  aria-hidden="true"
+                  className={`size-4 transition-transform duration-300 group-hover:translate-x-[3px] ${sending ? "pulse-glow" : ""}`}
+                />
               </Button>
 
               <p

@@ -3,6 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Bot, Send, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/animations/reveal";
+import { Tilt } from "@/components/animations/tilt";
+import { AgentReasoningTrace } from "@/components/demos/agent-reasoning-trace";
 
 type Msg = { id: number; from: "user" | "agent"; text: string };
 
@@ -45,12 +48,14 @@ export function AgentChatDemo() {
   };
 
   return (
-    <div className="glass-glow rounded-3xl p-1 max-w-2xl w-full mx-auto">
-      <div className="rounded-3xl bg-void/60 overflow-hidden">
+    <Reveal className="max-w-2xl w-full mx-auto">
+      <Tilt max={4}>
+        <div className="glass-glow rounded-3xl p-1">
+          <div className="rounded-3xl bg-void/60 overflow-hidden">
         <div className="px-6 py-4 border-b border-white/5 flex items-center gap-3">
           <div className="relative size-10 rounded-full bg-linear-to-br from-indigo to-pink-pulse flex items-center justify-center">
             <Bot aria-hidden="true" className="size-5 text-white" />
-            <div className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full bg-cyan-glow border-2 border-void" />
+            <div className="pulse-glow absolute -bottom-0.5 -right-0.5 size-3 rounded-full bg-cyan-glow border-2 border-void" />
           </div>
           <div>
             <p className="text-white font-semibold">ZentroBot</p>
@@ -82,16 +87,7 @@ export function AgentChatDemo() {
                 )}
               </m.div>
             ))}
-            {typing && (
-              <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-2 items-center text-text-muted text-sm">
-                <div className="size-8 rounded-full bg-indigo/20 flex items-center justify-center"><Bot aria-hidden="true" className="size-4 text-indigo-glow" /></div>
-                <span className="flex gap-1">
-                  <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce" />
-                  <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce [animation-delay:0.15s]" />
-                  <span className="size-1.5 rounded-full bg-indigo-glow animate-bounce [animation-delay:0.3s]" />
-                </span>
-              </m.div>
-            )}
+            {typing && <AgentReasoningTrace active={typing} />}
             <div ref={endRef} />
           </AnimatePresence>
         </div>
@@ -103,7 +99,7 @@ export function AgentChatDemo() {
             onKeyDown={(e) => e.key === "Enter" && send()}
             placeholder="Ask the agent anything..."
             aria-label="Ask the agent"
-            className="flex-1 bg-white/5 rounded-full px-4 py-2 text-sm text-white placeholder:text-text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void"
+            className="flex-1 bg-white/5 rounded-full px-4 py-2 text-sm text-white placeholder:text-text-muted transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-void focus-visible:shadow-[0_0_22px_rgba(99,102,241,0.45)]"
           />
           <button
             onClick={send}
@@ -113,7 +109,9 @@ export function AgentChatDemo() {
             <Send aria-hidden="true" className="size-4 text-white" />
           </button>
         </div>
-      </div>
-    </div>
+          </div>
+        </div>
+      </Tilt>
+    </Reveal>
   );
 }

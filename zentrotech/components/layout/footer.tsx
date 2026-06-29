@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { SITE, SOCIAL, SOUTH_INDIA_CITIES } from "@/lib/constants";
+import { SITE, SOCIAL, SOUTH_INDIA_CITIES, OFFICES } from "@/lib/constants";
 import { FaLinkedinIn, FaXTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { Phone, Mail, MapPin } from "lucide-react";
 import type { Locale } from "@/lib/i18n/locales";
@@ -149,7 +149,7 @@ export function Footer({ locale, dict }: FooterProps) {
               </li>
               <li className="flex items-start gap-2 text-text-secondary">
                 <MapPin aria-hidden="true" className="size-4 text-text-muted mt-0.5 shrink-0" />
-                <span>{dict.footer.location}</span>
+                <address className="not-italic">{OFFICES[0].address}</address>
               </li>
             </ul>
             <Link href="/contact" className="mt-5 inline-flex items-center justify-center rounded-full bg-indigo px-5 py-2.5 text-white text-sm font-semibold hover:bg-indigo-glow transition-colors">
